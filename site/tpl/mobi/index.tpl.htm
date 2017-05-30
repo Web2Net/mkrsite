@@ -1,0 +1,79 @@
+<!--<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">-->
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?=CHARSET?>" />
+<meta http-equiv="content-language" content="ru" />
+<meta name="DC.Language" content="ru" />
+<meta name="Subject" content="" />
+<meta name="Resource-type" content="Document" />
+<meta name="Document-state" content="Dynamic" />
+<meta name="MSSmartTagsPreventParsing" content="TRUE" />
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
+<meta name="Expires" content="never" />
+<meta name="Publisher-URL" content="<?=SITE_URL?>/" />
+<meta http-equiv="Rating" content="General" />
+<meta name="Geography" content="" />
+<meta name="city" content="Kiev" />
+<meta name="country" content="Ukraine" />
+<meta name="zipcode" content="" />
+<meta name="Author" content="" />
+<meta name="Copyright" content="" />
+<meta name="Publisher" content="" />
+<meta http-equiv="reply-to" content="<?=EMAIL_BOSS?>" />
+<meta name="description" content="<?=$meta['description']?>" />
+<meta name="keywords" content="<?=$meta['keywords']?>" />
+
+<link href="<?=PATH_DESIGN;?>/css/main_mobi.css" rel="stylesheet" type="text/css" />
+<link rev="made" href="mailto:obitel@moyray.com" />
+<link rel="icon" href="/favicon.ico" type="images/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="images/x-icon" />
+<!-- IE vs .png -->
+    <script src="<?=PATH_LIB?>/IEvsPNG/jquery.pngFix.js" type="text/javascript" ></script>
+    <script src="<?=PATH_LIB?>/IEvsPNG/IEvsPNG.js" type="text/javascript" ></script>
+<!-- /IE vs .png -->
+<!-- Modal Windows -->
+    <script src="<?=PATH_DESIGN?>/modal_win/jquery-1.3.2.min.js" type="text/javascript"></script>
+    <script src="<?=PATH_DESIGN?>/modal_win/modal_win.js" type="text/javascript"></script>
+<!-- /Modal Windows -->
+<!-- Check Form-->
+    <script src="<?=PATH_DESIGN?>/CheckForm/checkForm.js" type="text/javascript"></script>
+    <link rel='stylesheet' href='<?=PATH_DESIGN?>/CheckForm/validationEngine.jquery.css' type='text/css' media='screen' title='no title' charset='utf-8' />
+    <script src='<?=PATH_DESIGN?>/CheckForm/jquery.validationEngine.js' type='text/javascript'></script>
+<!-- /Check Form-->
+<!-- Nav Main -->
+    <script type="text/javascript" src="<?=PATH_DESIGN?>/nav_main/nav_main.js"></script>
+<!-- /Nav Main -->
+<!-- Rotator Img -->
+    <script type="text/javascript" src="<?=PATH_DESIGN?>/rotator_img/rotator_images.js"></script>
+<!-- /Rotator Img -->
+<!-- Slim Box-->
+    <link href="<?=PATH_LIB?>/slimbox/css/slimbox2.css" rel="stylesheet" type="text/css" media="screen" />
+    <script src="<?=PATH_LIB?>/slimbox/js/slimbox2.js" type="text/javascript"></script>
+<!-- /Slim Box-->
+<script type="text/javascript">
+$(document).ready(function(){
+$('a#<?if($mod==""){$mod="mainsite";}echo $mod;?>').addClass("select_site_rub");
+});
+</script>
+<?=$meta['some_meta']?> 
+<title><?=$meta['title']?></title>
+</head>
+<?//Sys::varDump($_REQUEST)?>                                          
+<body>
+<div id="wrap">
+    <div id="wrap_top"><?include PATH_INC_MOBI."/top.php";?></div>
+    <div class="both br_2"></div>
+    
+    <!--<div><?//include PATH_INC_MOBI."/title.php";?></div>-->
+    <div class="both"></div>
+<?if($mod!=="mainsite"){include PATH_INC_MOBI."/butt_back.php";}?>
+    <div id="wrap_content"><?=$content?></div>
+    <div class="both br_2"></div>
+<?if($mod!=="mainsite"){include PATH_INC_MOBI."/butt_back.php";}?>
+    <div><?include PATH_INC_MOBI."/nav_main.php";?></div>
+    <div><?include PATH_INC_MOBI."/bottom.php";?></div>
+    <div class="both"></div>
+    
+</div>
+
+</body></html>

@@ -1,0 +1,71 @@
+<?//var_dump($_REQUEST)?>
+<script type="text/javascript">
+
+$("#shopping").text("Ваша корзина пуста");
+
+function openTreeList (what) {
+var x=what.id;
+
+if (document.getElementById("list"+x).style.display != "block") {
+document.getElementById("list"+x).style.display = "block";
+}else {
+document.getElementById("list"+x).style.display = "none";}
+}
+
+</script>
+<style>
+#signIn fieldset {
+border:2px solid #D7DDFE;
+margin:0 10px;
+padding:8px 16px;
+text-align:left;
+
+}
+</style>
+
+<div style="padding:3px 12px 3px 12px;font-family:verdana;font-size:11px;">
+<div><h1 style="font-size: 19px; font-weight: normal; margin: 3px 7px 7px 7px;">
+Оформление заказа</h1></div>
+
+<style>
+.shopping td{
+font-size: 11px; 
+font-family: verdana;
+border:solid 1px #D9D9D9;
+padding:4px;
+vertical-align:middle;
+}
+</style>
+<div class="navilink" style="margin:3px 3px 14px 15px;"><a onclick="openTreeList(this)" id="_111" href="javascript:void(0)">
+Ваш заказ</a></div>
+<div class="treeList" id="list_111" style="display: none;">
+<?=$sh_list?>
+<br>
+</div>
+
+<div id="signIn">
+	<fieldset>
+	<legend>&nbsp;<b>Статус заказа:</b>&nbsp;</legend>
+	<p><b>Спасибо, Ваш заказ принят. В ближайшее время с Вами свяжется наш консультант, чтобы обсудить удобные для Вас условия и время доставки.</b></p>
+	<p>
+	Если у Вас возникли какие-либо вопросы, свяжитесь с нами:
+	<table style="width: 100%">
+	<tr>
+		<td align="right" width="150">Телефон: </td>
+		<td>(044) 233-97-68</td>
+	</tr>
+	<tr>
+		<td align="right">Второй телефон: </td>
+		<td>(044) 452-52-53</td>
+	</tr>
+	<tr>
+		<td align="right">ICQ: </td>
+		<td> <img height="16" width="16" border="0" style="margin-bottom: -4px;" src="http://web.icq.com/whitepages/online?icq=426267010&amp;img=5"> 426-267-010</td>
+	</tr>
+</table>
+
+	</p><br>
+	</fieldset> 
+</div>
+<br><br><br>
+</div>

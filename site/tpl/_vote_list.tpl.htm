@@ -1,0 +1,28 @@
+<div class="block_main_header_left"></div>
+<div class="block_main_header_right"></div>
+<div class="block_main_header_center">Отзывы больных о лечении в клинике доктора Василевича</div>
+<?//Sys::varDump($vote_list)?>
+<div id="wrap_page" style="text-align:center;">
+    <div style="text-align:left;font-weight:bold;">Фотокопии нескольких отзывов наших пациентов об исходах проведенного лечения, взятых для примера из многотысячной картотеки пациентов по разным нозологическим формам.</div>
+    <div class="both br_20"></div>
+    <div class="left" style="width:50%">Самочувствие пациента до лечения:</div>
+    <div class="left" style="width:50%">Самочувствие пациента после лечения:</div>
+    <div class="both br_10"></div>
+    <div class="hr_sol_blue"></div>
+    <div class="both br_10"></div>
+<?if($vote_list !== NULL && $list !== 0){foreach($vote_list as $key=>$val){?>  
+    <div class="left" style="width:50%">
+        <a rel="lightbox-gallery1" href="<?=str_replace("small","big",$val['var1_img'])?>" title="Самочувствие пациента до лечения" style="margin:0px;padding:0px;">
+            <img src="<?=$val['var1_img']?>" style="width:300px; height:150px" alt="Самочувствие пациента до лечения" />
+        </a>
+    </div>
+    <div class="left" style="width:50%">
+        <a rel="lightbox-gallery1" href="<?=str_replace("small","big",$val['var2_img'])?>" title="Самочувствие пациента после лечения" style="margin:0px;padding:0px;">
+            <img src="<?=$val['var2_img']?>" style="width:300px; height:150px" alt="Самочувствие пациента после лечения" />
+        </a>
+    </div>
+    <div class="both br_10"></div>
+    <div class="hr_dash_blue"></div>
+    <div class="both br_10"></div>
+<?}}?>
+</div>

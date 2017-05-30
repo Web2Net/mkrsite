@@ -1,0 +1,19 @@
+<div class="block_main_header_center">Результаты запроса "<?=$_POST['search_input']?>"</div>
+<div id="wrap_page">
+
+<?php $val_article = $list_article;?> 
+<?if($val_article !== 0 && $val_article !== NULL){?>
+    <h2>Новости/Статьи</h2>
+    <div style="float:left;">    
+<?{foreach($val_article as $row_article){?>
+       <p style=" border:1px solid #d91219; padding:5px;">
+           <a href="/Новости/<?=$row_article['id']?>-<?=$row_article['web_link']?>/"><?=$row_article['caption']?></a>
+       </p>
+       <div class="br_5"></div>
+<?}}?>
+    </div>
+    <div class="both br_10"></div>
+<?}?>
+
+    
+</div>

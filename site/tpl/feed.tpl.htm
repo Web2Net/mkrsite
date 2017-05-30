@@ -1,0 +1,32 @@
+<div class="block_main_header_left"></div>
+<div class="block_main_header_right"></div>
+<div class="block_main_header_center">Форма обратной связи</div>
+<div id="wrap_page">
+    <div style="text-align:center;padding-left:25%">
+        <div class="both br_20"></div>
+        <form name='form_feed' action='' method='post' onsubmit='return validate_form ( );'>
+                <div style="width: 95%; text-align: left;">
+                    <div class="left" style="width:100px;"><label id='name'>Ваше имя&nbsp;<span style="color:#d91219;">*</span></label></div>
+                    <div><input name='form__name' type='text' value='' style="height:20px;" class="validate[required,length[3,25]]" /></div>
+                    <div class="br_5"></div>
+                    <div class="left" style="width:100px;"><label id='city'>Город</label></div>
+                    <div><input name='form__address' type='text' value='' style="height:20px;" /></div>
+                    <div class="br_5"></div>
+                    <div class="left" style="width:100px;"><label id='email'>E-mail&nbsp;<span style="color:#d91219;">*</span></label></div>
+                    <div><input name='form__email' type='text' value='' style="height:20px;" class="validate[required,custom[email]] text-input" /></div>
+                    <div class="br_5"></div>
+                    <div class="left" style="width:100px;"><label id='question'>Вопрос:&nbsp;<span style="color:#d91219;">*</span></label></div>
+                    <div><textarea  style="width:350px;" name='form__message' rows="10" cols="10" class="validate[required,length[10,1000]]"  ></textarea></div>
+                    <div class="br_5"></div>
+                    <div class="left">
+                        <button name="send_feed" type="submit" id="submit" style="cursor: pointer;">
+                            <img src="<?=PATH_IMG?>/butt_send.gif" class="butt_send" alt="Отправить" />
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div style="padding:20px;text-align:right;">Поля отмеченные <span class="error">&nbsp;*&nbsp;</span> обязательны для заполнения!</div>
+    
+    </div>
+    <div class="both br_5"></div>
+</div>

@@ -1,0 +1,79 @@
+<?$val=$mdata?> 
+<table style="width: 100%;margin-bottom:0px;" cellpadding="0" cellspacing="0">
+    <tr>
+        <td>
+            <a href="?mod=faq&com=view&category=<?=$category?>">
+            <img src="design/ico_back.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Назад к списку вопросов" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+            <?if(isset($id)){?><a href="<?=SITE_URL?>/faq/Вопросы_доктору/<?=$val['id']?>-<?=$val['name']?>/" title="Посмотреть на сайте" target="blank"><img src="design/internet.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;width:48px;" title="Посмотреть на сайте" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a><?}?>
+        </td>
+        <td align="right">
+            <a href="javascript:void(0)" onclick="faqForm.submit();"><img src="design/ico_save.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Применить" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+            <a title="Удалить" href="?mod=faq&com=delete&category=<?=$category?>&id=<?=$val['id']?>" onclick="if (confirm('Вы уверены что хотите удалить этот вопрос?')) location=this.href; return false;">
+            <img src="design/icon-delete.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Удалить" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+        </td>
+    </tr>
+</table>    
+<?if ($upd=='ok'){?>
+<div style="padding:3px 7px;font-family:verdana;font-size:12px;color:forestgreen;border:dashed 1px forestgreen;"><b>Данные обновлены</b></div><?}?>
+<table style="width: 100%;margin-top:2px" cellpadding="0" cellspacing="1">
+	<tr class="head">
+		<td>Вопрос от  <strong><?=$val['name']?></strong> :: <a href="mailto:<?=$val['email']?>"><?=$val['email']?></a> :: <?=$val['city']?></td>
+	</tr>
+	<tr>
+        <td>
+        <form action="?mod=faq&com=update&category=<?=$category?><?=isset($id)?"&id=".$id:""?>" method="post" name="faqForm">
+<table style="width: 100%" cellpadding="2" cellspacing="0" class="uniform">	
+	<tr>
+		<td align="left"><input name="id" value="<?=$val['id']?>" type="hidden" /></td>
+        <td valign="top" style="padding:15px;">
+            <span class="error">*&nbsp;</span><strong style="padding-bottom:2px;">Обработано :&nbsp;</strong><input name="enabled" type="checkbox"<?if ($val['showing']=='Y'){?> checked="checked"<?}?> value="1" />
+        </td>
+	</tr>
+    <tr>
+        <td style="width: 120px" align="right">IP :</td>
+        <td align="left"><?=$val['ip']?></td>
+    </tr>
+    <tr>
+        <td style="width: 120px" align="right">Дата :</td>
+        <td align="left"><input name="date" value="<?=$val['date']?>" type="text" /></td>
+    </tr>
+    <tr>
+        <td style="width: 120px" align="right">Имя :</td>
+        <td align="left"><input name="name" value="<?=$val['name']?>" type="text" /></td>
+    </tr>
+    <tr>
+        <td style="width: 120px" align="right">Город :</td>
+        <td align="left"><input name="city" value="<?=$val['city']?>" type="text" /></td>
+    </tr>
+    <tr>
+        <td style="width: 120px" align="right">e-mail :</td>
+        <td align="left"><input name="email" value="<?=$val['email']?>" type="text" /></td>
+    </tr>
+	<tr>
+	    <td style="width: 120px" align="right"><span class="error">*&nbsp;</span>Вопрос :</td>
+	    <td align="left"><textarea name='question' class='adminform' cols='' rows='10'><?=$val['question']?></textarea></td>
+	</tr>
+	<tr>
+	    <td style="width: 120px" align="right"><span class="error">*&nbsp;</span>Ответ :</td>
+	    <td align="left"><textarea name='answer' class='adminform' cols='' rows='10'><?=$val['answer']?></textarea></td>
+	</tr>	
+	<tr>
+		<td align="right"></td>
+		<td align="left">
+        <select name="category_id" style="width:350px;padding:0px 0px;height: 20px" class="adminform">
+            <option value="null" selected>Выберете секцию</option>
+<?foreach ($parent_list as $k=>$v){?>
+            <option value="<?=$v['id']?>"<?if ($val['category_id']==$v['id']){?> selected<?}?>><?=$v['caption']?></option>
+<?}?>
+        </select>
+        </td>
+	</tr>		
+	<tr>
+		<td colspan="2" align="right" style="padding:7px 14px 14px 0px;">
+		    <input name ="save" type="image" src="design/ico_save.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''" onclick="articleForm.submit();">
+		</td>
+	</tr>	
+	</table>
+</form>	
+</td></tr>
+</table>

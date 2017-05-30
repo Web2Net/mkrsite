@@ -1,0 +1,184 @@
+<?php
+     if (!defined('_SAPE_USER')){
+        define('_SAPE_USER', '15108986cb4d3a4171235ca2e1693bbe');
+     }
+     require_once(realpath($_SERVER['DOCUMENT_ROOT'].'/'._SAPE_USER.'/sape.php'));
+     $sape = new SAPE_client();
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="google-site-verification" content="WGIx67TE9K5M2BIINei8ObXYTG24s28GJlcFXJCooHc" />
+<meta name='yandex-verification' content='440a3a0d124c68ab' />
+
+<meta http-equiv="Content-Type" content="text/html; charset=<?=CHARSET?>" />
+<meta http-equiv="content-language" content="ru" />
+<meta name="DC.Language" content="ru" />
+<meta name="Subject" content="" />
+<meta name="Resource-type" content="Document" />
+<meta name="Document-state" content="Dynamic" />
+<meta name="MSSmartTagsPreventParsing" content="TRUE" />
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
+<meta name="Expires" content="never" />
+<meta name="Publisher-URL" content="<?=SITE_URL?>/" />
+<meta http-equiv="Rating" content="General" />
+<meta name="Geography" content="" />
+<meta name="city" content="Kiev" />
+<meta name="country" content="Ukraine" />
+<meta name="zipcode" content="" />
+<meta name="Author" content="<?=SITE_NAME?>" />
+<meta name="Copyright" content="<?=SITE_NAME?>" />
+<meta name="Publisher" content="<?=SITE_NAME?>" />
+<meta http-equiv="reply-to" content="<?=EMAIL_BOSS?>" />
+<meta name="description" content="<?=$meta['description']?>" />
+<meta name="keywords" content="<?=$meta['keywords']?>" />
+
+<link href="<?=PATH_DESIGN;?>/css/main.css" rel="stylesheet" type="text/css" />
+<link rev="made" href="<?=EMAIL_ADMIN?>" />
+<link rel="icon" href="/favicon.ico" type="images/x-icon" />
+<link rel="shortcut icon" href="/favicon.ico" type="images/x-icon" />
+
+<script src="<?=PATH_DESIGN?>/modal_win/jquery-1.3.2.min.js" type="text/javascript"></script>
+<!-- IE vs .png -->
+    <script src="<?=PATH_LIB?>/IEvsPNG/jquery.pngFix.js" type="text/javascript" ></script>
+    <script src="<?=PATH_LIB?>/IEvsPNG/IEvsPNG.js" type="text/javascript" ></script>
+<!-- /IE vs .png -->
+<!-- Check Form-->
+    <script src="<?=PATH_DESIGN?>/CheckForm/checkForm.js" type="text/javascript"></script>
+    <link rel='stylesheet' href='<?=PATH_DESIGN?>/CheckForm/validationEngine.jquery.css' type='text/css' media='screen' title='no title' charset='utf-8' />
+    <script src='<?=PATH_DESIGN?>/CheckForm/jquery.validationEngine.js' type='text/javascript'></script>
+<!-- /Check Form-->
+<!-- Nav Main -->
+    <script type="text/javascript" src="<?=PATH_DESIGN?>/nav_main/nav_main.js"></script>
+<!-- /Nav Main -->
+<!-- Slim Box-->
+    <link href="<?=PATH_LIB?>/slimbox/css/slimbox2.css" rel="stylesheet" type="text/css" media="screen" />
+    <script src="<?=PATH_LIB?>/slimbox/js/slimbox2.js" type="text/javascript"></script>
+<!-- /Slim Box-->
+<script type="text/javascript">
+$(document).ready(function(){
+$('a#<?if($mod==""){$mod="Главная";}echo $mod;?>').addClass("select_site_rub");
+});
+</script>
+<?=$meta['some_meta']?>
+
+<title><?=$meta['title']?></title>
+<!-- SladeFoto -->
+<script type="text/javascript" src="<?=PATH_DESIGN;?>/slidefoto/jquery.innerfade.js"></script>
+<script type="text/javascript" src="<?=PATH_DESIGN;?>/slidefoto/slidefoto.js"></script>
+<link href="<?=PATH_DESIGN;?>/slidefoto/slidefoto.css" rel="stylesheet" type="text/css" />
+<!-- /SladeFoto -->
+
+
+</head>
+<?//Sys::varDump($_REQUEST)?>                                          
+<body id="top">
+<center>
+<div class="both"></div>                      
+<div id="wrap">
+    <!--<div id="wrap_bar"><?//include PATH_INC."/bar.tpl.htm";?></div>-->
+    <div style="height: 25px;border-bottom: 1px solid #d91219;background-image: url('/site/design/img/bg_nav_main.jpg');"><?include PATH_INC."/brands_string.tpl.htm";?></div>
+    <div class="both"></div>
+<?$rand = rand(1,8)?>
+    <div id="wrap_top" style="background-image: url('/site/design/img/top_office_8.png');background-repeat: no-repeat;background-position: top right;">
+        <?include PATH_INC."/top.tpl.htm";?>
+    </div>
+    <div class="both"></div>
+    <div id="wrap_nav_main"><?include PATH_INC."/nav_main.tpl.htm";?></div>
+    <div class="both"></div>
+    <div id="wrap_content">
+    <table style="width: 100%; background-color:#fff;">
+     <tr>
+         <td  style="padding: 0px 5px 5px 5px; width: 20%;background:url('<?=PATH_IMG?>/bg_column_left.png');background-repeat:repeat-y;border-right:0px solid #d91219;">
+             <?//include PATH_INC."/nav_items.tpl.htm";?>
+             <?//include PATH_INC."/block_brends.tpl.htm";?>
+             <?include PATH_INC."/block_minolta.tpl.htm";?>
+             <div class="both br_5"></div>
+             <?include PATH_INC."/block_cartridges.tpl.htm";?>
+             <div class="both br_5"></div>
+             <?include "site/tpl/inc/block_news.tpl.htm";?>
+             <div class="both br_5"></div>
+             <?include PATH_INC."/block_articles.tpl.htm";?>
+             <div class="both br_5"></div>
+             <?include PATH_INC."/block_portfolio.tpl.htm";?>
+             <div class="both br_5"></div>
+             <? echo $sape->return_links(2); ?>
+        </td>
+         <td style="padding: 10px;">
+             <?=$content?>
+         </td>
+         <td  style="padding: 0px 5px 5px 5px; width: 20%;background:url('<?=PATH_IMG?>/bg_column_right.png');background-repeat:repeat-y;background-position:right;border-left:0px solid #d91219;">
+                 <?//include PATH_INC."/search.tpl.htm"?>
+                 <!--<div class="both br_5"></div>-->
+                 <?include PATH_INC."/block_remont.tpl.htm";?>
+                 <div class="both br_5"></div>
+                 <?include PATH_INC."/block_terminologik.tpl.htm";?>
+                 <div class="both br_5"></div>
+                 <?include PATH_INC."/block_poleznosti.tpl.htm";?>
+                 <div class="both br_5"></div>
+                 <center><?include PATH_INC."/block_pogoda.tpl.htm";?></center>
+                 <div class="both br_5"></div>
+                 <? echo $sape->return_links(2); ?>
+          
+         </td>
+     </tr>
+</table>
+    
+    
+    </div>
+    <div class="float:right">
+        <?include PATH_INC."/counter/counter_bigmir.tpl.htm";?>
+        <?include PATH_INC."/counter/counter_iua.tpl.htm";?>
+    </div>
+    <div id="wrap_nav_second"><?include PATH_INC."/nav_second.tpl.htm";?></div>
+</div>
+<? echo $sape->return_links(); ?>
+</center>
+<div id="back-top"><a href="#top"><span></span></a></div>
+<?php //include PATH_INC."bots_catcher";?>
+<?php readfile("http://external-links.net/informer/?100_9852_61_716")?> 
+<div>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+(function (d, w, c) {
+    (w[c] = w[c] || []).push(function() {
+        try {
+            w.yaCounter17309293 = new Ya.Metrika({id:17309293, enableAll: true, webvisor:true});
+        } catch(e) { }
+    });
+    
+    var n = d.getElementsByTagName("script")[0],
+        s = d.createElement("script"),
+        f = function () { n.parentNode.insertBefore(s, n); };
+    s.type = "text/javascript";
+    s.async = true;
+    s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+    if (w.opera == "[object Opera]") {
+        d.addEventListener("DOMContentLoaded", f);
+    } else { f(); }
+})(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/17309293" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</div>
+<!-- Google Analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-12461671-13', 'mkr.com.ua');
+  ga('send', 'pageview');
+
+</script> 
+<!-- /Google Analytics -->
+
+<!-- RedHelper -->
+<script id="rhlpscrtg" type="text/javascript" charset="utf-8" async="async" 
+	src="https://web.redhelper.ru/service/main.js?c=larron">
+</script> 
+<!--/Redhelper -->
+<?php include PATH_INC."/block_ear_shop.tpl.htm";?>
+</body></html>

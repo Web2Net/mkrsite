@@ -1,0 +1,47 @@
+<?$seodata=explode("/",$seolink);
+  $mod=$seodata[0];
+  if($mod == "smi") $smi = "<span style='padding-left:25px;font-weight:bold;'>{$article['text_autor']}</span>"; 
+?>
+<?$val=$article;?>
+
+<div id="wrap_page">
+<!-- Кнопка назад после поиска -->
+<?if($_SERVER['HTTP_REFERER'] == SITE_URL."/search/"){?>
+<form method="post" action="/search/" style="display:inline;">
+       <input value="<?=$_SESSION['search_input']?>" type="hidden" name="search_input" />
+       <input type="image" src="<?=PATH_IMG?>/butt_search_back.png" alt="Назад к списку" title="Назад к списку" />
+</form>
+<div class="br_10"></div>
+<?}?>
+<!-- /Кнопка назад после поиска -->
+<?if($mod !== "Главная" ){?> 
+    <div class="date_1">
+        <span style="padding-left: 25px;"><?=Time::formatMonth($val["date_create"])?></span>
+<?if($val["source"] !== ""){?>
+        <span style="padding-left:25px;">Источник : <?=$val["source"]?></span>
+<?}?>
+        <br /><br /><?=$smi?>
+    </div>
+<?}?>
+    <div class="br_5"></div>
+    <div>
+        <p style="font-size:18px; color:#d91219;text-align: center;"><?=$val["caption"]?></p>
+    </div>
+    <div class="br_5"></div>
+    <div class="article">
+<?if($val["image"]!=""&&$article_cat['seo']!="videogid"){?>
+        <img src="<?=$val['image']?>" align="left" style="margin:0px 15px 7px 0px;width:150px" alt="" />
+<?}?>
+        <?=$val["full_text"]?>
+    </div>
+
+<?if($val["video"]!=='')
+{
+    $youtube=explode("/",$val["video"]);
+?> 
+    <div align="center" style="margin:15px 0px 25px 0px;">
+        <iframe width="560" height="349" src="http://www.youtube.com/embed/<?=$val["video"]?>" frameborder="0"></iframe>
+    </div>
+<?}?> 
+<?include PATH_INC."/butt_back.php"?>
+</div>

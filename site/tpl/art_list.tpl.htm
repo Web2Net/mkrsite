@@ -1,0 +1,53 @@
+<?if($rub == "articles"){$content_title = "Научные работы";}
+  if($rub == "Новости"){$content_title = "Новости";}
+  if($rub == "videogid"){$content_title = "Видеогид клиники";}
+  if($rub == "smi"){$content_title = "Пресса о нас";}?>
+
+<div style="text-transform: capitalize;"><h1><?=$content_title?></h1></div>
+
+<div id="wrap_page">
+<?if($list!=NULL){foreach($list as $key=>$val){?>
+    <div class="hr_dash_blue" onmouseover="this.style.background='#fafaeb';" onmouseout="this.style.background='#fff';">
+       <div style="padding:10px 15px 12px 15px;">
+<?if($mod!=="Услуги"){?>
+           <div class="date_2">
+                <span class="block_date_time"><?=Time::formatMonth($val["date_create"])?></span>
+                
+                <!--<span style="padding-left: 25px;"><strong><?//=$val["text_autor"]?></strong></span>-->
+            </div>
+            <div class="br_10"></div>
+<?}?> 
+            <div class="caption" style="padding-left:25px;padding-right:10px">
+                <a style="padding-left:25px" title="Далее" href="/<?=$val['article_cat']?>/<?=$val['id']?>-<?=$val['web_link']?>/">
+                <strong><?=$val["caption"]?></strong></a>
+            </div>
+            <div class="both br_10"></div>
+<?if($val["image"]!=""){?> 
+               <a title="Далее" href="/<?=$val['article_cat']?>/<?=$val['id']?>-<?=$val['web_link']?>/">
+               <img class="img_150 left" src="<?=$val['image']?>" alt="" /></a>
+<?}?>
+           <div class="br_5"></div>
+           <div class="article_short"><?=$val["short_text"]?></div>
+           <div class="both br_10"></div>
+
+           <div class="right block_more">
+               <a href="/<?=$val['article_cat']?>/<?=$val['id']?>-<?=$val['web_link']?>/">
+<?if($rub == "видео")
+{?>
+                   <strong>Смотреть</strong>&nbsp;<b style="color:#444;">»</b>&nbsp;
+<?}else{?>
+ 
+                   <strong>Подробнее</strong>&nbsp;<b style="color:#444;">»</b>&nbsp;
+<?}?>
+               </a> 
+           </div>
+
+        </div>
+        <div class="both br_5"></div>
+    </div>
+<?}}?>
+    <div class="br_10"></div>
+<?if($mod!=="Услуги"){?>  
+    <?include PATH_INC."/paginator.php"?>
+<?}?>
+</div>

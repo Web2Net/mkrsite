@@ -1,0 +1,7 @@
+Архивы лежат в <?=SITE_URL?>/archives/<strong>ДАТА СОЗДАНИЯ АРХИВА</strong>/<br /><br />
+<?if($list !== NULL){foreach($list as $key=>$val){?>
+<div>
+    <span style="font-size:10px;">Создан дамп таблицы</span>
+    &nbsp;<span style="font-weight:bold; border-bottom:1px solid #000;"><?=$val?></span>
+</div>
+<?}}?>

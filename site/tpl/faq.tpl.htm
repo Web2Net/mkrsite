@@ -1,0 +1,31 @@
+<?$val = $faq[0]?>
+<div class="block_main_header_left"></div>
+<div class="block_main_header_right"></div>
+<div class="block_main_header_center"><span style="text-transform: capitalize;"><?=$val['name']?></span>&nbsp;спрашивает</div> 
+
+<div id="wrap_page">
+<!-- Кнопка назад после поиска -->
+<?if($_SERVER['HTTP_REFERER'] == SITE_URL."/search/"){?>
+<form method="post" action="/search/" style="display:inline;">
+       <input value="<?=$_SESSION['search_input']?>" type="hidden" name="search_input" />
+       <input type="image" src="<?=PATH_IMG?>/butt_search_back.png" alt="Назад к списку" title="Назад к списку" />
+</form>
+<div class="br_10"></div>
+<?}?>
+<!-- /Кнопка назад после поиска -->
+    <div style="padding:10px 15px 10px 15px;">
+        <p><span class="block_date_time"><?=Time::formatMonth($val['date'])?></span>
+            <br />
+<?if($val['city'] !== ""){?>
+            <span style="padding-left:15px;font-size:18px;">г.</span>
+            <span style="font-size:18px;text-transform: capitalize;"><?=$val['city']?></span>
+<?}?>
+        </p>
+        <div class="both"></div>
+        <p><strong>Вопрос пациента :</strong></p>
+        <div style="color:#02405d"><?=$val['question']?></div>
+        <div style="height: 5px;"></div>
+        <p><strong>Ответ доктора :</strong></p>
+        <div style="color:#025d0d"><?=stripslashes($val['answer'])?></div>
+    </div>
+</div>

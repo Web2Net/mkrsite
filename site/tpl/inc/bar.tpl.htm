@@ -1,0 +1,15 @@
+<?
+if(Setting::setSetting("mobi"))
+{?>
+<span class="left" style="padding:2px 5px 0px 15px;"  title="Мобильная версия">
+    <a href="/mobi/"><img src="<?=PATH_IMG?>/ico_mobi.gif" border="0" height="25" title="Мобильная версия" alt="Мобильная версия" /></a>
+</span>       
+<?}?>
+<?
+if(Setting::setSetting("multi_lang"))
+{
+    include PATH_INC."/langs_switch.tpl.htm";    
+}
+?>
+<span class="right date"><?=Time::formatMonth(date("Y-m-d"))?></span>
+<div class="both br_5 hr_sol"></div>

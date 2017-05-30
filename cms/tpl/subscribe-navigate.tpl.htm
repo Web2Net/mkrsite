@@ -1,0 +1,13 @@
+<?if($_SESSION['level']>=2){?>
+<div class="title_of_hddn menu2"><strong>Подписчики</strong></div>
+  <div class="hddn">  
+    <div class='title' <?if($mod=='subscribe' && $type=='Y'){$img = "ico_folder_a.gif";?>style="font-weight:bold;"<?}else{$img = "ico_folder.gif";}?>>
+          <img src='design/<?=$img?>' alt='Показать все' width='19' height='19' vspace='0' border='0' hspace='5' />
+          <a href='?mod=subscribe&type=Y&com=view'>Активные</a>
+    </div>
+    <div class='title' <?if($mod=='subscribe' && $type=='N'){$img = "ico_folder_a.gif";?>style="font-weight:bold;"<?}else{$img = "ico_folder.gif";}?>> 
+          <img src='design/<?=$img?>' alt='Показать все' width='19' height='19' vspace='0' border='0' hspace='5' />
+          <a href='?mod=subscribe&type=N&com=view'>Отписавшиеся</a>
+    </div>
+  </div>   
+<?}?>

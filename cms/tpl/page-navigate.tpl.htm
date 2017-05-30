@@ -1,0 +1,13 @@
+<?if($_SESSION['level']>=2){?>
+<div class="title_of_hddn menu2" style="text-align:center"><strong>Страницы</strong><img class="right" src="<?=PATH_IMG_ADMIN?>/butt_page.gif" style="height:15px" /></div>
+    <div class="hddn">  
+        <div class='title' <?if($mod=='page' && $com=='view'){$img = "ico_folder_a.gif";?>style="font-weight:bold;"<?}else{$img = "ico_folder.gif";}?>>
+            <img src='design/<?=$img?>' alt='Показать все статьи секции' width='19' height='19' vspace='0' border='0' hspace='5' />
+            <a href='?mod=page&type=page&com=view'>Обзор</a>
+        </div>
+        <!--<div class='title' <?if($mod=='page' && $com=='add'){$img = "ico_folder_a.gif";?>style="font-weight:bold;"<?}else{$img = "ico_folder.gif";}?>> 
+            <img src='design/<?=$img?>' alt='Показать все статьи секции' width='19' height='19' vspace='0' border='0' hspace='5' />
+            <a href='?mod=page&com=add'>Создать</a>
+      </div>-->
+  </div>   
+<?}?>

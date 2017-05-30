@@ -1,0 +1,37 @@
+<?if(strlen($page['content']['caption'])>='60'){$font_size = "15px";}else{$font_size = "18px";}?>
+<div class="block_main_header_left"></div>
+<div class="block_main_header_right"></div>
+<div class="block_main_header_center" style="font-size:<?=$font_size?>;"><?=$title_page?></div>
+
+<div id="wrap_page">
+   <div class="both br_10"></div>
+   <div style="text-align:center;">      
+<?if($list!=NULL){foreach($list as $key=>$val){?>
+    <?if(strstr($val['image'],","))
+          {
+              $img = explode(",",$val['image']);                             
+              foreach($img as $img_n=>$img_f)
+              {?>
+                  <a rel="lightbox-gallery1" href="<?=PATH_IMG?>/award/<?=$img_f?>" title="<?=Text::cutString($list[0]['caption'])?>" style="margin:0px;padding:0px;">
+                      <img src="<?=PATH_IMG?>/award/<?=$img_f?>" style="height:150px" alt="<?=Text::cutString($list[0]['caption'])?>" />
+                  </a>
+            <?}
+          }
+          else
+          {?>
+              <a rel="lightbox-gallery1" href="<?=PATH_IMG?>/award/<?=$val['image']?>" title="<?=Text::cutString($list[0]['caption'])?>" style="margin:0px;padding:0px;">
+                    <img src="<?=PATH_IMG?>/award/<?=$val['image']?>" style="height:150px" alt="<?=Text::cutString($list[0]['caption'])?>" />
+                </a>
+        <?}?>
+    
+     
+    <div style="padding:10px 15px 10px 15px; text-align:center;">
+        <!--<a href="/award/<?//=$val['type']?>/<?//=$val['id']?>/"><?//=$val['caption']?></a>-->
+        <?=$val['caption']?>
+    </div>
+    <div class="both br_15"></div>
+    
+    
+<?}}?>
+</div>
+</div>

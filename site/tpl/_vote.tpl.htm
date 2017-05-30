@@ -1,0 +1,10 @@
+<div class="block_main_header_left"></div>
+<div class="block_main_header_right"></div>
+<div class="block_main_header_center">Отзывы больных о лечении в клинике доктора Василевича</div>
+<?Sys::varDump($vote_list)?>
+<div id="wrap_page">
+<?if($vote_list !== NULL && $list !== 0){foreach($vote_list as $key=>$val){?>  
+    <div class="left"><?=$val['var1_content']?></div>
+    <div class="left"><?=$val['var2_content']?></div>
+<?}}?>
+</div>

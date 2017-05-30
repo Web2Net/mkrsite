@@ -1,0 +1,218 @@
+<script type="text/javascript" language="JavaScript">
+  function flyImage(menu){
+var smenu='sub-'+ menu.id;
+document.getElementById(smenu).style.display='block';
+
+}
+function hideImage(menu){
+var smenu='sub-'+menu.id;
+document.getElementById(smenu).style.display='none';
+}
+
+function openDiv (what) {
+  var z=what.id;
+   var y=1;
+do {
+ if (document.getElementById("list"+y).style.display == "block") {
+  document.getElementById("list"+y).style.display = "none";
+  document.getElementById("td"+y).className = "close";
+  }
+  y++;
+} while (y<4) 
+ 
+ if (document.getElementById("list"+z).style.display != "block") {
+  document.getElementById("list"+z).style.display = "block";
+  document.getElementById("td"+z).className = "open";
+ }
+ else {
+  document.getElementById("list"+z).style.display = "none";
+  document.getElementById("td"+z).className = "close";
+ } 
+
+ }
+
+  function aSend(param,value) {
+  //alert(param);
+ if(param=='shoppingplus'){document.getElementById("shopping").innerHTML = '...';  }   
+   JsHttpRequest.query(
+      '<?=SITE_URL?>/?mod=ajax&param='+param,
+      { 
+        'data': value,
+      },
+      function(result, errors) {
+    if(param=='shoppingplus'){  
+    document.getElementById("shopping").innerHTML = result['q']; 
+    document.getElementById("rukzak").src = "/index_files/rukzak2.gif";
+      document.getElementById("result").innerHTML = result['r'];  }   
+      },
+ false
+    );
+      document.getElementById("return").innerHTML = '<a href="<?=PAGE_REF?>"> «« Вернуться </a>';       
+  
+  } 
+  
+  
+</script>
+<style>
+a.prodstyles{
+color:#145C82;
+}
+a.prodstyles:hover{
+text-decoration:none;
+}
+.open{
+padding: 3px 10px 3px 10px;
+background-color: #FFFFFF;
+border: 3px solid #D7DDFE;
+border-bottom: none;
+}
+.close{
+padding: 4px 10px 3px 10px; 
+background-color: #D7DDFE; 
+border-left: solid 3px #FFFFFF; 
+border-right: solid 3px #FFFFFF; 
+}
+</style>
+<div style="width: 995px; margin-right: 12px; margin-left: 12px; margin-top: 3px;" class="product">
+
+<div style="padding:7px 0px 1px 0px;" id="return"><a href="<?=$return=="no"?PAGE_REF:"javascript:history.back()"?>"> «« Вернуться </a></div>
+<div style="padding:4px 0px 10px 0px;">
+<?if($product["brand"]!=""){?><h2><?=$product["brand"]?></h2><?}?>
+<h1> - <?=$product["name"]?></h1>
+<h2>&nbsp;<?if($product["style"]!=""){?><small>Цвет:</small> <?=$product["style"]?><?}?>
+<?if($product["volume"]!=""){?> <small>Размер:</small> <?=$product["volume"]?><?}?></h2>
+
+</div>
+<?if($product["picture"]!=""){?>
+<div style="position:relative;display:none;z-index:100;margin:0px 0px 0px 0px;text-align: left;" name="sub-image" id="sub-image" onMouseOver="document.getElementById(this).style.display='block'"  onMouseOut="document.getElementById('this').style.display='none'"><div style="padding:0px;" class="submenu">
+		<table style="background-color: #D7DDFE;" cellspacing="0" cellpadding="2">
+			<tr>
+				<td id="image" align="center" style="background-color: #D7DDFE;" onMouseOver="flyImage(this)" onMouseOut="hideImage(this)">
+				<img alt="" src="<?=$product["picture"]!=""?SITE_URL.$product["picture"]:SITE_URL."/index_files/bignoimage.jpg"?>" />
+				</td>
+			</tr>
+		</table>
+</div></div>
+<?}?>
+<table style="width: 995px" cellpadding="0" cellspacing="0">
+	<tr>
+		<td width="300" align="center" valign="top" style="padding-right:7px">
+		<table style="background-color: #D7DDFE;" cellspacing="3" cellpadding="3">
+			<tr>
+				<td id="image" align="center" style="background-color: #fefefe;cursor:pointer" onClick="flyImage(this)" onMouseOut="hideImage(this)">
+				<img alt="" src="<?=$product["picture"]!=""?SITE_URL.$product["picture"]:SITE_URL."/index_files/bignoimage.jpg"?>" width="285" />
+				</td>
+			</tr>
+			<tr>
+				<td align="center">Кликните по картинке для увеличения</td>
+			</tr>
+		</table>
+		</td>
+		<td valign="top" style="background-color: #D7DDFE;padding:15px;">
+<div style="border-style: double; border-width: 3px; border-color: #D7DDFE; width: 300px; float: right; background-color: #FFFFFF;">
+<div style="padding:7px 7px 7px 15px;"><h2>Добавить товар в корзину:</h2></div>
+<form method="post" id="f" enctype="multipart/form-data" onsubmit="return false">
+<table style="width: 99%;font-family:tahoma;color:#145C82;" cellspacing="0" cellpadding="4">
+<?if($product["style"]!=""){?>
+<tr>
+		<td align="right"><b>Цвет:</b></td>
+		<td><?=$product["style"]?></td>
+</tr>
+<?}?>
+<?if($product["volume"]!=""){?>
+	<tr>
+		<td align="right"><b>Размер:</b></td>
+		<td><?=$product["volume"]?></td>
+	</tr>
+<?}?>
+	<tr>
+		<td align="right" width="35%"><b>Количество:</b></td>
+		<td><input name="pcount" type="text" maxlength="3" size="5" value="1"/></td>
+	</tr>
+</table>
+
+    <input type="hidden" name="prodid" value="<?=$product["1Cid"]?>">
+
+<div style="padding:15px 15px 20px 60px;" id="result">
+<a id="shoppingplus" href="javascript:aSend('shoppingplus',document.getElementById('f'))" class="button">
++ В Корзину</a></div>
+</div>
+</form>
+<div style="color:#145C82;">
+<?if($product['newprice']!=0){?>
+<div style="font-family:tahoma;font-size:13px;font-weight:bold;text-decoration: line-through;padding:4px;">
+Цена: <?=$product['price']?> грн.</div>
+<div style="font-family:tahoma;font-size:13px;font-weight:bold;padding:4px;">
+Новая цена: <?=$product['newprice']?> грн.</div>
+<?}else{?>
+<div style="font-family:tahoma;font-size:13px;font-weight:bold;padding:4px;">
+Цена: <?=$product['price']?> грн.</div>
+<?}?>
+<?if($product['price']>300 || $product['newprice']>300){?><div style="padding:4px;">Бесплатная доставка по Украине</div><?}?>
+<?if($product['description']!=""){?><div style="padding:15px 4px 4px 4px;color:#00486E;"><?=$product['description']?> <a href="javascript:document.location.replace('#detail')">Узнать больше</a></div><?}?>
+</div>
+<?if($styles!=NULL){?>		
+<div style="margin:7px 0px 0px 0px;color:#145C82;clear:both;font-family:verdana;font-size:11px;margin-bottom:3px;">
+<b>Другие цвета и размеры этого товара: <b></div>
+<div style="">
+<?//var_dump($styles)?>
+<?foreach($styles as $key=>$val){?>
+<?if($val['1Cid']!=$prodid){?>
+<table style="float:left;width:75px;margin:0px 7px 0px 0px;" cellpadding="0" cellspacing="0"><tr><td align="center">
+<a href="<?=SITE_URL?>/shop/catalog/product/<?=$val['1Cid']?>/<?=Text::cirilToLatin($val['brand'])?>-<?=Text::cirilToLatin($val['name'])?>.html">
+<img src="<?=$val['thumbnail']!=""?$val['thumbnail']:"/index_files/noimage.jpg"?>" alt="" border="0" class="catalog-list-image" width="65" style="border:3px double #D7DDFE;background-color:#FFFFFF;margin-top:4px;">
+</a>
+</td></tr><tr><td align="center">
+<a href="<?=SITE_URL?>/shop/catalog/product/<?=$val['1Cid']?>/<?=Text::cirilToLatin($val['brand'])?>-<?=Text::cirilToLatin($val['name'])?>.html" class="prodstyles">
+<?if($val['style']!=""){?><nobr><?=$val['style']?></nobr><br><?}?>
+<?if($val['volume']!=""){?><nobr><?=$val['volume']?></nobr><?}?>
+</a>
+</td></tr></table><?}?>
+<?}}?>
+</div>			
+		</td>
+	</tr>
+</table>
+		
+		</td>
+	</tr>
+</table>
+<a name="detail"></a>
+<div align="center">
+<div style="width:600px;" align="justify">
+<table class="butt" cellpadding="0" cellspacing="0"><tr><td id="td1" class="open"><a class="" id="1" onclick="openDiv(this)" href="javascript:void(0)">Описание</a></td></tr></table>
+<table class="butt" cellpadding="0" cellspacing="0"><tr><td id="td2" class="close"><a class="" id="2" onclick="openDiv(this)" href="javascript:void(0)">Характеристики</a></td></tr></table>
+<table class="butt" cellpadding="0" cellspacing="0"><tr><td id="td3" class="close"><a class="" id="3" onclick="openDiv(this)" href="javascript:void(0)">Инструкции</a></td></tr></table>
+
+
+<div style="margin-right:10px;border: 3px solid #D7DDFE;margin-top:37px;margin-top:30px;padding:25px 35px 35px 35px">
+<div id="list1" style="display: block;">
+<?if($product['full_text']!=""){?>
+<?=$product['full_text']?>
+<?}else{?>
+<br><br><br><br><br><br><br><br><br><br><br>
+<?}?>
+</div>
+<div id="list2" style="display: none;">
+<?if($product['harakter']!=""){?>
+<?=$product['harakter']?>
+<?}else{?>
+<br><br><br><br><br><br><br><br><br><br><br>
+<?}?>
+</div>
+<div id="list3" style="display: none;">
+<?if($product['instruction']!=""){?>
+<?=$product['instruction']?>
+<?}else{?>
+<br><br><br><br><br><br><br><br><br><br><br>
+<?}?>
+</div>
+
+</div>
+</div></div>
+
+
+
+
+<br>
+</div>

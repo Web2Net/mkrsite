@@ -1,0 +1,195 @@
+<script type="text/javascript" language="JavaScript">
+
+function SetUrl( url, width, height, alt )
+{
+document.getElementById('image_name').value = url;
+document.getElementById('seeImage').src = url;
+//alert(url);
+//alert(width);
+//alert(height);
+//alert(alt);
+}
+
+function BrowseServer(typefolder)
+{
+var url='<?=SITE_URL?>/lib/fckeditor/editor/filemanager/browser/default/browser.html?Type='+typefolder+'&Connector=<?=urlencode(SITE_URL)?>/lib%2Ffckeditor%2Feditor%2Ffilemanager%2Fconnectors%2Fphp%2Fconnector.php';
+
+var width = 650;
+var height = 400;
+
+var iLeft = ( window.screenWidth  - width ) / 2 ;
+var iTop  = ( window.screenHeight - height ) / 2 ;
+
+    var sOptions = "toolbar=no,status=no,resizable=yes,dependent=yes,scrollbars=yes" ;
+    sOptions += ",width=" + width ;
+    sOptions += ",height=" + height ;
+    sOptions += ",left=" + iLeft ;
+    sOptions += ",top=" + iTop ;
+
+    window.open( url, 'FCKBrowseWindow', sOptions ) ;
+}
+
+  function aUploadImage(value) {
+  //alert(param);
+   document.getElementById("seeImage").src = '<?=SITE_URL?><?=ADM_SITE_URL?>/design/loadfoto.gif';
+   JsHttpRequest.query(
+      '<?=PAGE_URL?>&ext=ajax&param=uploadimage',
+      { 
+        'file': value,
+      },
+      function(result, errors) {
+    //document.getElementById("image").innerHTML = result['q']; 
+    document.getElementById("seeImage").src = result['image'];
+    document.getElementById("image").value =  result['image'];  
+    document.getElementById("image_small").value =  result['image_small'];        
+    document.getElementById("message").innerHTML =  errors;     
+      },
+ false
+    );    
+  
+  } 
+</script>
+<table style="margin-bottom:2px;">
+    <tr>
+        <td>
+            <a href="?mod=health&type=<?=$_REQUEST['type']?>&com=view&category=<?=$cat_data['category']?>">
+                <img src="design/ico_back.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Назад" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+        <?if($_REQUEST['com'] == "edit"){?>    
+            <a href="<?=SITE_URL?>/health/<?=$cat_data['category_name']?>/<?=$cat_data['seolink']?>/" title="Посмотреть на сайте" target="_blank">
+                <img src="design/internet.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;width:48px;" title="Посмотреть на сайте" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+        <?}?>
+            <!--<a href="javascript:void(0)" onclick="articleForm.submit();">
+              <img src="design/ico_save.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''">
+           </a>-->
+          </td>
+        <td class="heading1" align="right" valign="bottom">
+            <span style="color:#e7e7e7;font-size:24px;"><?=$mod_name?></span><br>
+            <span style="color:#444;">Список статей категории : </span><?=$type_name?>
+        </td>
+    </tr>
+</table>
+<?if ($upd=='ok'){?><div style="padding:3px 7px;font-family:verdana;font-size:12px;color:forestgreen;border:dashed 1px forestgreen;"><b>Данные обновлены</b></div><?}?>
+<table style="width: 100%;margin-top:2px" cellpadding="0" cellspacing="1">
+    <tr class="head">
+        <td>Редактирование в модуле : <?=$mod_name?></td>
+    </tr>
+    <tr>
+        <td>
+            <table style="width: 100%" cellpadding="2" cellspacing="0" class="uniform">    
+               <tr>
+                    <td align="left" style="width: 120px"><span class="error">*&nbsp;</span>Картинка :</td>
+                    <td align="left" style="background-color: #FFFFFF;padding: 1px;">
+                        <img alt="" src="<?=$cat_data['image']!=""?$cat_data['image']:ADM_SITE_URL."/design/noimage.jpg"?>" id="seeImage"/>
+                    </td>
+                    <td>
+<div style="margin:3px 0px 7px 0px;">
+<form method="post" enctype="multipart/form-data" onsubmit="return false">
+    <input type="file" name="upl"><br>
+    <input type="button" value="Загрузить" 
+      onclick="aUploadImage(this.form.upl)">
+</form>
+</div>
+
+</td></tr></table>
+        </td>
+    </tr>              
+    <tr>
+       <td>    
+            <form action="?mod=health&type=<?=$type?>&com=update<?=isset($id)?"&id=".$id:""?>" method="post"  name="articleForm">
+               <input name="id" value="<?=$cat_data['id']?>" type="hidden">
+               <input name="category" value="<?=$_GET['category']?>" type="hidden">
+               <input type="hidden" style="width: 300px;" name="image" id="image" value="<?=$cat_data['image']?>" />
+               <input type="hidden" style="width: 300px;" name="image_small" id="image_small" value="<?=$cat_data['image_small']?>" />
+               <table style="width: 100%" cellpadding="2" cellspacing="0" class="uniform">
+                    <tr>
+                        <td style="width: 120px" align="right">Image Title</td>
+                        <td align="left"><input name="image_title" value="<?=$cat_data['image_title']?>" type="text" class="validate[required,length[0,1000]]" style="font-family:Verdana;font-size:12px;width:580px;"></td>
+                    </tr>    
+                    <tr>
+                        <td style="width: 120px" align="right"><span class="error">*&nbsp;</span>Заголовок :</td>
+                        <td align="left"><input name="caption" value="<?=$cat_data['caption']?>" type="text" class="validate[required,length[0,100]]" style="font-family:Verdana;font-size:12px;width:580px;"></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Кол-во запросов :</td>
+                        <td><input name="counts" class="adminform" value="<?=$cat_data['counts']?>" type="text"></td>
+                    </tr>    
+                    <tr>
+                        <td align="right">Meta Title :</td>
+                        <td><input name="meta_t" class="adminform" value="<?=$cat_data['meta_t']?>" type="text"></td>
+                    </tr>    
+                    <tr>
+                        <td align="right">Meta Description :</td>
+                        <td align="left"><textarea name="meta_d" class="adminarea"><?=$cat_data['meta_d']?></textarea></td>
+                    </tr>    
+                    <tr>
+                        <td align="right">Meta Keywords :</td>
+                        <td align="left"><textarea name="meta_k" class="adminarea"><?=$cat_data['meta_k']?></textarea></td>
+                    </tr>
+                    <tr>
+                        <td align="right">Опубликовать :</td>
+                        <td align="left"><input name="showing" type="checkbox" <?if ($cat_data['showing']=='Y' || $cat_data['showing']==''){?> checked=""<?}?>value="1" /></td>
+                    </tr>
+                    <!--<tr>
+                        <td style="background-color:#fde5e5" align="right">Показывать в "Хит лечения" :</td>
+                        <td style="background-color:#fde5e5" align="left"><input name="hit_enable" type="checkbox" <?if ($cat_data['hit_enable']=='1'){?> checked="checked"<?}?>value="1" /></td>
+                    </tr>-->
+                    <tr>
+                        <td align="right"><span class="error">*&nbsp;</span>Содержимое :</td>
+                        <td align="left">
+<?
+include(SITE_PATH."/lib/fckeditor/fckeditor.php") ;
+$sBasePath=SITE_URL.'/lib/fckeditor/';
+$oFCKeditor->Config['SkinPath'] = SITE_URL.'/lib/fckeditor/editor/skins/silver/';
+$oFCKeditor = new FCKeditor('content') ;
+$oFCKeditor->BasePath    = $sBasePath ;
+$oFCKeditor->Value        = $cat_data["content"];
+$oFCKeditor->Width  = '100%' ;
+$oFCKeditor->Height = '450' ;
+$oFCKeditor->ToolbarSet = 'Basic';
+$oFCKeditor->Create() ;
+?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#f9bbbe" align="right">Показывать в Демо на Главной :</td>
+                        <td style="background-color:#f9bbbe" align="left"><input name="demo_main" type="checkbox" <?if ($cat_data['demo_main']=='1'){?> checked="checked"<?}?>value="1" /></td>
+                    </tr>
+                    <!--<tr>
+                        <td style="background-color:#d6eefb" align="right">Демо - заглавие :</td>
+                        <td style="background-color:#d6eefb"><input name="demo_caption" class="adminform" value="<?=$cat_data['demo_caption']?>" type="text"></td>
+                    </tr>-->
+                    <tr>
+                        <td style="background-color:#d6eefb" align="right">Демо - цена :</td>
+                        <td style="background-color:#d6eefb"><input name="demo_price" class="adminform" value="<?=$cat_data['demo_price']?>" type="text"></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#d6eefb" align="right">Демо - описание (для главной) :</td>
+                        <td style="background-color:#d6eefb">
+<?
+include(SITE_PATH."/lib/fckeditor/fckeditor.php") ;
+$sBasePath=SITE_URL.'/lib/fckeditor/';
+$oFCKeditor->Config['SkinPath'] = SITE_URL.'/lib/fckeditor/editor/skins/silver/';
+$oFCKeditor = new FCKeditor('demo_content') ;
+$oFCKeditor->BasePath    = $sBasePath ;
+$oFCKeditor->Value        = $cat_data["demo_content"];
+$oFCKeditor->Width  = '100%' ;
+$oFCKeditor->Height = '250' ;
+$oFCKeditor->ToolbarSet = 'Basic';
+$oFCKeditor->Create() ;
+?>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:#d6eefb" align="right">Показывать в Демо :</td>
+                        <td style="background-color:#d6eefb" align="left"><input name="demo_enable" type="checkbox" <?if ($cat_data['demo_enable']=='1'){?> checked="checked"<?}?>value="1" /></td>
+                    </tr>      
+                    <tr>
+                        <td colspan="2" align="right" style="padding:7px 14px 14px 0px;">
+                            <button name="save" type="submit" id="submit" style="border: 1px solid rgb(90, 126, 220); cursor: pointer; background: #fff;" title="Сохранить" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background='#fff'" onclick="newsForm.submit();" /><img src="design/ico_save.gif" class="butt_send"/></button>
+                        </td>
+                </tr>    
+                </table>
+            </form>    
+        </td>
+    </tr>
+</table>

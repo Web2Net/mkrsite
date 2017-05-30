@@ -1,0 +1,13 @@
+<div style="padding:5px">
+<?
+$site_langs = Lang::getSiteLangs();
+if($site_langs !== NULL)
+{
+    foreach($site_langs as $key=>$val)
+    {?> 
+          
+        <a href="/<?=$val['lang']?>/"><img src="<?=PATH_IMG?>/lang_switch/ico_flag_<?=$val['lang']?>.jpg" style="height:18px;" title="<?=$val['caption']?>"  alt="<?=$val['caption']?>" /></a>
+  <?}
+}
+?>
+</div>

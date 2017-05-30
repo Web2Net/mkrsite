@@ -1,0 +1,29 @@
+<?
+$select="";
+$from="mr_feedback";
+$where="showing='N'";
+$sortby="`date` DESC";
+$db = new mysql;
+$row = $db->origSelectSQL($select, $from, $where, $sortby);
+if($row > 0)
+{
+    $new_question = "<img src='/site/design/img/ico_new.gif' />";
+}
+
+?>
+<?//if($_SESSION['level']>=2){?>
+<div class="title_of_hddn menu2"><strong>Запись в клинику</strong></div>
+  <div class="hddn">  
+    <div class='title' <?if($mod=='feedback' && $category=='question'){$img = "ico_folder_a.gif";?>style="font-weight:bold;"<?}else{$img = "ico_folder.gif";}?>>
+          <img src='design/<?=$img?>' alt='Показатр все статри секции' width='19' height='19' vspace='0' border='0' hspace='5' />
+          <span style="padding:1px 4px;font-size:12px;line-height: 15px;font-family:tahoma;<?if($category=='question' && $mod=='feedback'){?>background-color:#f7f7f7;font-weight:bold;<?}?>">
+          <a href="?mod=feedback&com=view&category=question" title="Открыть папку">Обзор</a></span>
+          <span class="right"><a href="?mod=feedback&com=view&category=question" title="Открыть папку"><?=$new_question?></a></span>
+    </div>
+    <div class='title' <?if($mod=='feedback' && $category=='answer'){$img = "ico_folder_a.gif";?>style="font-weight:bold;"<?}else{$img = "ico_folder.gif";}?>> 
+          <img src='design/<?=$img?>' alt='Показатр все статри секции' width='19' height='19' vspace='0' border='0' hspace='5' />
+          <span style="padding:1px 4px;font-size:12px;line-height: 15px;font-family:tahoma;<?if($category=='answer' && $mod=='feedback'){?>background-color:#f7f7f7;font-weight:bold;<?}?>">
+          <a href="?mod=feedback&com=view&category=answer" title="Открыть папку">Архив</a></span>
+    </div>
+  </div>   
+<?//}?>

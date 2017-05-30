@@ -1,0 +1,98 @@
+<table style="width: 100%;margin-bottom:3px;" cellpadding="0" cellspacing="0">
+    <tr>
+        <td align="left">
+<?if (isset($category_id)){?>
+            <a href="?mod=contacts&type=category&com=view"><img src="design/ico_back.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Назад" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a> <?}?>
+            <a href="?mod=contacts&com=add"><img src="design/ico_add_artic.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Добавить статью в эту категорию" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+            <!--<a href="?mod=article&com=find&type=<?=$type?>"><img src="design/ico_search.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Поиск" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>-->    
+            <a href="<?=SITE_URL."/".$parent_data['seo']."/"?>" title="Посмотреть на сайте" target="_blank"><img src="design/internet.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;width:48px;" title="Посмотреть на сайте" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+        </td>
+        <td class="heading1" align="right" valign="bottom">
+            <span style="color:#e7e7e7;font-size:24px;"><?=$mod_name?></span><br>
+            <span style="color:#444;">Список статей <?if (isset($category_id)){?>категории : </span><?=$parent_data['caption']?><?}?>
+        </td>
+    </tr>
+</table>
+<?if($_SESSION["level"] == "9"){?>
+<div>
+	<div class="left" style="width:75px"><a href="?mod=<?=$mod?>&com=view&category=МКР">МКР</a></div>
+	<div class="left" style="width:75px"><a href="?mod=<?=$mod?>&com=view&category=Всяко">Всяко</a></div>
+	<div class="left" style="width:75px"><a href="?mod=<?=$mod?>&com=view&category=Отопление">Отопление</a></div>
+	<div class="left" style="width:75px"><a href="?mod=<?=$mod?>&com=view&category=СШ N92">СШ N92</a></div>
+	<div class="left" style="width:75px"><a href="?mod=<?=$mod?>&com=view&category=ЗРТ 92">ЗРТ 92</a></div>
+	<div class="left" style="width:75px"><a href="?mod=<?=$mod?>&com=view&category=Семья">Семья</a></div>
+</div>
+<div class="both br_5"></div>
+<?}?>
+<table class="list-table collapse" width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr class="head">
+<?if($_SESSION["level"] == "9"){?>
+        <td width="50"><span class="navigation">id</span>
+            <a href="?mod=<?=$mod?>&com=view&order=id&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+            <a href="?mod=<?=$mod?>&com=view&order=id"><img src="design/butt_order_az.png" width="10" /></a>
+        </td>
+<?}?>
+		<td width="60"><span class="navigation">фото</span></td>
+        <td width="80"><span class="navigation">Группа</span>
+			<a href="?mod=<?=$mod?>&com=view&order=category_id&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+            <a href="?mod=<?=$mod?>&com=view&order=category_id"><img src="design/butt_order_az.png" width="10" /></a>
+		</td>
+        <td width="100"><span class="navigation">Компания</span>
+			<a href="?mod=<?=$mod?>&com=view&order=company&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+            <a href="?mod=<?=$mod?>&com=view&order=company"><img src="design/butt_order_az.png" width="10" /></a>
+		</td>
+        <td width="100"><span class="navigation">Фамилия</span>
+			<a href="?mod=<?=$mod?>&com=view&order=l_name&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+            <a href="?mod=<?=$mod?>&com=view&order=l_name"><img src="design/butt_order_az.png" width="10" /></a>
+		</td>
+        <td width="100"><span class="navigation">Имя</span>
+			<a href="?mod=<?=$mod?>&com=view&order=name&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+            <a href="?mod=<?=$mod?>&com=view&order=name"><img src="design/butt_order_az.png" width="10" /></a>
+		</td>
+        <!-- <td width="100"><span class="navigation">Отчество</span></td> -->
+        <td align="center" width="120"><span class="navigation">Тел. моб</span></td>
+        <td align="center" width="100"><span class="navigation">День рождения</span>
+			<a href="?mod=<?=$mod?>&com=view&order=birthday&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+            <a href="?mod=<?=$mod?>&com=view&order=birthday"><img src="design/butt_order_az.png" width="10" /></a>		
+		</td> 
+        <!-- <td width="50"><span class="navigation">Ник</span></td> -->
+        <td align="center" width="50" colspan="2"><span class="navigation">Опции</span></td>
+    </tr>
+<?if ($listing!=''){?>
+<?$i=1;?>
+<?foreach($listing as $key=>$val){?>
+    <tr class="<?if($i==2&&$id!=$val['id']){?>bg_grey<?}else{?>bg_white<?}?> row1<?if ($id==$val['id']){?> sel<?}?>" onmouseover="this.style.background='<?if($id!=$val['id']){?>#FFFFCC<?}?>';" onmouseout="this.style.background='<?if($i==2&&$id!=$val['id']){$i=0;?>#F7F7F7<?}?>'">
+<?if($_SESSION["level"] == "9"){?>
+        <td><?=$val['id']?></td>
+<?}?>
+        <td><img src="<?=$val['image_small']?>" style="width:50px" /></td>
+        <td><?=$val['category_id']?></td>
+        <td><?=$val['company']?></td>
+        <td class="title" style="padding:4px 10px 4px 10px;">
+            <span><a href="?mod=contacts&com=edit&category_id=<?=$val['category_id']?>&id=<?=$val['id']?>" title="Редактировать">
+				<?=Text::cutStr($val['l_name'],7)?></a>
+			</span>
+        </td>
+        <td align="left"><?=Text::cutStr($val['name'],7)?></td>
+        <!-- <td style="padding:4px;"><?=Text::cutStr($val['patronumic'],9)?></td> -->
+        <td style="padding:4px;"><?=$val['tel_mob']?></td>
+<?
+$birth_d = explode("-",$val['birthday']);
+$d_birth = $birth_d[1]."-".$birth_d[2];
+if(date("m-d") == $d_birth){$bgg="style='background-color:#d91219'";}else{$bgg="";}
+?>
+        <td align="center" <?=$bgg?>><?=$val['birthday']?></td>
+		<!-- <td><?//=$val['nik']?></td> -->
+        <td class="options" align="center">
+
+<nobr>
+<a href="?mod=contacts&com=edit&category_id=<?=$val['category_id']?>&id=<?=$val['id']?>" title="Редактировать">
+<img src="design/ico_edit_sm.gif" alt="Редактировать" vspace="1" border="0" hspace="1"></a>
+<a title="Удалить" href="?mod=contacts&com=delete&id=<?=$val['id']?>" onclick="if (confirm('Вы уверены что хотите удалить статью?')) location=this.href; return false;">
+<img src="design/ico_delete_sm.gif" alt="Удалить" vspace="1" border="0" hspace="1"></a>
+</nobr>    
+</td>
+<?$i++;?>
+<?}}?>
+</tr>
+</table>

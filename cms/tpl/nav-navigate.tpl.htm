@@ -1,0 +1,9 @@
+<?if($_SESSION['level']>=2){?>
+<div class="title_of_hddn menu2" style="text-align:center"><strong>Навигация</strong><img class="right" src="<?=PATH_IMG_ADMIN?>/butt_nav.gif" style="height:15px" /></div>
+    <div class="hddn">  
+        <div class='title' <?if($mod=='nav' && $com=='view'){$img = "ico_folder_a.gif";?>style="font-weight:bold;"<?}else{$img = "ico_folder.gif";}?>>
+            <img src='design/<?=$img?>' alt='Открыть папку' width='19' height='19' vspace='0' border='0' hspace='5' />
+            <a href='?mod=nav&showing=Y&com=view'>Обзор</a>
+        </div>
+  </div>   
+<?}?>

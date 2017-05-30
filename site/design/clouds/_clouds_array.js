@@ -1,0 +1,15 @@
+var rnumber = Math.floor(Math.random()*9999999);
+ var so = new SWFObject("http://szenprogs.ru/tagcloud/tagcloud.swf?r="+rnumber, "tagcloudflash", "250", "250", "9");
+so.addParam("wmode", "transparent"); 
+so.addParam("allowScriptAccess", "always"); 
+so.addParam("bgcolor", "#FF0000"); 
+so.addVariable("tspeed", "250"); 
+so.addVariable("distr", "true"); 
+so.addVariable("mode", "tags"); 
+so.addVariable("minFontSize", "8"); 
+so.addVariable("maxFontSize", "48"); 
+so.addVariable("tcolor", "0x000000"); 
+so.addVariable("tcolor2", "0xd91219"); 
+so.addVariable("hicolor", "0x000000"); 
+ so.addVariable("tagcloud", "<div><?=$tags_clouds?></div>");
+ so.write("cloud_block");

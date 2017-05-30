@@ -1,0 +1,250 @@
+
+
+<div>
+     <div class="left">
+         <a href="?mod=<?=$mod?>&type=all&com=view">
+             <img src="design/ico_back.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Назад" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''">
+         </a>
+     </div>
+     <div class="left">
+          <a href="javascript:void(0)" onclick="articleForm.submit();">
+              <img src="design/ico_save.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''">
+          </a>
+     </div>
+     <div class="right heading1">
+         <span class="right" style="color:#e7e7e7;font-size:24px; align:right;"><?=$seo?></span><br />
+         <span><?=$art_data['client']?></span>
+     </div>
+</div>
+<div class="both br_5"></div>
+<?if ($upd=='ok'){?><div class="ok"><b>Данные обновлены</b></div><?}?>
+    <table style="width: 100%;margin-top:2px" cellpadding="0" cellspacing="1">
+	<tr class="head">
+	    <td>Редактирование :: <?=$art_data['client']?> :: <?=$art_data['email']?> </td>
+	</tr>
+	<tr>
+	    <td style="border:1px solid #d91219; padding:10px;">
+<!--		<h2>УВАГА, УВАГА!!!</h2>
+		Памятка для многоуважаемой Ирины Геннадьевны!<br />
+		С помощью данной формы загружаем документы (счета, акты и прочая макулатура..)<br />
+        Временно.. Название файлов должно быть латиницей и не должно содержать пробелов и всяческих непонятных знаков, типа (% ? * %)..<br />
+		Оптимальное название - "schet_125_ot_16.03.2017.doc"<br />
+		В дальнейшем сие неудобство я устраню.. <br /><br />
+		Памятка для остальных, не менее уважаемых камрадов..<br />
+		Если нужно скачать файл - то просто тыць по названию и загрузка начнется.. А там хош читай, хош печатай, хош в рамку и на стену..))<br /><br />
+		ЗЫ. После загрузки файла, кнопку "Сохранить" можно не нажимать..<br />
+		Всегда ваш, You.<br /><br />
+-->		
+<?//////////// UPLOAD FILES ///////////////////?>
+<?
+$item_dir = "/userfiles/works/";
+$upload_dir = SITE_PATH.$item_dir;
+$doc_dir = $art_data['id'];
+$full_dir = $upload_dir.$doc_dir;
+?>
+
+
+<form action="" method="POST" enctype="multipart/form-data">
+        <input type="file" name="uploadfile">
+        <input type="submit" name="up_file" value="Загрузить"></form>
+</form>
+
+
+<?
+if($_POST['up_file']){
+    @mkdir($upload_dir.$doc_dir, 0777); // создаем папку, если ее нет то ошибки не будет, задаем права
+
+    /*echo "<pre>";
+    print_r($_FILES);
+    echo "</pre>";*/
+    //$uploaddir = $upload_dir.'/';
+    $uploadfile = $full_dir."/".basename($_FILES['uploadfile']['name']);
+
+    if(copy($_FILES['uploadfile']['tmp_name'], $uploadfile)){
+        echo "<h3>Файл успешно загружен на сервер</h3>";
+    }
+	else{
+        echo "<h3>Не удалось загрузить файл на сервер</h3>";
+        exit;
+    }
+
+    //Данные о загруженном файле
+/*
+    echo "<h3>Информация о загруженном на сервер файле: </h3>";
+    echo "<p>Оригинальное имя загруженного файла:<b> ".$_FILES['uploadfile']['name']."</b></p>";
+    echo "<p>Mime-тип загруженного файла:<b> ".$_FILES['uploadfile']['type']."</b></p>";
+    echo "<p>Размер загруженного файла в байтах:<b> ".$_FILES['uploadfile']['size']."</b></p>";
+    echo "<p>Временное имя файла: <b>".$_FILES['uploadfile']['tmp_name']."</b></p>";
+*/
+}
+?>
+<br />
+<?php
+if($com !== "add"){
+$dir  = $full_dir;
+$files = scandir($dir);
+foreach ($files as $file){
+    if($file == "." || $file == ".."){}
+	else{
+		echo "<nobr><a href='{$item_dir}{$doc_dir}/{$file}' style='color:blue;' target='_blank'>{$file}</a></nobr> <br />";
+	}
+    
+}
+}
+?>
+<?//////////// /UPLOAD FILES ///////////////////?>
+	    </td>
+	</tr>
+	<tr>
+            <td>
+                <table style="width: 100%" cellpadding="2" cellspacing="0" class="uniform">	
+                            <form action="?mod=<?=$mod?>&type=<?=$type?>&com=update<?=isset($id)?"&id=".$id:""?>" method="post" name="articleForm">
+                            <input name="form__id" value="<?=$art_data['id']?>" type="hidden">
+ 
+<?
+if($art_data['ingener'] == ""){$ingener = $_SESSION['username'];}
+else{$ingener = $art_data['ingener'];}
+?>
+                            <input name="form__ingener" value="<?=$ingener?>" type="hidden">
+    <tr>
+<?if($_REQUEST['com'] == "edit"){$date = $art_data['date_create'];}else{$date = date("Y-m-d")." ".$_SESSION['username'];}?>
+        <td align="right">Заявка получена :</td>
+	    <td align="left"><input name="form__date_create" class="adminform" value="<?=$date?>" type="text"></td>
+	</tr>
+	
+	<?if ($art_data['prioritet']=='Y'){$bg = "#fd7c7c";}else{$bg = "#fff";}?>
+        <td align="right" style="background-color:<?=$bg?>">Горящая :</td>
+        <td align="left" style="background-color:<?=$bg?>">
+            <input name="form__prioritet" type="checkbox" <?if ($art_data['prioritet']=='Y'){?> checked=""<?}?>value="Y" />
+        </td>
+    </tr>
+	
+    <tr>
+	    <td style="width: 120px" align="right"><span class="error">*&nbsp;</span>Клиент :</td>
+	    <td align="left"><input name='form__client' class='adminform' value="<?=$art_data['client']?>" type="text"></td>
+	</tr>
+	<tr>
+	    <td align="right">Контактная инфа :</td>
+	    <td align="left"><textarea name="form__data_client" class="adminarea"><?=$art_data['data_client']?></textarea></td>
+	</tr>
+	<tr>
+	    <td style="width: 120px" align="right"><span class="error">*&nbsp;</span>Дивайс :</td>
+	    <td align="left"><input name='form__divice' class='adminform' value="<?=$art_data['divice']?>" type="text"></td>
+	</tr>
+	<tr>
+	    <td style="width: 120px" align="right">S/N :</td>
+	    <td align="left"><input name='form__sn' class='adminform' value="<?=$art_data['sn']?>" type="text"></td>
+	</tr>
+	<tr>
+	    <td align="right"><span class="error">*&nbsp;</span>Неисправность :</td>
+	    <td align="left">
+<?
+include(SITE_PATH."/lib/fckeditor/fckeditor.php") ;
+$sBasePath=SITE_URL.'/lib/fckeditor/';
+$oFCKeditor->Config['SkinPath'] = SITE_URL.'/lib/fckeditor/editor/skins/silver/';
+$oFCKeditor = new FCKeditor('form__neispravnost') ;
+$oFCKeditor->BasePath	= $sBasePath ;
+$oFCKeditor->Value		= $art_data['neispravnost'];
+$oFCKeditor->Width  = '100%' ;
+$oFCKeditor->Height = '250' ;
+$oFCKeditor->ToolbarSet = 'Default';
+//$oFCKeditor->ToolbarSet = 'Normal';
+$oFCKeditor->Create() ;
+?>	    
+	    </td>
+	</tr>
+	<tr>
+	    <td align="right"><span class="error">*&nbsp;</span>Что сделано :</td>
+	    <td align="left">
+<?
+include(SITE_PATH."/lib/fckeditor/fckeditor.php") ;
+$sBasePath=SITE_URL.'/lib/fckeditor/';
+$oFCKeditor->Config['SkinPath'] = SITE_URL.'/lib/fckeditor/editor/skins/silver/';
+$oFCKeditor = new FCKeditor('form__content') ;
+$oFCKeditor->BasePath	= $sBasePath ;
+$oFCKeditor->Value		= $art_data['content'];
+$oFCKeditor->Width  = '100%' ;
+$oFCKeditor->Height = '250' ;
+$oFCKeditor->ToolbarSet = 'Default';
+//$oFCKeditor->ToolbarSet = 'Normal';
+$oFCKeditor->Create() ;
+?>
+	    </td>
+	</tr>
+	<tr>
+            <td align="right">Форма оплаты :</td>
+            <td align="left">
+<?if ($art_data['nal']=='Y'){$chk_n = "checked =''";$chk_b = "";}else{$chk_b = "checked =''";$chk_n = "";}?>         
+                <input type="radio" name="form__nal" value="N" <?=$chk_b?>>Безнал<Br>
+                <input type="radio" name="form__nal" value="Y" <?=$chk_n?>>Нал<Br>
+        </td>
+    </tr>
+
+    <tr>
+	    <td style="width: 120px" align="right">Номер счета :</td>
+	    <td align="left"><input name='form__number_bill' class='adminform' value="<?=$art_data['number_bill']?>" type="text"></td>
+	</tr>
+	
+	
+    <tr>
+<?if ($art_data['zdelano']=='Y'){$bg = "#85fd7c";}else{$bg = "#fd7c7c";}?>
+        <td align="right" style="background-color:<?=$bg?>">Работа :</td>
+        <td align="left" style="background-color:<?=$bg?>">
+            <input name="form__zdelano" type="checkbox" <?if ($art_data['zdelano']=='Y'){?> checked=""<?}?>value="1" /><span class="right"><?=$art_data['date_zdelano']?></span>
+        </td>
+    </tr>
+    <tr>
+<?if ($art_data['otgryzka']=='Y'){$bg = "#85fd7c";}else{$bg = "#fd7c7c";}?>
+        <td align="right" style="background-color:<?=$bg?>">Отгрузка :</td>
+        <td align="left" style="background-color:<?=$bg?>">
+            <input name="form__otgryzka" type="checkbox" <?if ($art_data['otgryzka']=='Y'){?> checked=""<?}?>value="1" /><span class="right"><?=$art_data['date_otgryzka']?></span>
+        </td>
+    </tr>
+    <tr>
+<?if ($art_data['doc']=='Y'){$bg = "#85fd7c";}else{$bg = "#fd7c7c";}?>
+        <td align="right" style="background-color:<?=$bg?>">Документы :</td>
+        <td align="left" style="background-color:<?=$bg?>">
+            <input name="form__doc" type="checkbox" <?if ($art_data['doc']=='Y'){?> checked=""<?}?>value="1" /><span class="right"><?=$art_data['date_doc']?></span>
+        </td>
+    </tr>
+<!--
+    <tr>
+<?if ($art_data['pay']=='Y'){$bg = "#85fd7c";}else{$bg = "#fd7c7c";}?>
+        <td align="right" style="background-color:<?=$bg?>">Оплата :</td>
+        <td align="left" style="background-color:<?=$bg?>">
+            <input name="form__pay" type="checkbox" <?if ($art_data['pay']=='Y'){?> checked=""<?}?>value="Y" /><span class="right"><?=$art_data['date_pay']?></span>
+        </td>
+    </tr>
+-->
+
+<?if ($art_data['pay']=='Y'){$bg = "#85fd7c";}else{$bg = "#fd7c7c";}?>
+                        <td align="right" style="background-color:<?=$bg?>">Оплата :</td>
+                        <td align="left" style="background-color:<?=$bg?>">
+                            <input name="form__pay" type="checkbox" <?if ($art_data['pay']=='Y'){?> checked=""<?}?>value="1" /><span class="right"><?=$art_data['date_pay']?></span>
+                        </td>
+                    </tr>
+	
+	
+	
+    <tr>
+            <td align="right">Где производились работы :</td>
+            <td align="left">
+<?if ($art_data['viezd']=='Y'){$viezd_y = "checked =''";$viezd_n = "";}else{$viezd_n = "checked =''";$viezd_y = "";}?>         
+                <input type="radio" name="form__viezd" value="N" <?=$viezd_n?>>В сервисе<Br>
+                <input type="radio" name="form__viezd" value="Y" <?=$viezd_y?>>На выезде<Br>
+        </td>
+    </tr>
+    <tr>
+	    <td align="right">Примечание :</td>
+	    <td align="left"><textarea name="form__note" class="adminarea"><?=$art_data['note']?></textarea></td>
+	</tr>    
+		
+	<tr>
+		<td colspan="2" align="right" style="padding:7px 14px 14px 0px;">
+		<input name ="save" type="image" src="design/ico_save.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''" onclick="articleForm.submit();">
+		</td>
+	</tr>	
+	</table>
+</form>	
+</td></tr>
+</table>

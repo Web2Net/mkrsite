@@ -1,0 +1,195 @@
+<script type="text/javascript" language="JavaScript">
+
+function SetUrl( url, width, height, alt )
+{
+document.getElementById('image_name').value = url;
+document.getElementById('seeImage').src = url;
+//alert(url);
+//alert(width);
+//alert(height);
+//alert(alt);
+}
+
+function BrowseServer(typefolder)
+{
+var url='<?=SITE_URL?>/lib/fckeditor/editor/filemanager/browser/default/browser.html?Type='+typefolder+'&Connector=<?=urlencode(SITE_URL)?>/lib%2Ffckeditor%2Feditor%2Ffilemanager%2Fconnectors%2Fphp%2Fconnector.php';
+
+var width = 650;
+var height = 400;
+
+var iLeft = ( window.screenWidth  - width ) / 2 ;
+var iTop  = ( window.screenHeight - height ) / 2 ;
+
+	var sOptions = "toolbar=no,status=no,resizable=yes,dependent=yes,scrollbars=yes" ;
+	sOptions += ",width=" + width ;
+	sOptions += ",height=" + height ;
+	sOptions += ",left=" + iLeft ;
+	sOptions += ",top=" + iTop ;
+
+	window.open( url, 'FCKBrowseWindow', sOptions ) ;
+}
+
+  function aUploadImage(value) {
+  //alert(param);
+   //document.getElementById("seeImage").src = '<?=SITE_URL?>//cms/design/loadfoto.gif';
+   JsHttpRequest.query(
+      '<?=PAGE_URL?>&ext=ajax&param=uploadimage',
+      { 
+        'file': value,
+      },
+      function(result, errors) {
+    //document.getElementById("image").innerHTML = result['q']; 
+   // document.getElementById("seeImage").src = result['image_small'];
+  // alert(result['bantype']);
+    document.getElementById("banfile").value =  result['banfile']; 
+   document.getElementById("bantype").value =  result['bantype'];    
+   if(result['bantype']=='swf'){
+   document.getElementById("banview").innerHTML = '<img width="200" height="240" border="0" src="/cms/design/spacer.gif"  style="position: absolute; z-index: 10;"><object width="200" height="240" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" style="background-color: white;"><param name="wmode" value="transparent"><param name="allowScriptAccess" value="sameDomain"><param name="movie" value="'+ result['banfile']+'"><param name="quality" value="high"><embed width="200" height="240" wmode="transparent" src="'+ result['banfile']+'" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" allowscriptaccess="sameDomain" style="background-color: white;"></object>'; 
+  }else{
+   document.getElementById("banview").innerHTML = '<img src="'+ result['banfile']+'" id="seeImage" />'; 
+  } 
+    document.getElementById("message").innerHTML =  errors;     
+      },
+ false
+    );    
+  
+  } 
+</script>
+<table style="width: 100%;margin-bottom:0px;" cellpadding="0" cellspacing="0"><tr><td>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=view&category_id=<?=$category_id?>"><img src="/cms/design/ico_back.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Назад к списку баннернвх зон" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=add&category_id=<?=$category_id?>"><img src="/cms/design/ico_add_artic.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Добавить баннерную зону" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+<a href="javascript:void(0)" onclick="articleForm.submit();"><img src="/cms/design/ico_save.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Применить" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+</td></tr>
+</table>
+
+<?if ($upd=='ok'){?><div style="padding:3px 7px;font-family:verdana;font-size:12px;color:forestgreen;border:dashed 1px forestgreen;"><b>Данные обновлены</b></div><?}?>
+<table style="width: 100%;margin-top:2px" cellpadding="0" cellspacing="1">
+	<tr class="head">
+		<td>Баннерная зона</td>
+	</tr>
+	<tr><td>
+<table style="width: 100%" cellpadding="2" cellspacing="0" class="uniform">	
+
+<form action="?mod=<?=$mod?>&type=<?=$type?>&com=update<?=isset($id)?"&id=".$id:""?>" method="post" name="articleForm">
+<input type="hidden" style="width: 300px;" name="banfile" id="banfile" value="<?=$art_data['file']?>" />
+<input type="hidden" style="width: 300px;" name="bantype" id="bantype" value="<?=$art_data['type']?>" />
+
+<input name="type" value="<?=$type?>" type="hidden">	
+<input name="id" value="<?=$art_data['id']?>" type="hidden">
+		<tr>
+		<td align="right"></td>
+		<td align="left"></td>
+	</tr>
+	<tr>
+	<td style="width: 120px" align="right"><span class="error">*&nbsp;</span>Баннер :</td>
+	<td align="left">
+	<input name='name' class='adminform' value='<?=$art_data['name']?>' type='text'></td>
+	</tr>
+	
+	
+<tr>
+		<td align="right"><span class="error">*&nbsp;</span>Текст :</td>
+		<td align="left"><textarea name="caption" class="adminarea" style="height: 65px;"><?=$art_data['caption']?></textarea></td>
+	</tr>
+	
+	<tr>
+		<td align="right"><span class="error">*&nbsp;</span>Линк :</td>
+		<td align="left"><input name='link' class='adminform' value='<?=$art_data['link']?>' type='text'></td>
+	</tr>	
+		
+<!--	<tr>
+		<td align="right"><span class="error">*&nbsp;</span>Секция :</td>
+		<td align="left">
+		<table cellspacing=0 cellpadding=0 style="width:100%;height: 20px"><tr><td align="left" style="width:40%;">
+		<select name="category_id" style="width:90%;padding:0px 0px;height: 20px" class="adminform">
+<option value="null" selected>[Выбрать категорию]</option>
+<?foreach ($parent_list as $key=>$val){?>
+<option value="<?=$val['id']?>"<?if ($category_id==$val['id']){?> selected<?}?>><?=$val['caption']?></option>
+<?}?>
+</select>
+</td>
+<td align="left" style="width:40%;">
+
+</td>
+<td align="right" style="padding-right:25px;">
+<span class="error">*&nbsp;</span>Видимость :&nbsp;<input name="enabled" type="checkbox"<?if ($art_data['enabled']==1){?> checked="checked"<?}?> value="1" />
+</td></tr></table>
+</td>
+</tr> -->
+
+<tr>
+    <td align="right"><span class="error">*&nbsp;</span>Положение :</td>
+    <td align="left" style="width:40%;">
+        <select name="location" style="width:90%;padding:0px 0px;height: 20px" class="adminform">
+            <option value="null" selected>[Выбрать положение]</option>
+            <option value="top"<?if ($art_data['location']=="top"){?> selected<?}?>>Вверх</option>
+            <option value="bottom"<?if ($art_data['location']=="bottom"){?> selected<?}?>>Низ</option>
+        </select>
+    </td>
+</tr>	
+</form>
+		<tr>
+		<td align="right"></td>
+		<td align="left"></td>
+	</tr>
+	
+		<tr>
+		<td align="right"><span class="error">*&nbsp;</span>Медиа :</td>
+		<td align="left">
+		
+<table cellspacing="1" style="border: 1px solid #c7c7c7; background-color: #FFFFFF;margin-right:7px;width:100px;" align="left" cellpadding="0" cellspacing="0">
+	<tr>
+		<td style="background-color: #FFFFFF;padding: 1px;"><div style="width:800px;overflow:auto;" id="banview">
+<?if($art_data["type"]=="gif" || $art_data["type"]=="jpg"){?>
+	
+	<img alt="" src="<?=$art_data["file"]!=""?$art_data["file"]:SITE_URL."/cms/design/noimage.jpg"?>" id="seeImage"/>
+	
+<?}else if($art_data["type"]=="swf"){?>
+<img width="200" height="240" border="0" src="/cms/design/spacer.gif"  style="position: absolute; z-index: 10;">
+<object width="200" height="240" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,19,0" style="background-color: white;">
+  <param name="wmode" value="transparent">
+  <param name="allowScriptAccess" value="sameDomain">
+  <param name="movie" value="<?=$art_data["file"]?>">
+  <param name="quality" value="high">
+  <embed width="200" height="240" wmode="transparent" src="<?=$art_data["file"]?>" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" allowscriptaccess="sameDomain" style="background-color: white;">
+</object>
+
+<?}?>
+</div></td>
+	</tr>
+</table>
+<div style="margin:3px 0px 7px 0px;">
+<form method="post" enctype="multipart/form-data" onsubmit="return false">
+    <input type="file" name="upl"><br>
+    <input type="button" value="Загрузить" 
+      onclick="aUploadImage(this.form.upl)">
+</form>
+</div>
+
+		<?=$mess?>
+	<div id="message"></div>
+
+<!--<div style="margin:3px 0px 7px 0px;"><input id="btnBrowse" onclick="BrowseServer('Preview');" type="button" value="Выбрать на сервере" /></div>-->
+
+</td>
+	</tr>	
+	
+		<tr>
+		<td align="right"></td>
+		<td align="left"></td>
+	</tr>		
+	<tr>
+		<td colspan="2" align="right" style="padding:7px 14px 14px 0px;">
+		<input name ="save" type="image" src="/cms/design/ico_save.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''" onclick="articleForm.submit();">
+		</td>
+	</tr>
+	
+		<tr>
+		<td align="right"></td>
+		<td align="left"></td>
+	</tr>
+
+	</table>
+
+</td></tr>
+</table>

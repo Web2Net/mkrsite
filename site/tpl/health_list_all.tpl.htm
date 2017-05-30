@@ -1,0 +1,26 @@
+<?php $val = $list;?>
+<?php $count_row = count($val);?>
+<div class="block_main_header_left"></div>
+<div class="block_main_header_right"></div>
+<div class="block_main_header_center">Заболевания</div>
+
+<div id="wrap_page">
+    <div style="padding:10px;">
+    <table style="width: 100%; font-family: cursive; font-size: 11px;">
+           <tr><td style="width: 50%; border-right: 1px solid #eee;">    
+<?php $i = 0; if($val !== 0 && $val !== NULL){foreach($val as $row){?>
+        
+               
+           <p style="text-align: justify;">
+               <a href="/health/<?=$row['category_name']?>/<?=$row['seolink']?>/" style="font-size:16px;"><?=$row['caption']?></a>
+           </p>
+        
+<? $i++; if($i==floor($count_row/2)){?>
+           </td><td style="width: 50%;">
+<?}?>
+<?}}?>
+    </td></tr></table>
+    </div>
+</div>
+
+

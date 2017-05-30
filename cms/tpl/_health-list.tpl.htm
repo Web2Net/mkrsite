@@ -1,0 +1,205 @@
+<?php $category_name=str_replace("_", " ", $listing['0']['category_name']);?>
+<?if($_SESSION['level']>=2)
+  {?>
+<table style="width: 100%;margin-bottom:3px;" cellpadding="0" cellspacing="0">
+    <tr>
+        <td align="left">
+    <?if (isset($category_id))
+      {?>
+            <!--<a href="?mod=<?=$mod?>&com=view">
+                <img src="design/ico_back.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="РќР°Р·Р°Рґ" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>--> 
+     <?}?>
+            <a href="?mod=<?=$mod?>&type=<?=$type?>&category=<?=$category?>&com=add">
+                <img src="design/ico_add_artic.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Добавить" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+            <!--<a href="?mod=<?=$mod?>&com=find&type=<?=$type?>">
+                <img src="design/ico_search.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="РџРѕРёСЃРє" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>-->	
+            <a href="<?=SITE_URL?>/<?=$mod?>/<?=$listing['0']['category_name']?>/" title="Посмотреть на сайте" target="_blank">
+                <img src="design/internet.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;width:48px;" title="Посмотреть на сайте" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+        </td>
+        <td class="heading1" align="right" valign="bottom">
+            <span style="color:#e7e7e7;font-size:24px;"><?=$mod_name?></span><br>
+            <span style="color:#444;">Список статей категории : </span><?=$category_name?>&nbsp;(<?=count($listing);?>)
+        </td>
+    </tr>
+</table>
+<style>
+.tabl{
+    border:1px solid #021e49;
+    border-right: 0px;
+    height: 20px;
+    padding: 5px 0px 0px 5px;
+    background-color:#587aae;
+}
+</style>
+<div style="text-align:center'">
+<?if($_SESSION['level'] == "9")
+  {?>
+    <div class="left tabl" style="width:5%;"><!--id-->
+        <span class="navigation">
+            id&nbsp;<?=$butt_order_by?>
+            <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=id&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+            <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=id"><img src="design/butt_order_az.png" width="10" /></a>
+        </span>
+    </div>
+<?}?>    
+    <div class="left tabl" style="width:5%;"></div><!--image-->
+    <div class="left tabl" style="width:35%;"><!--caption-->
+        <span class="navigation">
+            Название&nbsp;
+            <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=caption&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+            <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=caption"><img src="design/butt_order_az.png" width="10" /></a>
+        </span>
+    </div>
+    <div class="left tabl" style="width:10%;"><!--counts-->
+        <span class="navigation">
+            Запросы&nbsp;
+            <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=counts&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+            <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=counts"><img src="design/butt_order_az.png" width="10" /></a>
+        </span>
+    </div>
+    <div class="left tabl" style="width:10%;"><!--showing-->
+        <span class="navigation">
+            Вид&nbsp;
+            <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=showing&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+            <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=showing"><img src="design/butt_order_az.png" width="10" /></a>
+        </span>
+    </div>
+    <div class="left tabl" style="width:10%;"><!--demo_main-->
+        <span class="navigation">
+            ДЕМО
+            <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=demo_main&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+            <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=demo_main"><img src="design/butt_order_az.png" width="10" /></a>
+        </span>
+    </div>
+    <div class="left tabl" style="width:10%;"><!--demo-->
+        <span class="navigation">
+            демо&nbsp;
+            <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=demo_enable&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+            <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=demo_enable"><img src="design/butt_order_az.png" width="10" /></a>
+        </span>
+    </div>
+    <div class="left tabl" style="width:10%;"><!--option-->
+        <span class="navigation">Опции</span>
+    </div>
+</div>
+<table class="list-table collapse" width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr class="head">
+<?if($_SESSION['level'] >= "3"){?>
+            <td align="center" width="50">
+                <span class="navigation">
+                    id&nbsp;<?=$butt_order_by?>
+                    <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=id&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+                    <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=id"><img src="design/butt_order_az.png" width="10" /></a>
+                </span>
+            </td>
+<?}?>
+            <td align="center" width="30"></td> 
+		    <td align="center" width="40%">
+                <span class="navigation">
+                    Название&nbsp;
+                    <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=caption&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+                    <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=caption"><img src="design/butt_order_az.png" width="10" /></a>
+                </span>
+            </td>
+ <!--           <td align="center" width="50%">
+                <span class="navigation">
+                    Контент&nbsp;&nbsp;
+                    <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=content&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+                    <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=content"><img src="design/butt_order_az.png" width="10" /></a>
+                </span>
+            </td>
+		    <td align="center" width="100"><span class="navigation">РљР°СЂС‚РёРЅРєР°</span></td>-->
+            <td align="center" width="100">
+                <span class="navigation">
+                    Запросы&nbsp;
+                    <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=counts&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+                    <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=counts"><img src="design/butt_order_az.png" width="10" /></a>
+                </span>
+            </td>
+	        <td align="center" width="70">
+                <span class="navigation">
+                   Вид&nbsp;
+                    <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=showing&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+                    <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=showing"><img src="design/butt_order_az.png" width="10" /></a>
+                </span>
+            </td>
+            <td align="center" width="70">
+                <span class="navigation">
+                    ДЕМО
+                    <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=demo_main&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+                    <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=demo_main"><img src="design/butt_order_az.png" width="10" /></a>
+                </span>
+            </td>
+            <td align="center" width="70">
+                <span class="navigation">
+                    демо&nbsp;
+                    <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=demo_enable&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+                    <a href="?mod=health&type=<?=$listing[0]['type']?>&category=<?=$listing[0]['category']?>&com=view&order=demo_enable"><img src="design/butt_order_az.png" width="10" /></a>
+                </span>
+            </td>
+            <td align="center" width="100" colspan="2"><span class="navigation">Опции</span></td>
+    </tr>
+<?if ($listing!=''){?>
+<?$i=1;?>
+<?foreach($listing as $key=>$val){?>
+    <tr class="row1" style="background-color:<?if($i%2){?>#F7F7F7<?}?>;" onmouseover="style.background='#fffebd';" onmouseout="style.background='#F7F7F7'">
+<?if($_SESSION['level'] >= "3"){?>
+        <td><?=$val['id']?></td>
+        <td><img src="<?=$val['image_small']?>" style="width:30px; padding-left:10px;" /></td>
+<?}?>
+        <td class="title" style="padding:4px 10px 4px 10px;">
+            <img src="design/ico_issues_sm.gif" vspace="0" border="0" hspace="5" align="left">
+            <span<?if ($val['showing']!=Y){?> class="orangered"<?}?>>
+            <a href="?mod=<?=$mod?>&com=edit&id=<?=$val['id']?>&type=<?=$val['type']?>&category=<?=$category?>" title="Редактировать">
+            <span style="color:<?if ($val['showing']=='N'){?>orangered<?}?>"><?=Text::cutStr($val['caption'],7)?></span>
+            </a></span>
+        </td>
+<!--        <td align="left"><?=$val['content_short']?></td>-->
+        <td align="left"><?=$val['counts']?></td>
+        <td align="center">
+<?if ($val['showing']=='Y'){?>
+            <span style="font-size:15px;font-weight: bold;color:lightgreen">&#9679;</span>
+<?}else{?>
+            <span style="font-size:15px;font-weight: bold;color:orangered">&#9679;</span>
+<?}?>
+        </td>
+        <td align="center">
+<?if ($val['demo_main']=='1'){?>
+            <span style="font-size:15px;font-weight: bold;color:lightgreen">&#9679;</span>
+<?}else{?>
+            <span style="font-size:15px;font-weight: bold;color:orangered">&#9679;</span>
+<?}?>
+        </td>
+        <td align="center">
+<?if ($val['demo_enable']=='1'){?>
+            <span style="font-size:15px;font-weight: bold;color:lightgreen">&#9679;</span>
+<?}else{?>
+            <span style="font-size:15px;font-weight: bold;color:orangered">&#9679;</span>
+<?}?>
+        </td>
+        <!--<td class="options" align="center">
+<?//if ($parent!=''){?>
+            <nobr>
+            <a href="?mod=<?=$mod?>&com=view&table=<?=$table?>&type=<?=$val['type']?>&id=<?=$val['id']?><?if ($parent!=''){?>&parent=<?=$parent?><?}?>&event=moveDown" title="Р’РЅРёР·">
+                <img src="design/backward.gif" alt="Р’РЅРёР·" border="0" height="17" width="17"></a>
+            <a href="?mod=<?=$mod?>&com=view&table=<?=$table?>&type=<?=$val['type']?>&id=<?=$val['id']?><?if ($parent!=''){?>&parent=<?=$parent?><?}?>&event=moveUp" title="Р’РІРµСЂС…">
+                <img src="design/forward.gif" alt="Р’РІРµСЂС…" border="0" height="17" width="17"></a>
+            </nobr>
+<?//}?>
+        </td>-->
+        <td class="options" align="center">
+            <nobr>
+            <a href="/<?=$mod?>/<?=$val['seolink']?>/" title="Посмотреть на сайте" target="_blank">
+                <img src="design/internet.gif" alt="Посмотреть на сайте" vspace="1" border="0" hspace="1" height="20" width="20"></a>			
+            <a href="?mod=<?=$mod?>&com=edit&id=<?=$val['id']?>&type=<?=$val['type']?>" title="Редактировать">
+                <img src="design/ico_edit_sm.gif" alt="Редактировать" vspace="1" border="0" hspace="1"></a>
+            <?if($_SESSION['level'] >= "2"){?>
+            <a title="Удалить" href="?mod=<?=$mod?>&com=delete&id=<?=$val['id']?>" onclick="if (confirm('Удалить?')) location=this.href; return false;">
+                <img src="design/ico_delete_sm.gif" alt="Удалить" vspace="1" border="0" hspace="1"></a>
+            <?}?></nobr>	
+        </td>
+    </tr>
+<?$i++;?>
+<?}}?>
+</table>
+<?}?>

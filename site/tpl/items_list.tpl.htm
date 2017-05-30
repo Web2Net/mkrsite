@@ -1,0 +1,55 @@
+<?$val = $list;?>
+<?//SYS::varDump($val)?>
+<div style="padding: 20px 10px 5px 10px;">
+    <div><h1><?=$caption_page?></h1></div>
+    <div class="both"></div>  
+</div>
+
+<div id="wrap_page">
+<?
+if($val !== 0 && $val !== NULL)
+{
+    foreach($val as $row)
+    {
+        $caption = $row['caption'];
+        $content = $row['content'];
+        
+        if($row['heritage'] == "1")
+        {
+            $link = "/каталог/{$_SESSION['rub']}/{$row['seolink']}/";
+        }
+        else
+        {
+            $link = "/каталог/{$_SESSION['rub']}/{$row['id']}-{$row['seolink']}/";
+        }
+        
+        $price_grn = ceil($row['price_mass']*KURS_USD); //Цена в гривнах
+        if($row['present_kiev'] == "+"){$present="color:#205401;";$present_1="color:#205401;"; $wait="Есть в наличии";}else{$present="color:#b3abab;";$present_1="color:#d91219;"; $wait="Нет в наличии";}
+?>      
+<div class="items_list_caption"><a href="<?=$link?>"><h2 style="<?=$present?>"><?=$row['caption']?></h2></a></div>
+<table style="width:100%">
+    <tr>
+<?if($row['image_small'] !== ""){?> 
+        <td>
+           <a href="<?=$link?>"> 
+                <img src="<?=$row['image_small']?>" align="left" class="img_items img_150" />
+            </a>
+        </td>
+<?}?>
+        
+        <td><?=$content?></td>
+        <td style="width:150px;text-align:right">
+            <span style="<?=$present_1?>"><?=$wait?></span><br />
+            <h2 style="<?=$present?>"><?=$price_grn?> грн.</h2>
+            <span style="<?=$present?>">$ <?=$row['price_mass']?></span>
+        </td>
+    </tr>
+</table>
+        <div class="both br_20"></div>
+    <?}
+}?>
+    <div class="both"></div>
+</div>
+
+
+

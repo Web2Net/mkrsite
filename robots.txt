@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /archives/
+Disallow: /cgi-bin/ 
+Disallow: /cms/
+Disallow: /jump/ 
+Disallow: /kernel/ 
+Disallow: /lib/
+Disallow: /parse/
+Disallow: /price/
+Disallow: /soft/
+Disallow: /userfiles/    
+
+Host: http://www.mkr.com.ua
+Sitemap: http://www.mkr.com.ua/sitemap.txt

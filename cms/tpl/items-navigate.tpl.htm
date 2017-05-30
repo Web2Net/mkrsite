@@ -1,0 +1,53 @@
+<?if($_SESSION['level']>=2){?>  
+<div onmouseover="thisOver(this.style);" onmouseout="thisOut(this.style);" class="menu2">
+<a class="header" href="?mod=items&type=category&com=view">Товары</a></div>
+                
+<?php
+$query = "SELECT * FROM `items_category`";
+$res = mysql_query($query);
+
+while($row = mysql_fetch_array($res)) 
+{         
+          if($mod=='items' && $type==$row['name'])
+          {
+              $img = "ico_folder_a.gif";
+              $font_weight = "font-weight:bold;";
+          }
+          else
+          {
+              $img = 'ico_folder.gif';
+              $font_weight = "font-weight:normal;";
+          }
+          if($row['showing'] == "N"){$font_color = "color:#d91219;";}else{$font_color = "color:#000;";}
+    if($row['parent'] == "0" )
+   {
+?>   
+      <div class='title' style='<?=$font_weight?>'>
+          <img src='design/<?=$img?>' alt='Показать все статьи секци' width='19' height='19' vspace='0' border='0' hspace='5' />
+          <a href='?mod=items&com=view&type=<?=$row['id']?>&view=category&category_name=<?=$row['caption']?>' style="<?=$font_color?>"><?=$row['caption']?></a>
+      </div>
+<? 
+     // $query1 = "SELECT * FROM `items_category` WHERE `parent`='{$row['id']}'"; 
+     // $res1 = mysql_query($query1);
+     // while($row1 = mysql_fetch_array($res1)) 
+     // {
+?>    
+<!--      <div style='padding-left:30px; padding-top:0px; color:<?=$background?>;<?=$font_weight?>' class='menu1 title'>
+          <img src='design/<?=$img?>' alt='Показать все статьи секци' width='19' height='19' vspace='0' border='0' hspace='5' />
+          <a href='?mod=items&type=<?=$row1['name']?>&category=<?=$row1['id']?>&com=view'><?=$row1['caption']?></a>
+      </div>  -->
+<?
+    //  }
+   }
+   //if($row['parent'] == "0")
+   //{
+?>
+<!--      <div class='title'>
+          <img src='design/ico_folder.gif' alt='Показать все статьи секции' width='19' height='19' vspace='0' border='0' hspace='5' />
+          <a href='?mod=items&type=<?=$row['type']?>&com=view&category_id=<?=$row['id']?>' style="color:<?if($row['showing'] == "N"){?>#d91219<?}?>;"><?=$row['caption']?></a>
+      </div>-->
+<?     
+//   }
+}
+?>
+<?}?>

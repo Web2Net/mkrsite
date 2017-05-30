@@ -1,0 +1,46 @@
+<div class="block_main_header_left"></div>
+<div class="block_main_header_right"></div>
+<div class="block_main_header_center">Анкета для запроса брони на обращение в клинику</div>
+<div id="wrap_page">
+    <div class="error" style="padding:20px;text-align:right;">Все поля обязательны для заполнения</div>
+    <div>
+        <form action="" method="post" name="sectionForm">
+            <div class="left" style="width:60%; text-align:right;padding-right:5px;">Ваша фамилия, имя и отчество<span class="error">&nbsp;*</span></div>
+            <div class="left"><input type="text" name="form__name" value="" style="width:300px;" class="validate[required,length[3,25]]" /></div>
+            <div class="both br_5"></div>
+            <div class="left" style="width:60%; text-align:right;padding-right:5px;">Введите свой день, месяц и год рождения<span class="error">&nbsp;*</span></div>
+            <div class="left"><input type="text" name="form__birth" value="" style="width:300px;" class="validate[required,length[3,50]]" /></div>
+            <div class="both br_5"></div>
+            <div class="left" style="width:60%; text-align:right;padding-right:5px;">Укажите адрес своего проживания<span class="error">&nbsp;*</span></div>
+            <div class="left"><input type="text" name="form__address" value="" style="width:300px;" class="validate[required,length[3,250]]" /></div>
+            <div class="both br_5"></div>
+            <div class="left" style="width:60%; text-align:right;padding-right:5px;">Введите свой функционирующий электронный адрес<span class="error">&nbsp;*</span></div>
+            <div class="left"><input type="text" name="form__email" value="" style="width:300px;" class="validate[required,custom[email]] text-input" /></div>
+            <div class="both br_5"></div>
+            <div class="left" style="width:60%; text-align:right;padding-right:5px;">Укажите причину обращения: нужна консультация или медицинские услуги?<span class="error">&nbsp;*</span></div>
+            <div class="left"><input type="text" name="form__why" value="" style="width:300px;" class="validate[required,length[3,250]]" /></div>
+            <div class="both br_5"></div>
+            <div class="left" style="width:60%; text-align:right;padding-right:5px;">Введите номер контактного телефона<span class="error">&nbsp;*</span></div>
+            <div class="left"><input type="text" name="form__tel" value="" style="width:300px;" class="validate[required,length[7,25]]"  /></div>
+            <div class="both br_5"></div>
+            <div class="left" style="width:60%; text-align:right;padding-right:5px;">Укажите дату подходящего обращения в клинику<span class="error">&nbsp;*</span></div>
+            <div class="left"><input type="text" name="form__your_date" value="" style="width:300px;" class="validate[required,length[3,50]]" /></div>
+            <div class="both br_5"></div>
+            <div class="left" style="width:60%; text-align:right;padding-right:5px;">Укажите время подходящего для себя обращения в клинику<span class="error">&nbsp;*</span></div>
+            <div class="left"><input type="text" name="form__your_time" value="" style="width:300px;" class="validate[required,length[2,10]]" /></div>
+            <div class="both br_5"></div>
+            <div class="left" style="width:60%; text-align:right;padding-right:5px;">Укажите удобный для Вас способ подтверждения заявки<span class="error">&nbsp;*</span></div>
+            <div class="left"><input type="text" name="form__method" value="" style="width:300px;" class="validate[required,length[3,250]]" /></div>
+            <div class="both br_5"></div>
+            <div class="left" style="width:60%; text-align:right;padding-right:5px;">Кратко укажите причину своего обращения в клинику<span class="error">&nbsp;*</span></div>
+            <div class="left"><textarea name="form__message" cols="40" rows="5" class="validate[required,length[10,1000]]"></textarea></div>
+            <div class="both br_5"></div>
+            <div class="right">    
+                <button name="send_feedback" type="submit" style="cursor: pointer;">
+                    <img src="<?=PATH_IMG?>/butt_send.gif" class="butt_send" alt="Отправить" />
+                </button>
+            </div>
+        </form>
+    </div>
+    <div class="both br_5"></div>
+</div>

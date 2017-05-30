@@ -1,0 +1,71 @@
+<style>
+.pay a{color: #0087D7;}
+.orangered a{color: orangered;}
+</style>
+<table style="width: 100%;margin-bottom:3px;" cellpadding="0" cellspacing="0">
+<tr><td align="left">
+<?if (isset($category_id)){?>
+<a href="?mod=<?=$mod?>&type=category&com=view"><img src="/cms/design/ico_back.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Назад к списку секций" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a> <?}?>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=add&category_id=<?=$category_id?>"><img src="/cms/design/ico_add_artic.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Добавить баннерную зону в эту категорию" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+</td>
+<td class="heading1" align="right" valign="bottom">
+<span style="color:#e7e7e7;font-size:24px;"><?=$mod_name?></span><br>
+<span style="color:#444;">Баннерные зоны<?if (isset($category_id)){?> категории : </span><?=$parent_data['caption']?><?}?>
+</tr>
+</table>
+<table class="list-table collapse" width="100%" border="0" cellpadding="0" cellspacing="0">
+<tr class="head">
+		<td width="45%">
+		<span class="navigation">Баннерная зона</span></td>
+        <td width="25">
+        <span class="navigation">Положение</span></td>
+		<td width="45%">
+	    <span class="navigation">Линк</span></td>
+	    <td align="center" width="15"><span class="navigation">Вид.</span></td>
+		<td align="center" width="50" colspan="2"><span class="navigation">Опции</span></td>
+</tr>
+<?if ($artlist!=''){?>
+<?$i=1;?>
+<?foreach($artlist as $key=>$val){?>
+<tr class="<?if($i==2&&$id!=$val['id']){?>bg_grey<?}else{?>bg_white<?}?> row1<?if ($id==$val['id']){?> sel<?}?>" onmouseover="this.style.background='<?if($id!=$val['id']){?>#FFFFCC<?}?>';" onmouseout="this.style.background='<?if($i==2&&$id!=$val['id']){$i=0;?>#F7F7F7<?}?>'">
+<td class="title" style="padding:4px 10px 4px 10px;">
+<img src="/cms/design/ico_issues_sm.gif" vspace="0" border="0" hspace="5" align="left">
+<span<?if ($val['enabled']!=1){?> class="orangered"<?}else if($val['enabled']==1&&trim($val['link'])!=""){?> class="pay"<?}?>>
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=edit&category_id=<?=$category_id?>&id=<?=$val['id']?>" title="Редактировать">
+<?=$val['name']?></a></span>
+</td>
+<td><?=$val['location']?></td>
+<td style="padding:4px;">
+<?if(trim($val['link'])!=""){?>
+<a href="<?=trim($val['link'])?>" target="blank" style="color: #009BEB;"><?=trim($val['link'])?></a>
+<?}else{?>
+
+<?}?>
+</td>
+
+<td align="center">
+<?if ($val['enabled']==1){?>
+<span style="font-size:15px;font-weight: bold;color:lightgreen">&#9679;</span>
+<?}else{?>
+<span style="font-size:15px;font-weight: bold;color:orangered">&#9679;</span>
+<?}?></td>
+<td class="options" align="center">
+<?if ($parent!=''){?>
+<nobr>
+<a href="?mod=<?=$mod?>&com=view&table=<?=$table?>&type=<?=$val['type']?>&id=<?=$val['id']?><?if ($parent!=''){?>&parent=<?=$parent?><?}?>&event=moveDown" title="Вниз">
+<img src="/cms/design/backward.gif" alt="Вниз" border="0" height="17" width="17"></a>
+<a href="?mod=<?=$mod?>&com=view&table=<?=$table?>&type=<?=$val['type']?>&id=<?=$val['id']?><?if ($parent!=''){?>&parent=<?=$parent?><?}?>&event=moveUp" title="Вверх">
+<img src="/cms/design/forward.gif" alt="Вверх" border="0" height="17" width="17"></a>
+</nobr>
+</td>
+<td class="options" align="center">
+<?}?>
+<nobr>		
+<a href="?mod=<?=$mod?>&type=<?=$type?>&com=edit&category_id=<?=$category_id?>&id=<?=$val['id']?>" title="Редактировать">
+<img src="/cms/design/ico_edit_sm.gif" alt="Редактировать" vspace="1" border="0" hspace="1"></a>
+<a title="Удалить" href="?mod=<?=$mod?>&type=<?=$type?>&com=delete&category_id=<?=$category_id?>&id=<?=$val['id']?>" onclick="if (confirm('Вы уверены что хотите удалить баннерную зону?')) location=this.href; return false;">
+<img src="/cms/design/ico_delete_sm.gif" alt="Удалить" vspace="1" border="0" hspace="1"></a></nobr>	
+</td>
+<?$i++;?>
+<?}}?>
+</table>

@@ -1,0 +1,60 @@
+<div id="wrap_page">
+<!-- SladeFoto -->
+<!--
+<?
+//$imagecode=array(1,2,3,4,5);
+//shuffle($imagecode);
+?>
+	<div style="width:100%;margin:0 auto;">
+		<div id="slidefoto">					
+<?//foreach($imagecode as $key=>$val){?>
+			<img alt="" src="<?=PATH_IMG?>/main<?=$val?>.jpg" style="width:100%;height:25em" />
+<?//}?>
+		</div>
+	</div>
+-->
+<!-- SladeFoto -->
+<!-- bizhub 185 -->
+<center>
+<div class="red_string_2" style="text-align:center">
+<a style="font-size:18px" href="http://mkr.kiev.ua/shop/catalog/product/A0XY026/konicaminolta-kopiuvalniy-aparat-konica-minolta-bizhub-185-a3.html" target="_blank">
+Konica Minolta bizhub 185</a>
+</div>
+<span style="font:normal normal normal 11px/19px Consolas, 'Andale Mono', Courier, 'Courier New', monospace;color:rgb(85, 85, 85);border-style:none;letter-spacing:normal;line-height:19px;text-align:start;vertical-align:baseline;text-decoration:none;text-shadow:none"><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-<a style="font:normal normal normal 11px/19px Consolas, " andale="" mono',="" courier,="" 'courier="" new',="" monospace;'="" href="https://passport.webmoney.ru/asp/CertView.asp?wmid=444553540000" target="_blank" title=""> 
+<param name="movie" value="http://www.konicaminolta.ua/fileadmin/content/eu/Business_Solutions/Products/Multifunctional_Printer/bizhub_185/Flash/loader_185.swf" />
+<param name="quality" value="high" />
+<param name="bgcolor" value="#ffffff" />
+<embed src="http://www.konicaminolta.ua/fileadmin/content/eu/Business_Solutions/Products/Multifunctional_Printer/bizhub_185/Flash/loader_185.swf" quality="high" bgcolor="#ffffff" width="500" height="265" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+</object>
+</span>
+</center>
+<!-- /bizhub 185 -->
+	<div class="both br_20"></div>
+<?$i=1;if($list!=NULL){foreach($list as $key=>$val){$i++;?>
+    <div onmouseover="this.style.background='#fafaeb';" onmouseout="this.style.background='#fff';">
+        <div style="padding:0px;">
+
+            <div class="red_string_2" style="text-align:center">
+               <a title="Далее" href="/<?=$val['article_cat']?>/<?=$val['id']?>-<?=$val['web_link']?>/">
+               <strong><?=$val["caption"]?></strong></a>
+            </div>
+       
+            <div class="both br_10"></div>
+<?if($val["image"]!=""){?>
+            <div style="text-align:center;"> 
+              <a title="Далее" href="/<?=$val['article_cat']?>/<?=$val['id']?>-<?=$val['web_link']?>/">
+              <img class="left" style="height:50px; padding:5px 10px 10px 5px;" src="<?=$val['image']?>" alt="<?=$val["caption"]?>" title="<?=$val["short_text"]?>" /></a>
+            </div>
+<?}?>
+           <span style="font-size:12px;"><?=$val["short_text"]?></span>
+           
+        </div>
+        <div class="both br_5"></div>
+    </div>
+
+<?}?>
+ 
+<?}?>
+    <div class="both br_10"></div>
+
+</div>

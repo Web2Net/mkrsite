@@ -1,0 +1,26 @@
+<?php defined('WEB2NET') or die();?>
+
+<div class="both br_10"></div>
+<div class="red_string_1"><a href="/Продажа/" class="decoration_none">Терминология</a></div>
+
+<div class="block_content">   
+<?php
+$query = "SELECT * FROM `art_article` WHERE `category_id` = '4' AND `enabled`='1' ORDER BY `date_create` DESC LIMIT 5";
+$res = mysql_query($query);
+while($row = mysql_fetch_array($res)) 
+{   
+if(@$row['enabled'] == '1')
+{?>
+    <div style="padding:5px;">
+        <!--<div class="date_1"><?=Time::formatMonth($row['date_create'])?><br />Просмотров (<?=$row['see']?>)</div>-->
+<?if($row['image_small'] !== ""){?>
+        <img src="<?=$row['image_small']?>" alt="<?=SITE_NAME?>" class="left block_small_img_preview" />
+<?}?>
+        <div><a href="/Продажа/<?=$row['id']?>-<?=$row['web_link']?>/"  style="font-size:10px;font-weight:100"><?=Text::cutStr($row['caption'],10)?></a></div>
+    </div>   
+    <div class="both br_5 hr_dash"></div>
+<?}
+}
+?>
+</div>
+<div class="both br_20"></div>

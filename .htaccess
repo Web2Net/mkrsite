@@ -1,0 +1,24 @@
+#AddDefaultCharset windows-1251
+AddDefaultCharset utf-8 
+#ErrorDocument 404 /404.shtml
+RewriteEngine on
+RewriteBase / 
+
+
+RewriteCond %{REQUEST_URI}  !^/cms
+RewriteCond %{REQUEST_URI}  !^/lib
+RewriteCond %{REQUEST_URI}  !^/soft
+RewriteCond %{REQUEST_URI}  !^/manager
+
+
+RewriteRule ^(.*)/$                                                index.php?seolink=$1
+
+RewriteCond %{REQUEST_URI}  !^/cms
+RewriteCond %{REQUEST_URI}  !^/lib
+RewriteRule ^(.*).html$                                            index.php?seolink=$1
+
+
+
+
+
+ErrorDocument 404 /404.shtml

@@ -1,0 +1,14 @@
+<?if(strlen($apparatus['0']['caption'])>='60'){$font_size = "14px";}else{$font_size = "18px";}?>
+<div class="block_main_header_left"></div>
+<div class="block_main_header_right"></div>
+<div class="block_main_header_center" style="font-size:<?=$font_size?>;"><?=Text::cutStr($apparatus[0]['caption'],15)?></div>
+
+<div id="wrap_page">
+
+    <div style="text-align:center;"><?//=$apparatus[0]['caption']?></div>
+    <a rel="lightbox-gallery1" href="<?=$apparatus['0']['image']?>" title="<?=Text::cutString($apparatus[0]['caption'])?>" style="margin:0px;padding:0px;">
+        <img src="<?=$apparatus['0']['image']?>" style="float:left;padding:5px;width:250px" title="<?=Text::cutString($apparatus[0]['image_title'])?>" alt="<?=Text::cutString($apparatus[0]['image_title'])?>" />
+    </a>
+    <?=$apparatus[0]['content']?>
+    <div class="both br_5"></div>
+</div>

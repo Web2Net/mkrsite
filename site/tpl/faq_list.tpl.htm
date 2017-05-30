@@ -1,0 +1,41 @@
+<div class="block_main_header_left"></div>
+<div class="block_main_header_right"></div>
+<div class="block_main_header_center"><a href="/faq/">Вопросы доктору</a>
+    <!--&nbsp;::&nbsp;<span style="font-size:14px"><?=$category?></span>-->
+</div>
+
+<div id="wrap_page">       
+<?if($list!=NULL){foreach($list as $key=>$val){?>
+    <div style="padding:10px 15px 10px 15px;border-bottom:dashed 1px #99CCFF;">
+        <div class="block_date_time"><?=Time::formatMonth($val["date"])?></div> <br />
+        <div>
+            <span style="padding-left:15px;font-size:14px;text-transform: capitalize;"><?=$val['name']?></span>
+            <br />
+<?if($val['city'] !== ""){?>
+            <span style="padding-left:15px;font-size:14px;">г.</span>
+            <span style="font-size:14px;text-transform: capitalize;"><?=$val['city']?></span>
+<?}?>
+        </div>
+        <div class="both"></div>
+        <div>
+           <p><a style="font-weight:900" title="Вопрос пациента" href="/<?=$val['table']?>/<?=$category_id?>-<?=$category?>/<?=$val['id']?>-<?=Text::cutForCirilicSeolink($val['name'])?>/">
+               Вопрос пациента :</a><br />
+               <div style="color:#02405d"><?=Text::cutStr($val['question'], 25)?></div> 
+            </p>    
+            <div style="height: 5px;"></div>
+            <p><a style="font-weight:900" title="Ответ доктора" href="/<?=$val['table']?>/<?=$category_id?>-<?=$category?>/<?=$val['id']?>-<?=Text::cutForCirilicSeolink($val['name'])?>/">
+                 Ответ доктора :</a><br />
+                 <div style="color:#025d0d"><?=Text::cutStr($val['answer'], 25)?></div>
+            </p>
+        </div>
+        <div class="right">
+            <a style="font-weight:900" title="Вопрос пациента" href="/<?=$val['table']?>/<?=$category_id?>-<?=$category?>/<?=$val['id']?>-<?=Text::cutForCirilicSeolink($val['name'])?>/">
+                <strong>Читать полностью</strong>&nbsp;<b style="color:#444;">»</b>&nbsp;
+            </a>
+        </div>
+        <div class="both br_5"></div>
+    </div>
+<?}}?>
+<div class="both br_5"></div>
+<?include PATH_INC."/paginator_1.php"?>
+</div>

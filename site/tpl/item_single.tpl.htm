@@ -1,0 +1,27 @@
+<?$val = $list;?>
+<?//SYS::varDump($val)?>
+
+
+
+
+<?$row=$item_data?>
+<?$row['price_mass'] = $row['price_mass']*8.8;
+$priсe_mass = $priсe_mass * 8.8;
+?>
+
+<div style="padding: 20px 10px 5px 10px;">
+    <div class=left><h1><?=$row['caption']?></h1></div>
+    <div class="right" style="color:#d91219"><?=$row['price_mass']?>&nbsp;грн.</div>
+    <div class="both"></div>  
+</div>
+<div id="wrap_page">
+    <div class="left" style="padding:10px;">
+<?if($row['image'] !== ""){?> 
+        <img src="<?=$row['image']?>" align="left" class="img_items" />
+<?}?>
+       
+        <?=$row['content']?>
+        
+    </div>
+    <div class="both"></div>
+</div>

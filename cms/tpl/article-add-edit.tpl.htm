@@ -1,0 +1,238 @@
+<script type="text/javascript" language="JavaScript">
+function SetUrl( url, width, height, alt )
+{
+document.getElementById('image_name').value = url;
+document.getElementById('seeImage').src = url;
+//alert(url);
+//alert(width);
+//alert(height);
+//alert(alt);
+}
+
+function BrowseServer(typefolder)
+{
+var url='<?=SITE_URL?>/lib/fckeditor/editor/filemanager/browser/default/browser.html?Type='+typefolder+'&Connector=<?=urlencode(SITE_URL)?>/lib%2Ffckeditor%2Feditor%2Ffilemanager%2Fconnectors%2Fphp%2Fconnector.php';
+
+var width = 650;
+var height = 400;
+
+var iLeft = ( window.screenWidth  - width ) / 2 ;
+var iTop  = ( window.screenHeight - height ) / 2 ;
+
+	var sOptions = "toolbar=no,status=no,resizable=yes,dependent=yes,scrollbars=yes" ;
+	sOptions += ",width=" + width ;
+	sOptions += ",height=" + height ;
+	sOptions += ",left=" + iLeft ;
+	sOptions += ",top=" + iTop ;
+
+	window.open( url, 'FCKBrowseWindow', sOptions ) ;
+}
+
+  function aUploadImage(value) {
+  //alert(param);
+   document.getElementById("seeImage").src = '<?=SITE_URL?><?=ADM_SITE_URL?>/design/loadfoto.gif';
+   JsHttpRequest.query(
+      '<?=PAGE_URL?>&ext=ajax&param=uploadimage',
+      { 
+        'file': value,
+      },
+      function(result, errors) {
+    //document.getElementById("image").innerHTML = result['q']; 
+    document.getElementById("seeImage").src = result['image'];
+    document.getElementById("image").value =  result['image'];  
+    document.getElementById("image_small").value =  result['image_small'];        
+    document.getElementById("message").innerHTML =  errors;     
+      },
+ false
+    );    
+  
+  } 
+</script>
+
+<div>
+     <div class="left">
+         <a href="?mod=article&type=<?=$type?>&com=view&category_id=<?=$category_id?>">
+             <img src="design/ico_back.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Назад" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''">
+         </a>
+     </div>
+     <div class="left">
+          <a href="javascript:void(0)" onclick="articleForm.submit();">
+              <img src="design/ico_save.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''">
+          </a>
+     </div>
+     <div class="right heading1">
+         <span class="right" style="color:#e7e7e7;font-size:24px; align:right;"><?=$seo?></span><br />
+         <span><?=$art_data['caption']?></span>
+     </div>
+</div>
+<div class="both br_5"></div>
+<?if ($upd=='ok'){?><div class="ok"><b>Данные обновлены</b></div><?}?>
+
+
+
+<table style="width: 100%;margin-top:2px" cellpadding="0" cellspacing="1">
+	<tr class="head">
+		<td>Редактирование :: <?=$art_data['caption']?></td>
+	</tr>
+	<tr>
+        <td>
+            <table style="width: 100%" cellpadding="2" cellspacing="0" class="uniform">	
+		        <tr>
+		            <td align="right"><span class="error">*&nbsp;</span>Картинка :</td>
+		            <td align="left">
+		
+<table cellspacing="1" style="border: 1px solid #c7c7c7; background-color: #FFFFFF;margin-right:7px;width:100px;" align="left" cellpadding="0" cellspacing="0">
+	<tr>
+		<td style="background-color: #FFFFFF;padding: 1px;">	
+	        <img alt="" src="<?=$art_data['image']!=""?$art_data["image"]:ADM_SITE_URL."/design/noimage.jpg"?>" id="seeImage" style="width:300px" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div style="margin:3px 0px 7px 0px;">
+            <form method="post" enctype="multipart/form-data" onsubmit="return false">
+                <input type="file" name="upl"><br>
+                <input type="button" value="Загрузить" 
+                  onclick="aUploadImage(this.form.upl)">
+            </form>
+            </div>
+        </td>
+	</tr>
+</table>
+<div style="border:1px solid #ccc; padding:10px">
+    <div><h2>Статистика по статье</h2></div>
+
+    <div class="left" style="width:200px">Дата создания</div>
+    <div class="right"><?=$art_data['date_create']?></div>
+    <br />
+    <div class="left" style="width:200px">Визитов</div>
+    <div class="right"><strong><?=$art_data['see']?></strong></div>
+    <br />
+    <hr />
+    <div><h4>Изменения</h4></div>
+    <div class="left" style="width:200px">Логин менеджера</div>
+    <div class="right"><strong><?=$art_data['author_name']?></strong></div>
+    <br />
+    <div class="left" style="width:200px">Дата последнего изменения</div>
+    <div class="right"><?=$art_data['date_change']?></div>
+    <div class="both"></div>
+</div>
+<div>
+		<?=$mess?>
+	<div id="message"></div>
+</div>
+<!--<div style="margin:3px 0px 7px 0px;"><input id="btnBrowse" onclick="BrowseServer('Preview');" type="button" value="Р’С‹Р±СЂР°С‚СЊ РЅР° СЃРµСЂРІРµСЂРµ" /></div>-->
+
+</td>
+	</tr>
+	
+<form action="?mod=article&type=<?=$type?>&com=update<?=isset($id)?"&id=".$id:""?>" method="post" name="articleForm">
+<input type="hidden" style="width: 300px;" name="image" id="image" value="<?=$art_data['image']?>" />
+<input type="hidden" style="width: 300px;" name="image_small" id="image_small" value="<?=$art_data['image_small']?>" />
+<input name="rubrica" value="<?=$_REQUEST['seo']?>" type="hidden">
+
+<input name="type" value="<?=$type?>" type="hidden">	
+<input name="id" value="<?=$art_data['id']?>" type="hidden">
+<tr>
+                        <td align="right" style="background-color:<?=$bg?>">Источник :</td>
+                        <td align="left">
+                            <input name="source" type="text" value="<?=$art_data['source']?>" />
+                        </td>
+                    </tr>
+                    <tr>
+<?if ($art_data['enabled']=='1'){$bg = "#85fd7c";}else{$bg = "#fd7c7c";}?>
+                        <td align="right" style="background-color:<?=$bg?>">Опубликовать :</td>
+                        <td align="left" style="background-color:<?=$bg?>">
+                            <input name="enabled" type="checkbox" <?if ($art_data['enabled']=='1'){?> checked=""<?}?>value="1" />
+                        </td>
+                    </tr>
+    <tr>
+	<td style="width: 120px" align="right"><span class="error">*&nbsp;</span>Заголовок :</td>
+	<td align="left">
+	<input name='caption' class='adminform' value='<?=$art_data['caption']?>' type='text'></td>
+	</tr>
+	<tr>
+		<td align="right"><span class="error">*&nbsp;</span>Секция :</td>
+		<td align="left">
+		<table cellspacing=0 cellpadding=0 style="width:100%;height: 20px"><tr><td align="left" style="width:40%;">
+		<select name="category_id" style="width:90%;padding:0px 0px;height: 20px" class="adminform">
+<option value="null" selected>Выберете секцию</option>
+<?foreach ($parent_list as $key=>$val){?>
+<option value="<?=$val['id']?>"<?if ($category_id==$val['id']){?> selected<?}?>><?=$val['caption']?></option>
+<?}?>
+</select>
+</td>
+<td align="left" style="width:40%;">
+</td>
+</tr></table>
+</td>
+</tr>
+
+<tr>
+		<td align="right"><span class="error">*&nbsp;</span>Анонс :</td>
+		<td align="left"><textarea name="short_text" class="adminarea"><?=$art_data['short_text']?></textarea></td>
+	</tr>	
+	<tr>
+		<td align="right"><span class="error">*&nbsp;</span>Содержимое :</td>
+		<td align="left">
+<?
+include(SITE_PATH."/lib/fckeditor/fckeditor.php") ;
+$sBasePath=SITE_URL.'/lib/fckeditor/';
+$oFCKeditor->Config['SkinPath'] = SITE_URL.'/lib/fckeditor/editor/skins/silver/';
+$oFCKeditor = new FCKeditor('full_text') ;
+$oFCKeditor->BasePath	= $sBasePath ;
+$oFCKeditor->Value		= $art_data["full_text"];
+$oFCKeditor->Width  = '100%' ;
+$oFCKeditor->Height = '450' ;
+$oFCKeditor->ToolbarSet = 'Default';
+//$oFCKeditor->ToolbarSet = 'Normal';
+$oFCKeditor->Create() ;
+?>
+</td>
+	</tr>
+<?if($seo == "видео")
+{?>
+     <tr>
+        <td style="width: 120px" align="right"><span class="error">*&nbsp;</span>Видео :</td>
+        <td align="left">
+        <input name='video' class='adminform' value='<?=$art_data['video']?>' type='text'></td>
+    </tr>
+<?}?>
+
+	<tr>
+		<td align="right">Meta Keywords :</td>
+		<td align="left"><textarea name="meta_keywords" class="adminarea"><?=$art_data['meta_keywords']?></textarea></td>
+	</tr>
+	<tr>
+<?if($_REQUEST['com'] == "edit"){$date = $art_data['date_create'];}else{$date = date("Y-m-d H:i");}?>
+        <td align="right">Дата :</td>
+		<td align="left"><input name="date_create" class="adminform" value="<?=$date?>" type="text"></td>
+	</tr>					
+		<tr>
+		<td align="right">Meta Description :</td>
+		<td align="left"><textarea name="meta_description" class="adminarea"><?=$art_data['meta_description']?></textarea></td>
+	</tr>
+    <tr>
+<?if ($art_data['show_on_main']=='1'){$bg = "#85fd7c";}else{$bg = "#fd7c7c";}?>
+        <td align="right" style="background-color:<?=$bg?>">На главной :</td>
+        <td align="left" style="background-color:<?=$bg?>">
+            <input name="show_on_main" type="checkbox" <?if ($art_data['show_on_main']=='1'){?> checked=""<?}?>value="1" />
+        </td>
+    </tr>	
+    <tr>
+		<td align="right">SeoTitle :</td>
+		<td align="left" style="font-size: 10px;">/<?=$art_data['id']?>-<?=$art_data['web_link']?>/</td>
+	</tr>
+    <tr>
+        <td align="right">Позиция :</td>
+        <td align="left"><input name="pos" class="adminform" value="<?=$art_data['pos']?>" type="text"></td>
+    </tr>		
+	<tr>
+		<td colspan="2" align="right" style="padding:7px 14px 14px 0px;">
+		<input name ="save" type="image" src="design/ico_save.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''" onclick="articleForm.submit();">
+		</td>
+	</tr>	
+	</table>
+</form>	
+</td></tr>
+</table>

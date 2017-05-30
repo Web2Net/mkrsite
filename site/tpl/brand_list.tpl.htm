@@ -1,0 +1,23 @@
+<?if($rub == "Портфолио_сайты"){$content_title = "Портфолио";}
+  if($rub == "Производители"){$content_title = "Производители";}
+?>
+<div style="text-transform: capitalize;"><h1><?=$content_title?></h1></div>
+<div class="both br_10"></div>
+<div id="wrap_page">
+<?if($list!=NULL){$i="1";foreach($list as $key=>$val){?>
+    <div class="left hr_dash_blue" style="width:33%;height:100px;" onmouseover="this.style.background='#fafaeb';" onmouseout="this.style.background='#fff';">
+       <div style="text-align:center;padding-top:25px">
+<?if($val["image"]!==""){?> 
+               <a title="<?=$val["short_text"]?>" href="/<?=$val['article_cat']?>/<?=$val['id']?>-<?=$val['web_link']?>/">
+               <img style="height:50px" src="<?=$val['image']?>" alt="<?=$val["caption"]?>" title="<?=$val["content_short"]?>" /></a>
+<?}?>
+        </div>
+    </div>
+<?
+$i++;
+}
+if($i%3=="0"){?>
+ <div class="both br_10"></div>
+<?}
+}?>
+</div>

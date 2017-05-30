@@ -1,0 +1,17 @@
+<div onmouseover="thisOver(this.style);" onmouseout="thisOut(this.style);" class="menu2">
+    <a class="header" href="?mod=article&type=category&com=view">Статьи</a>
+</div>
+
+<table style="margin:2px 0px 10px 0px;">
+<?foreach ($category as $key=>$val){if($category_id==$val['id']&& $mod=='article'){$img="ico_folder_a.gif";}else{$img="ico_folder.gif";}?>
+    <tr>
+        <td class="menu2 menu1 title" style="padding:2px 3px 3px 3px;border:none;">
+            <img src="design/<?=$img?>" alt="Показать все статьи секции" width="19" height="19" vspace="0" border="0" hspace="5" align="left">
+            <a href="?mod=<?=$val['modul']?>&type=article&com=view&seo=<?=$val['seo']?>&category_id=<?=$val['id']?>" title="Открыть папку">
+                <span style="padding:1px 4px;font-size:12px;line-height: 15px;font-family:tahoma;<?if($category_id==$val['id']&& $mod=='article'){?>background-color:#f7f7f7;font-weight:bold;<?}?>"<?if ($val['showing']!='Y'){?> class="orangered"<?}?>><?=$val['caption']?></span>
+            </a>
+        </td>
+    </tr>
+<?}?>
+</table>
+

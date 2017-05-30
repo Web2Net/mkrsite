@@ -1,0 +1,45 @@
+<?$val = $list;?>
+<?//SYS::varDump($val)?>
+<div style="padding: 20px 10px 5px 10px;">
+    <div><h1><?//=$rub?></h1></div>
+    <div class="both"></div>  
+</div>
+
+<div id="wrap_page">
+<?
+if($val !== 0 && $val !== NULL)
+{
+    foreach($val as $row)
+    {
+        $caption = $row['caption'];
+        $content = $row['content'];
+ 
+        if($row['heritage'] == "1")
+        {
+            $link = "/каталог/{$_SESSION['rub']}/{$row['seolink']}/";
+        }
+        else
+        {
+            $link = "/каталог/{$_SESSION['rub']}/{$row['seolink']}/";
+        }
+        
+?>      
+<?//=$row['id']?>
+        <div>
+<!--            <div class="left" style="width:150px;padding:10px;">
+                <a href="<?=PATH_ITEMS?>/<?=$row['image']?>" onclick='return hs.expand(this)'> 
+                    <img src="<?=PATH_ITEMS?>/<?=$row['image']?>" class="img_items" />
+                </a>
+            </div>-->
+            <div class="left" style="text-align:left">
+                <h4><a href="<?=$link?>"><?=$caption?></a></h4>
+                
+            </div>
+
+            <div class="both"></div>
+        </div>
+        
+    <?}
+}?>
+    <div class="both"></div>
+</div>

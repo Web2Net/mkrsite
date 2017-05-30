@@ -1,0 +1,70 @@
+<?if($_SESSION['level']>=2){?>
+<table style="width: 100%;margin-bottom:3px;" cellpadding="0" cellspacing="0">
+    <tr>
+        <td align="left">
+            <?if (isset($category_id)){?>
+            <a href="?mod=<?=$mod?>&com=view">
+                <img src="design/ico_back.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Назад" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a> <?}?>
+            <a href="?mod=<?=$mod?>&com=add">
+                <img src="design/ico_add_artic.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Добавить" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+        </td>
+        <td class="heading1" align="right" valign="bottom">
+            <span style="color:#e7e7e7;font-size:24px;"><?=$mod_name?></span><br>
+            <span style="color:#444;"><?=$type_name?></span>
+        </td>
+    </tr>
+</table>
+<table class="list-table collapse" width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr class="head">
+            <?if($_SESSION['level'] >= "3"){?><td align="center" width="15"><span class="navigation">id</span></td><?}?>
+		    <td align="center" width="70%"><span class="navigation">Заглавие</span></td>
+            <!--<td align="center" width="40%"><span class="navigation">Версия 2</span></td>-->
+            <td align="center" width="15"><span class="navigation">Вид</span></td>
+            <td align="center" width="50" colspan="2"><span class="navigation">Опции</span></td>
+    </tr>
+<?if ($listing!=''){?>
+<?$i=1;?>
+<?foreach($listing as $key=>$val){?>
+    <tr class="row1" style="background-color:<?if($i%2){?>#F7F7F7<?}?>;" onmouseover="style.background='#fffebd';" onmouseout="style.background='#F7F7F7'">
+        <?if($_SESSION['level'] >= "3"){?><td><?=$val['id']?></td><?}?>
+        <td class="title" style="padding:4px 10px 4px 10px;">
+            <img src="design/ico_issues_sm.gif" vspace="0" border="0" hspace="5" align="left">
+            <span<?if ($val['showing']!=Y){?> class="orangered"<?}?>>
+            <a href="?mod=<?=$mod?>&com=edit&id=<?=$val['id']?>" title="Редактировать">
+            <span style="color:<?if ($val['showing']=='N'){?>orangered<?}?>">
+            <?=$val['var1_content']?></span></a></span>
+        </td>
+        <!--<td align="left">
+            <?//=$val['var2_content']?>&nbsp;(<?//=$val['var2_vote']?>)
+        </td>-->
+        <td align="center">
+<?if ($val['showing']=='Y'){?>
+            <span style="font-size:15px;font-weight: bold;color:lightgreen">&#9679;</span>
+<?}else{?>
+            <span style="font-size:15px;font-weight: bold;color:orangered">&#9679;</span>
+<?}?>
+        </td>
+        <td class="options" align="center">
+            <nobr>
+            <?if($_SESSION['level'] >= "2"){?> 			
+            <a href="?mod=<?=$mod?>&com=edit&id=<?=$val['id']?>" title="Редактировать">
+                <img src="design/ico_edit_sm.gif" alt="Редактировать" vspace="1" border="0" hspace="1"></a>
+            
+            <a title="Удалить" href="?mod=<?=$mod?>&com=delete&id=<?=$val['id']?>" onclick="if (confirm('Вы уверены?')) location=this.href; return false;">
+                <img src="design/ico_delete_sm.gif" alt="Удалить" vspace="1" border="0" hspace="1"></a>
+            <?}?></nobr>	
+        </td>
+    </tr>
+<?$i++;?>
+<?}}?>
+</table>
+<?}?>
+<?if($page>1){?><a href="/<?=$mod?>/page-<?=$page-1?>.html" class="pagenum" style="font-size:13px;">« <i>предидущая</i></a><?}?>
+&nbsp;
+<?$sko=1;$page==""?$page=1:$page=$page;
+if($page<=7){$i=$sko;}else{$i=$page-6;}
+while($sko<11&&$i<=$pages){?>
+<a href="/<?=$mod?>/<?if($i>1){?>page-<?=$i?>.html<?}?>" class="pagenum<?if($page==$i){?>now<?}?>"><b><?=$i?></b></a>
+<?$sko++;$i++;}?>
+&nbsp;
+<?if($page<$pages){?><a href="/<?=$mod?>/page-<?=$page+1?>.html" class="pagenum" style="font-size:13px;"><i>следующая</i> »</a><?}?>

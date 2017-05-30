@@ -1,0 +1,21 @@
+<?php $val = $list;?>
+<div class="block_main_header_left"></div>
+<div class="block_main_header_right"></div>
+<div class="block_main_header_center"><?=ucfirst($val['caption'])?> - демо лечение</div>
+
+<div id="wrap_page">
+    <div style="padding:10px;text-align: justify;">
+        <img src="<?=$val['image']?>" title="<?=$val['image_title']?>" alt="<?=$val['caption']?>" align="left" style="padding: 0px 10px 10px 0px; width:250px" />
+<?php
+$str = urlencode('<b>Предлагается');
+ 
+$first_abzac = stristr($val['content'], urldecode($str)); 
+$first_abzac = str_replace("<p>","<br />",$first_abzac);
+$first_abzac = str_replace("</p>","<br />",$first_abzac);
+echo $first_abzac;
+?>
+        
+   </div>
+   <div class="error" style="text-align:right;width:100%;"><?=$val['demo_price']?></div>
+   <div class="both br_10"></div>
+</div>

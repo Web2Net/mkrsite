@@ -1,0 +1,49 @@
+<div class="block_main_header_left"></div>
+<div class="block_main_header_right"></div>
+<div class="block_main_header_center">Демонстрационное лечение</div>
+
+<div id="wrap_page">
+<?//Sys::varDump($health_item_list);
+if($health_cat_list!=="")
+{
+    $health_i = "0";
+    $health_count = count($health_cat_list);?>
+    <div style="float:left;width:33%;">
+    <?foreach($health_cat_list as $health_cat_k=>$health_cat_v)
+    {   
+        $health_i++;
+        if($health_cat_v['id'] == "20" || $health_cat_v['id'] == "21" || $health_cat_v['id'] == "23")
+        {
+        ?>
+        
+      <?}
+      else
+      {?>
+        <div class="both br_10"></div>
+        <div>
+            <strong><?=$health_cat_v['caption']?></strong>
+        </div>
+              
+      <?if($health_item_list!=="")
+        {
+            foreach($health_item_list as $health_item_k=>$health_item_v)
+            {                                                            
+                if($health_item_v['category'] == $health_cat_v['id'])
+                {     
+                    ?>
+        <div style="text-align: left;"><a href="/health/<?=$health_cat_v['seolink']?>/demo-<?=$health_item_v['seolink']?>/"><?=$health_item_v['caption']?></a></div>
+        
+              <?    
+                } ?>
+            <?}
+         }?>
+         <div style="width:90%"></div>   <?}?> 
+         <?if($health_i == round($health_count/3) || $health_i == round($health_count*2/3))
+          {?>
+            </div><div style="float:left;width:33%;">  
+        <?}?>
+      <?}?>    
+    </div>
+    <div class="both br_10"></div>
+<?}?>
+</div>

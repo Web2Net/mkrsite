@@ -1,0 +1,197 @@
+<script type="text/javascript" language="JavaScript">
+function SetUrl( url, width, height, alt )
+{
+document.getElementById('image_name').value = url;
+document.getElementById('seeImage').src = url;
+//alert(url);
+//alert(width);
+//alert(height);
+//alert(alt);
+}
+
+function BrowseServer(typefolder)
+{
+var url='<?=SITE_URL?>/lib/fckeditor/editor/filemanager/browser/default/browser.html?Type='+typefolder+'&Connector=<?=urlencode(SITE_URL)?>/lib%2Ffckeditor%2Feditor%2Ffilemanager%2Fconnectors%2Fphp%2Fconnector.php';
+
+var width = 650;
+var height = 400;
+
+var iLeft = ( window.screenWidth  - width ) / 2 ;
+var iTop  = ( window.screenHeight - height ) / 2 ;
+
+	var sOptions = "toolbar=no,status=no,resizable=yes,dependent=yes,scrollbars=yes" ;
+	sOptions += ",width=" + width ;
+	sOptions += ",height=" + height ;
+	sOptions += ",left=" + iLeft ;
+	sOptions += ",top=" + iTop ;
+
+	window.open( url, 'FCKBrowseWindow', sOptions ) ;
+}
+
+  function aUploadImage(value) {
+  //alert(param);
+   document.getElementById("seeImage").src = '<?=SITE_URL?><?=ADM_SITE_URL?>/design/loadfoto.gif';
+   JsHttpRequest.query(
+      '<?=PAGE_URL?>&ext=ajax&param=uploadimage',
+      { 
+        'file': value,
+      },
+      function(result, errors) {
+    //document.getElementById("image").innerHTML = result['q']; 
+    document.getElementById("seeImage").src = result['image'];
+    document.getElementById("image").value =  result['image'];  
+    document.getElementById("image_small").value =  result['image_small'];        
+    document.getElementById("message").innerHTML =  errors;     
+      },
+ false
+    );    
+  
+  } 
+</script>
+
+<div>
+     <div class="left">
+         <a href="?mod=<?=$mod?>&type=all&com=view">
+             <img src="design/ico_back.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Назад" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''">
+         </a>
+     </div>
+     <div class="left">
+          <a href="javascript:void(0)" onclick="articleForm.submit();">
+              <img src="design/ico_save.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''">
+          </a>
+     </div>
+     <div class="right heading1">
+         <span class="right" style="color:#e7e7e7;font-size:24px; align:right;"><?=$seo?></span><br />
+         <span><?=$art_data['client']?></span>
+     </div>
+</div>
+<div class="both br_5"></div>
+<?if ($upd=='ok'){?><div class="ok"><b>Данные обновлены</b></div><?}?>
+    <table style="width: 100%;margin-top:2px" cellpadding="0" cellspacing="1">
+	<tr class="head">
+	    <td>Новая запись :: <?=$art_data['client']?> :: <?=$art_data['email']?> </td>
+	</tr>
+	<tr>
+            <td>
+                <div style="color:#fff; font-size:24px; font-weight:900; text-align:center; padding:5px;background-color:#d91219">Не забываем править все необходимые поля!!</div>
+                <div class="both br_10"></div>
+                <table style="width: 100%" cellpadding="2" cellspacing="0" class="uniform">	
+                            <form action="?mod=<?=$mod?>&type=<?=$type?>&com=update" method="post" name="articleForm">
+                            
+                            <input name="form__ingener" value="<?=$_SESSION['username']?>" type="hidden">
+        <tr>
+<?if($_REQUEST['com'] == "edit"){$date = $art_data['date_create'];}else{$date = date("Y-m-d")." ".$_SESSION['username'];}?>
+            <td align="right">Заявка получена :</td>
+	    <td align="left"><input name="form__date_create" class="adminform" value="<?=$date?>" type="text"></td>
+	</tr>
+        <tr>
+	    <td style="width: 120px" align="right"><span class="error">*&nbsp;</span>Клиент :</td>
+	    <td align="left"><input name='form__client' class='adminform' value="<?=$art_data['client']?>" type="text"></td>
+	</tr>
+	<tr>
+	    <td align="right">Контактная инфа :</td>
+	    <td align="left"><textarea name="form__data_client" class="adminarea"><?=$art_data['data_client']?></textarea></td>
+	</tr>
+	<tr>
+	    <td style="width: 120px" align="right"><span class="error">*&nbsp;</span>Дивайс :</td>
+	    <td align="left"><input name='form__divice' class='adminform' value="<?=$art_data['divice']?>" type="text"></td>
+	</tr>
+	<tr>
+	    <td style="width: 120px" align="right">S/N :</td>
+	    <td align="left"><input name='form__sn' class='adminform' value="<?=$art_data['sn']?>" type="text"></td>
+	</tr>
+	<tr>
+	    <td align="right"><span class="error">*&nbsp;</span>Неисправность :</td>
+	    <td align="left">
+<?
+include(SITE_PATH."/lib/fckeditor/fckeditor.php") ;
+$sBasePath=SITE_URL.'/lib/fckeditor/';
+$oFCKeditor->Config['SkinPath'] = SITE_URL.'/lib/fckeditor/editor/skins/silver/';
+$oFCKeditor = new FCKeditor('form__neispravnost') ;
+$oFCKeditor->BasePath	= $sBasePath ;
+$oFCKeditor->Value		= $art_data['neispravnost'];
+$oFCKeditor->Width  = '100%' ;
+$oFCKeditor->Height = '250' ;
+$oFCKeditor->ToolbarSet = 'Default';
+//$oFCKeditor->ToolbarSet = 'Normal';
+$oFCKeditor->Create() ;
+?>	    
+	    </td>
+	</tr>
+	<tr>
+	    <td align="right"><span class="error">*&nbsp;</span>Что сделано :</td>
+	    <td align="left">
+<?
+include(SITE_PATH."/lib/fckeditor/fckeditor.php") ;
+$sBasePath=SITE_URL.'/lib/fckeditor/';
+$oFCKeditor->Config['SkinPath'] = SITE_URL.'/lib/fckeditor/editor/skins/silver/';
+$oFCKeditor = new FCKeditor('form__content') ;
+$oFCKeditor->BasePath	= $sBasePath ;
+$oFCKeditor->Value		= $art_data['content'];
+$oFCKeditor->Width  = '100%' ;
+$oFCKeditor->Height = '250' ;
+$oFCKeditor->ToolbarSet = 'Default';
+//$oFCKeditor->ToolbarSet = 'Normal';
+$oFCKeditor->Create() ;
+?>
+	    </td>
+	</tr>
+	<tr>
+            <td align="right">Форма оплаты :</td>
+            <td align="left">
+<?if ($art_data['nal']=='Y'){$chk_n = "checked =''";$chk_b = "";}else{$chk_b = "checked =''";$chk_n = "";}?>         
+                <input type="radio" name="form__nal" value="N" <?=$chk_b?>>Безнал<Br>
+                <input type="radio" name="form__nal" value="Y" <?=$chk_n?>>Нал<Br>
+        </td>
+    </tr>
+
+    <tr>
+<?if ($art_data['zdelano']=='Y'){$bg = "#85fd7c";}else{$bg = "#fd7c7c";}?>
+        <td align="right" style="background-color:<?=$bg?>">Работа :</td>
+        <td align="left" style="background-color:<?=$bg?>">
+            <input name="form__zdelano" type="checkbox" <?if ($art_data['zdelano']=='Y'){?> checked=""<?}?>value="Y" /><span class="right"><?=$art_data['date_zdelano']?></span>
+        </td>
+    </tr>
+    <tr>
+<?if ($art_data['otgryzka']=='Y'){$bg = "#85fd7c";}else{$bg = "#fd7c7c";}?>
+        <td align="right" style="background-color:<?=$bg?>">Отгрузка :</td>
+        <td align="left" style="background-color:<?=$bg?>">
+            <input name="form__otgryzka" type="checkbox" <?if ($art_data['otgryzka']=='Y'){?> checked=""<?}?>value="Y" /><span class="right"><?=$art_data['date_otgryzka']?></span>
+        </td>
+    </tr>
+    <tr>
+<?if ($art_data['doc']=='Y'){$bg = "#85fd7c";}else{$bg = "#fd7c7c";}?>
+        <td align="right" style="background-color:<?=$bg?>">Документы :</td>
+        <td align="left" style="background-color:<?=$bg?>">
+            <input name="form__doc" type="checkbox" <?if ($art_data['doc']=='Y'){?> checked=""<?}?>value="Y" /><span class="right"><?=$art_data['date_doc']?></span>
+        </td>
+    </tr>
+    <tr>
+<?if ($art_data['pay']=='Y'){$bg = "#85fd7c";}else{$bg = "#fd7c7c";}?>
+        <td align="right" style="background-color:<?=$bg?>">Оплата :</td>
+        <td align="left" style="background-color:<?=$bg?>">
+            <input name="form__pay" type="checkbox" <?if ($art_data['pay']=='Y'){?> checked=""<?}?>value="Y" /><span class="right"><?=$art_data['date_pay']?></span>
+        </td>
+    </tr>
+    <tr>
+            <td align="right">Где производились работы :</td>
+            <td align="left">
+<?if ($art_data['viezd']=='Y'){$viezd_y = "checked =''";$viezd_n = "";}else{$viezd_n = "checked =''";$viezd_y = "";}?>         
+                <input type="radio" name="form__viezd" value="N" <?=$viezd_n?>>В сервисе<Br>
+                <input type="radio" name="form__viezd" value="Y" <?=$viezd_y?>>На выезде<Br>
+        </td>
+    </tr>
+    <tr>
+	    <td align="right">Примечание :</td>
+	    <td align="left"><textarea name="form__note" class="adminarea"><?=$art_data['note']?></textarea></td>
+	</tr>    
+		
+	<tr>
+		<td colspan="2" align="right" style="padding:7px 14px 14px 0px;">
+		<input name ="save" type="image" src="design/ico_save.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''" onclick="articleForm.submit();">
+		</td>
+	</tr>	
+	</table>
+</form>	
+</td></tr>
+</table>

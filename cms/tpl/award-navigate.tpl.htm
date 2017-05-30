@@ -1,0 +1,27 @@
+<?if($_SESSION['level']>=2)
+{?>
+<div class="title_of_hddn menu2"><strong>Награды</strong></div>
+      <div class="hddn">
+     <?php
+     $query="SELECT * FROM `mr_award_category`";
+     $res = mysql_query($query);
+
+    while($row = mysql_fetch_array($res)) 
+    {   
+          if($mod=='award' && $type==$row['type'])
+          {
+              $img = "ico_folder_a.gif";
+              $font_weight = "font-weight:bold;";
+          }
+          else
+          {
+              $img = 'ico_folder.gif';
+              $font_weight = "font-weight:normal;";
+          }?>
+        <div class="title" style="<?=$font_weight?>"> 
+            <img src='design/<?=$img?>' alt='Показать все' width='19' height='19' vspace='0' border='0' hspace='5' />
+            <a href='?mod=award&type=<?=$row['type']?>&category=<?=$row['id']?>&com=view'><?=$row['caption']?></a>
+        </div>
+    <?}?>
+    </div>
+<?}?>

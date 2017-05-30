@@ -1,0 +1,300 @@
+<div>
+<h2>Увага, Увага!!!</h2>
+Чтобы мягко намекнуть Ирине Геннадьевне, что очень нужно выписать доки, - достаточно ткнуть в иконку "Серый карандаш" (да-да, это карандаш. Я художник, я так вижу)), он сразу станет красным.
+Заявка продублируется в списке "Доки. Срочно!!!". Это сделано, что-бы Ирина Геннадьевна не ломала свои прекрасные глаза в поисках очередной прихоти камрадов сервисного центра "МКР".<br />
+После выписки документов, карандаш окрасится в приятно зеленый цвет и заявка пропадет из списка "Доки. Срочно!!!".<br /><br />
+Всегда ваш, You.<br /><br />
+<hr />
+</div>
+<table style="width: 100%;margin-bottom:3px;" cellpadding="0" cellspacing="0">
+    <tr>
+        <td align="left">
+<?if (isset($category_id)){?>
+            <a href="?mod=<?=$mod?>&type=category&com=view"><img src="design/ico_back.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Назад" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a> <?}?>
+            <a href="?mod=<?=$mod?>&com=add"><img src="design/ico_add_artic.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Добавить статью в эту категорию" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+        </td>
+		
+		<td class="heading1" align="right" valign="bottom">
+        <div style="background-color:#fff;padding:5px"><h3>Фильтр по клиентам</h3>
+        <form action="?mod=works&com=view&type=client" method="post">
+            <input type="text" name="client"> 
+            <!-- <input type="text" name="calendar_date_1" class="date_input"> -->
+            <input type="submit" name="client_sumbit" value="Отфильтровать">
+        </form>    
+         </div>
+        </td>
+		
+		
+        <td class="heading1" align="right" valign="bottom">
+        <div style="background-color:#fff;padding:5px"><h3>Фильтр по дате</h3>
+        <form action="?mod=works&com=view&type=calendar" method="post">
+            <input type="text" name="calendar_date" class="date_input"> 
+            <!-- <input type="text" name="calendar_date_1" class="date_input"> -->
+            <input type="submit" name="date_sumbit" value="Отфильтровать">
+        </form>    
+    </div>
+        </td>
+    </tr>
+</table>
+<div class="both br_5"></div>
+<div>
+    <div class="left" style="border: 2px solid #000;background-color:#d91299;padding:5px"><a href="?mod=<?=$mod?>&com=view&type=prioritet" style="color:#fff;font-size:14px;font-weight:900;">Срочняковые!!!</a></div>
+    <div class="left" style="width:10px">&nbsp;&nbsp;</div>
+	<div class="left" style="border: 2px solid #000;background-color:#d91219;padding:5px"><a href="?mod=<?=$mod?>&com=view&type=srochno_y" style="color:#fff;font-size:14px;font-weight:900;">Нужны ДОКИ!!!</a></div>
+    <div class="left" style="width:10px">&nbsp;&nbsp;</div>
+	
+	<div class="left" style="border: 1px solid #000;background-color:#fff;padding:5px"><a href="?mod=<?=$mod?>&com=view&type=all">Всё</a></div>
+    <div class="left" style="width:10px">&nbsp;&nbsp;</div>
+    <div class="left" style="border: 1px solid #000;background-color:#FFC1C1;padding:5px"><a href="?mod=<?=$mod?>&com=view&type=nworks">Не сделано</div>
+    <div class="left" style="width:10px">&nbsp;&nbsp;</div>
+    <div class="left" style="border: 1px solid #000;background-color:#C1FFC1;padding:5px"><a href="?mod=<?=$mod?>&com=view&type=yworks">Сделано</a></div>
+    <div class="left" style="width:10px">&nbsp;&nbsp;</div>
+    <div class="left" style="border: 1px solid #000;background-color:#FFC1C1;padding:5px"><a href="?mod=<?=$mod?>&com=view&type=ndoc">Не выписано</a></div>
+    <div class="left" style="width:10px">&nbsp;&nbsp;</div>
+    <div class="left" style="border: 1px solid #000;background-color:#C1FFC1;padding:5px"><a href="?mod=<?=$mod?>&com=view&type=ydoc">Выписано</a></div>
+    <div class="left" style="width:10px">&nbsp;&nbsp;</div>
+        <div class="left" style="border: 1px solid #000;background-color:#FFC1C1;padding:5px"><a href="?mod=<?=$mod?>&com=view&type=n_otgryzka">Не отгружено</a></div>
+    <div class="left" style="width:10px">&nbsp;&nbsp;</div>
+    <div class="left" style="border: 1px solid #000;background-color:#fff;padding:5px"><a href="?mod=<?=$mod?>&com=view&type=sn">S/N</a></div>
+    <div class="left" style="width:10px">&nbsp;&nbsp;</div>
+    <div class="left" style="border: 1px solid #000;background-color:#fff;padding:5px"><a href="?mod=<?=$mod?>&com=view&type=nal_n">Без/Нал</a></div>
+    <div class="left" style="width:10px">&nbsp;&nbsp;</div>
+    <div class="left" style="border: 1px solid #000;background-color:#fff;padding:5px"><a href="?mod=<?=$mod?>&com=view&type=nal_y">Нал</a></div>
+
+
+
+    
+    <div class="right" style="width:10px">&nbsp;&nbsp;</div>
+    <div class="right" style="border: 1px solid #000;background-color:#fff;padding:5px"><a href="?mod=<?=$mod?>&com=view&type=archiv">Архив</a></div>
+<!--    
+    <div class="right" style="width:10px">&nbsp;&nbsp;</div>
+    <div class="right" style="border: 1px solid #000;background-color:#fff;padding:5px"><a href="?mod=<?=$mod?>&com=view&type=web2net">Web2Net</a></div>
+    <div class="right" style="width:10px">&nbsp;&nbsp;</div>
+    <div class="right" style="border: 1px solid #000;background-color:#fff;padding:5px"><a href="?mod=<?=$mod?>&com=view&type=alexkiev">AlexKiev</a></div>
+-->
+</div>
+<div class="both br_5"></div>
+<table class="list-table collapse" width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr class="head">
+
+        <td width="20"><span class="navigation">№</span></td>
+        <td width="20">ДОКИ</td>
+	    <td width="100"><span class="navigation">Дата</span></td>
+        <td width="170"><span class="navigation">Компания</span>
+        <td width="90"><span class="navigation">Дивайс</span>
+	        <a href="?mod=<?=$mod?>&com=view&order=company&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+            <a href="?mod=<?=$mod?>&com=view&order=company"><img src="design/butt_order_az.png" width="10" /></a>
+		</td>
+        <td width="170"><span class="navigation">Неисправность</span></td>
+        <td width="250"><span class="navigation">Работы</span></td>
+        <td width="20"></td><!-- Сделоно/не сделано -->
+        
+<!--
+	<td width="50"><span class="navigation">Статус работы</span>
+	    <a href="?mod=<?=$mod?>&com=view&order=l_name&strim=desc"><img src="design/butt_order_za.png" width="10" /></a>
+            <a href="?mod=<?=$mod?>&com=view&order=l_name"><img src="design/butt_order_az.png" width="10" /></a>
+	</td>
+-->
+	<td width="30"><img src="<?=PATH_IMG_ADMIN?>/1с.jpg" style="width:30px" alt="Статус документов" title="Статус документов" /></td><!-- Статус документов -->
+	<td width="20"></td><!-- Отгрузка -->
+	<td width="20"></td><!-- Оплата -->
+	<td width="20"></td><!-- Если есть примечание -->
+        <!-- <td width="30"><img src="<?=PATH_IMG_ADMIN?>/ingener.jpg" style="width:30px" title="Инженер" /></td>  -->
+        <td width="20"><span class="navigation">Где</span></td>  <!-- В офисе или на выезде -->
+        <td align="center" width="50" colspan="2"><span class="navigation">Опции</span></td>
+        
+    </tr>
+<?if ($listing!=''){?>
+<?$i=1;?>
+<?
+foreach($listing as $key=>$val)
+{
+    $client = Works::getClients($val['client_id']);
+
+?>
+
+
+
+    <tr class="<?if($i==2&&$id!=$val['id']){?>bg_grey<?}else{?>bg_white<?}?> row1<?if ($id==$val['id']){?> sel<?}?>" onmouseover="this.style.background='<?if($id!=$val['id']){?>#FFFFCC<?}?>';" onmouseout="this.style.background='<?if($i==2&&$id!=$val['id']){$i=0;?>#F7F7F7<?}?>'">
+        <td><?=$val['id']?></td>  
+<?
+if($val['srochno'] == 'Y' && $val['doc'] == "N"){
+    $ico_sroch = "ico_doc_Y.png";
+}
+elseif(($val['srochno'] == 'Y' && $val['doc'] == "Y") || $val['doc'] == "Y"){
+    $ico_sroch = "ico_doc_YY.png";
+}
+else{$ico_sroch = "ico_doc_N.png";}
+
+$create_srochno = explode(" ",$val['date_srochno']);
+$create_date_srochno = $create_srochno['0'];
+$create_author_srochno = $create_srochno['1'];
+
+?>
+        <td><a href="?mod=<?=$mod?>&com=srochno&id=<?=$val['id']?>"><img src="/cms/design/<?=$ico_sroch?>" style="width:30px;">
+		    <div>
+			    <nobr style="font-size:10px;"><?=$create_date_srochno?></nobr>
+			    <nobr style="font-size:14px;"><?=ucfirst($create_author_srochno);?></nobr>
+			    <?//=$val['date_create']?>
+			</div>
+		    </a></td>
+<?if($val['prioritet'] == "Y"){$bg_prioritet = "background-color:#fd7c7c;";}else{$bg_prioritet = "background-color:#fff;";}?>
+        
+<?
+$create = explode(" ",$val['date_create']);
+$create_date = $create['0'];
+$create_author = $create['1'];
+?>		
+		
+		<td style="<?=$bg_prioritet?>">
+		    <div>
+			    <nobr style="font-size:10px;"><?=$create_date?></nobr>
+			    <nobr style="font-size:14px;"><?=ucfirst($create_author);?></nobr>
+			    <?//=$val['date_create']?>
+			</div>
+		</td>
+        <td>
+            <a href="?mod=<?=$mod?>&com=edit&id=<?=$val['id']?>" title="<?=$val['data_client']?>"><?=$val['client']?></a><hr />
+            
+<?if($val['number_bill'] !== "")
+{?>
+		<div>Счет № <?=$val['number_bill']?></div>
+<?}else{}?>
+<div>
+<?php
+$item_dir = "/userfiles/works/";
+$upload_dir = SITE_PATH.$item_dir;
+$doc_dir = $val['id'];
+$full_dir = $upload_dir.$doc_dir;
+
+$dir  = $full_dir;
+$files = scandir($dir);
+foreach ($files as $file){
+    if($file == "." || $file == ".."){}
+	else{
+		echo "<nobr><a href='{$item_dir}{$doc_dir}/{$file}' style='color:blue;' target='_blank'>{$file}</a></nobr><br />";
+	}
+    
+}
+?>
+</div>
+
+
+			
+			<a href="?mod=<?=$mod?>&com=edit&id=<?=$val['id']?>" title="<?=$client['contact_name']?>  <?=$client['tel']?>
+                                                                        <?=$client['email']?>
+                                                                        <?=$client['note']?>"><?=$client['caption']?></a>
+        </td>
+        <td>
+            <?=$val['divice']?>
+<?if($val['sn'] !== ""){?>
+            <div>S/N <span style="color:#B03060"><?=$val['sn']?></span></div>
+<?}?>
+        </td>
+        <td><?=$val['neispravnost']?></td>
+        <td class="title" style="padding:4px 10px 4px 10px;">
+            <div><a href="?mod=<?=$mod?>&com=edit&id=<?=$val['id']?>" title="Редактировать"><?=$val['content']?></a></div>
+
+        </td>
+        <td>
+<?if($val['zdelano'] == "N"){?>
+            <a href="?mod=<?=$mod?>&com=zdelano&id=<?=$val['id']?>" onclick="if (confirm('Вы уверенны, что сделали работу?')) location=this.href; return false;">
+                <img src="<?=PATH_IMG_ADMIN?>/zdelano_n.jpg" style="width:30px" />
+            </a>
+<?}
+else
+{?>
+            <img src="<?=PATH_IMG_ADMIN?>/zdelano_y.jpg" style="width:30px" />
+            <br /><span style="font-size:8px"><?=$val['date_zdelano']?></span>
+<?}?>        
+        </td>
+
+
+
+        
+        
+<!--        <td><?=$val['zdelano']?></td>   -->
+        <td>
+
+<?if($val['doc'] == "Y" && $val['nal'] == "N")
+{?>
+    <img src="<?=PATH_IMG_ADMIN?>/ydoc.jpg" style="width:30px" /><br /><span style="font-size:8px"><?=$val['date_doc']?></span>
+<?}
+elseif($val['doc'] == "N" && $val['nal'] == "N")
+{?>
+    <a href="?mod=<?=$mod?>&com=doc&id=<?=$val['id']?>" onclick="if (confirm('Вы уверенны, что выписали документы?')) location=this.href; return false;"><img src="<?=PATH_IMG_ADMIN?>/ndoc.jpg" style="width:30px" /></a>
+<?}
+else
+{?>
+    <img src="<?=PATH_IMG_ADMIN?>/cash.jpg" style="width:30px" />
+<?}?>
+        </td>
+
+        
+<?if($val['otgryzka']=="Y"){$im="otgryzka_y.png";$titl="Отгружен";}else{$im="otgryzka_n.gif";$titl="Не отгружен";}?>        
+        <td>
+            <a title="<?=$titl?>" href="?mod=<?=$mod?>&com=otgryzka&id=<?=$val['id']?>" onclick="if (confirm('Вы хотите сказать, что дивайсы отгружены клиенту?')) location=this.href; return false;">
+            <img src="<?=PATH_IMG_ADMIN?>/<?=$im?>" style="width:20px" /></a>
+            <br /><span style="font-size:8px"><?=$val['date_otgryzka']?></span>
+        </td>
+        <td>
+<?if($val['pay']=="Y")
+{?>
+    <img src="<?=PATH_IMG_ADMIN?>/pay_y.jpg" style="width:20px" />
+    <br /><span style="font-size:8px"><?=$val['date_pay']?></span>
+<?}
+else
+{?>
+    <a title="Оплата" href="?mod=<?=$mod?>&com=pay&id=<?=$val['id']?>" onclick="if (confirm('Вы уверенны, что счет оплачен?')) location=this.href; return false;">
+        <img src="<?=PATH_IMG_ADMIN?>/pay_n.jpg" style="width:20px" />
+    </a>
+<?}?>
+        
+            
+        </td> 
+        <td><?if($val['note'] !== ""){?><a href="?mod=<?=$mod?>&com=edit&id=<?=$val['id']?>" title="<?=$val['note']?>"><img src="<?=PATH_IMG_ADMIN?>/attention.gif" style="width:15px" /></a><?}?></td>        
+<!--	<td><img src="<?=PATH_IMG_ADMIN?>/<?=$val['ingener']?>.jpg" style="width:30px" alt="<?=$val['ingener']?>" title="<?=$val['ingener']?>" /></td> -->
+        <td>
+<?if($val['viezd']=="N"){?>
+            <a title="Где производилась работа" href="?mod=<?=$mod?>&com=viezd&id=<?=$val['id']?>" onclick="if (confirm('Вы хотите сказать, что работу делали у клиета?')) location=this.href; return false;">
+                <img src="<?=PATH_IMG_ADMIN?>/viezd_n.png" style="width:20px" />
+            </a>
+<?}else{?>
+            <img src="<?=PATH_IMG_ADMIN?>/viezd_y.jpg" style="width:20px" />
+<?}?>            
+        </td>         
+        <td class="options" align="center">
+
+<nobr>
+<?if($val['nal'] == "N"){?>
+<a href="?mod=<?=$mod?>&com=nal&id=<?=$val['id']?>" title="Б\Н">
+    <img src="design/nal_n.jpg" alt="Б\Н" vspace="1" border="0" hspace="1" width="20" style="text-decoration:none">
+</a>
+<?}else{?>
+<img src="design/nal_y.jpg" alt="Н" vspace="1" border="0" hspace="1" width="20">
+<?}?>
+<a href="?mod=<?=$mod?>&com=edit&id=<?=$val['id']?>" title="Редактировать">
+<img src="design/ico_edit_sm.gif" alt="Редактировать" vspace="1" border="0" hspace="1"></a>
+<a title="Продублировать" href="?mod=<?=$mod?>&com=add&type=duble&id=<?=$val['id']?>" onclick="if (confirm('Вы уверены, что хотите создать запись похожую на эту))?')) location=this.href; return false;">
+<img src="design/ico_duble.png" alt="Удалить" vspace="1" border="0" hspace="1" width="20"></a>
+<?if($_SESSION["level"] >= "8"){?>
+<?
+if($val['nal'] == "N"){
+if($val['zdelano'] == "Y" && $val['otgryzka'] == "Y" && $val['pay'] == "Y" && $val['doc'] == "Y"){?>
+<a title="В архив" href="?mod=<?=$mod?>&com=archiv&id=<?=$val['id']?>" onclick="if (confirm('Вы уверены, что хотите отправить запись в архив?')) location=this.href; return false;">
+<img src="design/icons_archive.gif" alt="В архив" vspace="1" border="0" hspace="1" width="20"></a>
+<?}}
+if($val['nal'] == "Y"){
+if($val['zdelano'] == "Y" && $val['otgryzka'] == "Y" && $val['pay'] == "Y"){?>
+<a title="В архив" href="?mod=<?=$mod?>&com=archiv&id=<?=$val['id']?>" onclick="if (confirm('Вы уверены, что хотите отправить запись в архив?')) location=this.href; return false;">
+<img src="design/icons_archive.gif" alt="В архив" vspace="1" border="0" hspace="1" width="20"></a>
+<?}}?>
+<a title="Удалить" href="?mod=<?=$mod?>&com=delete&id=<?=$val['id']?>" onclick="if (confirm('Вы уверены, что хотите удалить запись?')) location=this.href; return false;">
+<img src="design/ico_delete_sm.gif" alt="Удалить" vspace="1" border="0" hspace="1"></a>
+<?}?>
+</nobr>    
+</td>
+<?$i++;?>
+<?}}?>
+</tr>
+</table>

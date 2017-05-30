@@ -1,0 +1,32 @@
+<?$seodata=explode("/",$seolink);
+  $rub=$seodata[0];
+?>
+<?$val=$article;?>
+
+
+<div id="wrap_page">
+<!-- Кнопка назад после поиска -->
+<?if($_SERVER['HTTP_REFERER'] == SITE_URL."/search/"){?>
+<form method="post" action="/search/" style="display:inline;">
+       <input value="<?=$_SESSION['search_input']?>" type="hidden" name="search_input" />
+       <input type="image" src="<?=PATH_IMG?>/butt_search_back.png" alt="Назад к списку" title="Назад к списку" />
+</form>
+<div class="br_10"></div>
+<?}?>
+<!-- /Кнопка назад после поиска -->
+ 
+    
+
+    <div class="red_string_2"><?=$val["caption"]?></div>
+    <div class="br_5"></div>
+    <div class="article">
+<?if($val["image"]!=""){?>
+        <img src="<?=$val['image']?>" align="left" style="margin:0px 15px 7px 0px;width:250px" alt="" />
+<?}?>
+        <?=$val["full_text"]?>
+    </div>
+<?if($val["source"] !== ""){?> 
+    <div class="date_1">Источник : <?=$val['source']?></div>
+<?}?> 
+<?include PATH_INC."/butt_back.php"?>
+</div>

@@ -1,0 +1,43 @@
+<?if($rub == "Портфолио_сайты"){$content_title = "Портфолио";}
+  if($rub == "Бренды"){$content_title = "Производители";}
+?>
+
+<div style="text-transform: capitalize;"><h1><?=$content_title?></h1></div>
+
+<div id="wrap_page">
+<?if($list!=NULL){foreach($list as $key=>$val){?>
+    <div class="hr_dash_blue" onmouseover="this.style.background='#fafaeb';" onmouseout="this.style.background='#fff';">
+       <div style="padding:10px 15px 12px 15px;">
+
+            <div class="red_string_2">
+                <a title="Далее" class="decoration_none" href="/<?=$val['article_cat']?>/<?=$val['id']?>-<?=$val['web_link']?>/">
+                <strong><?=$val["caption"]?></strong></a>
+            </div>
+            <div class="both br_10"></div>
+<?if($val["image"]!=""){?> 
+               <a title="Далее" href="/<?=$val['article_cat']?>/<?=$val['id']?>-<?=$val['web_link']?>/">
+               <img class="img_150 left" src="<?=$val['image']?>" alt="" /></a>
+<?}?>
+           <div class="br_5"></div>
+           <div class="article_short"><?=$val["short_text"]?></div>
+           <div class="both br_10"></div>
+
+           <div class="right block_more">
+               <a href="/<?=$val['article_cat']?>/<?=$val['id']?>-<?=$val['web_link']?>/">
+<?if($rub == "видео")
+{?>
+                   <strong>Смотреть</strong>&nbsp;<b style="color:#444;">»</b>&nbsp;
+<?}else{?>
+ 
+                   <strong>Подробнее</strong>&nbsp;<b style="color:#444;">»</b>&nbsp;
+<?}?>
+               </a> 
+           </div>
+
+        </div>
+        <div class="both br_5"></div>
+    </div>
+<?}}?>
+    <div class="br_10"></div>
+<?include PATH_INC."/paginator.php"?>
+</div>

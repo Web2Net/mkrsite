@@ -1,0 +1,68 @@
+<table style="width: 100%;margin-bottom:3px;" cellpadding="0" cellspacing="0">
+    <tr>
+
+        <td class="heading1" align="right" valign="bottom">
+            <span style="color:#e7e7e7;font-size:24px;"><?=$mod_name?></span><br>
+            <span style="color:#444;"><?=$cat_name?></span><br>
+        </td>
+    </tr>
+</table>
+
+<table class="list-table collapse" width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr class="head">
+<?if($_SESSION['level'] == "9"){?>
+        <td width="50"><span class="navigation">id</span></td>
+<?}?>
+        <td width="50%"><span class="navigation">Вопрос</span></td>
+        <td width="20%"><span class="navigation">Имя</span></td>
+        <td width="15%"><span class="navigation">Дата</span></td>
+        <td width="15%"><span class="navigation">E-mail</span></td>
+        <td align="center" width="15"><span class="navigation">Вид</span></td>
+        <td align="center" width="50" colspan="2"><span class="navigation">Опции</span></td>
+    </tr>
+<?if ($list!=NULL){?>
+<?$i=1;?>
+<?foreach($list as $key=>$val){?>
+    <tr class="<?if($i==2&&$id!=$val['id']){?>bg_grey<?}else{?>bg_white<?}?> row1<?if ($id==$val['id']){?> sel<?}?>" onmouseover="this.style.background='<?if($id!=$val['id']){?>#FFFFCC<?}?>';" onmouseout="this.style.background='<?if($i==2&&$id!=$val['id']){$i=0;?>#F7F7F7<?}?>'">
+<?if($_SESSION['level'] == "9"){?>
+        <td width="50"><?=$val['id']?></td>
+<?}?>        
+        <td class="title" style="padding:4px 10px 4px 10px;">
+            <a href="?mod=faq&com=edit&category=<?=$category?>&id=<?=$val['id']?>" style="font-weight: normal;" title="Редактировать">
+                <p><strong>Вопрос :</strong><br /><?=Text::cutStr($val['question'], 10)?></p>
+                <p><strong>Ответ :</strong><br /><?=Text::cutStr($val['answer'], 10)?></p>
+            </a>
+        </td>
+        <td class="title" style="padding:4px 10px 4px 10px;">
+            <span<?if($val['showing']!='Y'){?> class="orangered"<?}?>>
+                <a href="?mod=faq&com=edit&category=<?=$category?>&id=<?=$val['id']?>" title="Редактировать">
+                <?=$val['name']?></a>
+            </span>
+        </td>
+        <td align="left"><nobr>
+            <span<?if ($val['showing']!='Y'){?> class="orangered"<?}?>><?=Time::formatMonth($val['date'])?></span>
+            </nobr>
+        </td>
+        <td style="padding:4px;">
+            <?=$val['email']?>
+        </td>
+        <td align="center">
+            <?if ($val['showing']=='Y'){?>
+            <span style="font-size:15px;font-weight: bold;color:lightgreen">&#9679;</span>
+            <?}else{?>
+            <span style="font-size:15px;font-weight: bold;color:orangered">&#9679;</span>
+            <?}?>
+        </td>
+        <td class="options" align="center">
+            <nobr>
+            <a href="<?=SITE_URL?>/faq/Вопросы_доктору/<?=$val['id']?>-<?=$val['name']?>/" title="Посмотреть на сайте" target="_blank">
+            <img src="design/internet.gif" alt="Посмотреть на сайте" vspace="1" border="0" hspace="1" height="20" width="20"></a>            
+            <a href="?mod=faq&com=edit&category=<?=$category?>&id=<?=$val['id']?>" title="Редактировать">
+            <img src="design/ico_edit_sm.gif" alt="Редактировать" vspace="1" border="0" hspace="1"></a>
+            <a title="Удалить" href="?mod=faq&com=delete&category=<?=$category?>&id=<?=$val['id']?>" onclick="if (confirm('Вы уверены что хотите удалить этот вопрос?')) location=this.href; return false;">
+            <img src="design/ico_delete_sm.gif" alt="Удалить" vspace="1" border="0" hspace="1"></a></nobr>    
+        </td>
+    </tr>
+<?$i++;?>
+<?}}?>
+</table>

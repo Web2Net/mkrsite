@@ -1,0 +1,96 @@
+<?include "sender/inc/message_cfg.php"?>
+<?if(isset($_POST['upl_top']))Sender::uploadFile("sender/img");?> 
+<?if(isset($_POST['upl_base']))Sender::uploadFile("sender/e-mail_base");?>
+<div style="height: 20px; padding: 10px; border-bottom: 1px solid red;">
+   <span style='float: left;'> 
+       <a href='?mod=sender&com=view&add_base'>Загрузить базу</a> | 
+       <!--<a href='?mod=sender&com=view&add_top'>Загрузить "шапку"</a>-->
+   </span>
+   <br />
+</div>
+
+
+<?php
+if(!isset($_POST['sender_send']))
+{ 
+?>
+<center>
+<form action="?mod=sender&com=view" enctype="multipart/form-data" method="post">
+<table width="100%" border="0">
+     <tr valign="top">
+        <td width="350">
+             <div style="padding: 10px; margin: 10px; text-align: left; width: 350px; border: 1px solid black;">
+                 <strong>База e-mail.</strong><hr />
+    <?if($filearray !== NULL)
+      {
+          foreach($filearray as $key=>$val)
+          {       
+              $count_row_email_file = Sender::getCountRowEmailFile($val);
+              $font = "color:#000;";
+              if($count_row_email_file > "999"){$font = "color:#d91219;";}
+              ?>
+                 <div style='border: 1px solid #aaa;'>
+                     <input type='radio' name='mail_to' value='<?=$val?>' /><?=$val?> (<span style="font-size:9px;<?=$font?>"> <?=$count_row_email_file?></span> ) 
+                     <span style="float:right; padding-right:5px;"><a href='?mod=sender&comЮlete&name=<?=$val?>'>Удалить</a></span>
+                 </div>
+        <?}
+      }?>
+                 <hr />
+<?if(isset($_GET['add_base']))
+{?>
+<form enctype="multipart/form-data" action="?mod=sender&com­d_base" method="post">
+<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
+Отправить этот файл: <input name="userfile" type="file" /><br>
+<input type="submit" name="upl_base" value="Загрузить" />
+</form>
+<hr />
+<?}?>
+ 
+            </div>
+        </td>
+        <td>
+             <div style="width:400px;padding: 10px; margin: 10px; text-align: left; border: 1px solid black;">
+                Тема письма: <input type="text" name="mail_subject" size="50" maxlength="255"><hr />
+                Прикрепить файл: <input type="file" name="mail_file" maxlength="64">
+             </div>
+        </td>
+     </tr>
+</table>
+<table  border="0">
+     <tr>
+        <td><?=$top?>
+<?if(isset($_GET['add_top']))
+{?>
+<hr />
+<form enctype="multipart/form-data" action="?mod=sender&com­d_top" method="post">
+<input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
+Отправить этот файл: <input name="userfile" type="file" /><br>
+<input type="submit" name="upl_top" value="Загрузить" />
+</form>
+<hr />
+<?}?>        
+        
+        <br /><?=$content_head?></td>
+     </tr>
+     <tr valign="top">
+        <td>
+<?
+include(SITE_PATH."/lib/fckeditor/fckeditor.php") ;
+$sBasePath=SITE_URL.'/lib/fckeditor/';
+$oFCKeditor->Config['SkinPath'] = SITE_URL.'/lib/fckeditor/editor/skins/silver/';
+$oFCKeditor = new FCKeditor('full_text') ;
+$oFCKeditor->BasePath    = $sBasePath ;
+$oFCKeditor->Value        = $art_data["full_text"];
+$oFCKeditor->Width  = '100%' ;
+$oFCKeditor->Height = '450' ;
+$oFCKeditor->ToolbarSet = 'Basic';
+$oFCKeditor->Create() ;
+?>        </td>
+     </tr>
+</table>
+
+ 
+     <input type="submit" name="sender_send" value="Отправить">
+     </form>
+</center><br /><hr />
+<?}else{include "sender/inc/mailer.php";}?>

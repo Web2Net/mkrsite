@@ -1,0 +1,93 @@
+<script type="text/javascript" language="JavaScript">
+function aDel(param,value) {
+  document.getElementById(param).style.display = 'none';  
+  document.getElementById("shopping").innerHTML = '...';  
+   JsHttpRequest.query(
+      '<?=SITE_URL?>/?mod=ajax&param=shoppingminus',
+      { 
+        'data': value,
+      },
+      function(result, errors) {
+    document.getElementById("shopping").innerHTML = result['q']; 
+    document.getElementById("totalprice").innerHTML = result['r'];  }   
+      ,
+ false
+    );
+        
+  } 
+</script>
+
+<div style="padding:3px 12px 3px 12px;font-family:verdana;font-size:11px;">
+<?if($param!='login'&&$param!='order'){?><div><h1 style="font-size: 19px; font-weight: normal; margin: 3px 7px 7px 7px;">
+Корзина</h1></div><?}?>
+
+<style>
+.shopping td{
+font-size: 11px; 
+font-family: verdana;
+border:solid 1px #D9D9D9;
+padding:4px;
+vertical-align:middle;
+}
+</style>
+<table style="width: 100%; border-collapse: collapse;" cellpadding="0" cellspacing="0" class="shopping">
+	<tr style="background-color: #145C82;border: 1px solid #145C82; color: #FFFFFF; font-weight: bold;">
+		<td>Характеристики товара.</td>
+		<td width="150">Количество</td>
+		<td width="150">Цена</td>
+		<td width="150">Всего</td>
+		<td width="100">&nbsp;</td>
+	</tr>
+<?if($shopping_list!=NULL){
+$totalprice=0;
+foreach($shopping_list as $key=>$val){?>
+	<tr id="<?=$val['1Cid']?>-<?=strtotime($val['date'])?>">
+		<td style="border-left:none">
+		<table cellpadding="0" cellspacing="0"><tr><td style="border:none;">
+		<a href="<?=SITE_URL?>/shop/catalog/product/<?=$val['1Cid']?>/<?=Text::cirilToLatin($val['brand'])?>-<?=Text::cirilToLatin($val['name'])?>.html" style="line-height:15px;">
+		<img src="<?=$val['thumbnail']!=""?$val['thumbnail']:"/index_files/noimage.jpg"?>" alt="" border="0" class="catalog-list-image" width="50">
+		</a>
+		</td><td style="border:none;">
+		<?=$val['brand']?><br>
+		<a href="<?=SITE_URL?>/shop/catalog/product/<?=$val['1Cid']?>/<?=Text::cirilToLatin($val['brand'])?>-<?=Text::cirilToLatin($val['name'])?>.html" style="line-height:15px;">
+        <?=$val['name']?></a><br>
+        s/n: <?=$val['serial']?>
+<?if($val['style']!=""){?><br>Цвет: <?=$val['style']?><?}?>
+<?if($val['volume']!=""){?><br>Размер: <?=$val['volume']?><?}?>
+        </td></tr></table>
+        </td>
+		<td><?=$val['pcount']?></td>
+		<td><?=$val['newprice']!=0?$val['newprice']:$val['price']?> гривен</td>
+		<td style="background-color: #D7DDFE"><?=$val['allprice']?> гривен</td>
+		<td style="border-right:none">
+		<?if($param!='order'){?>
+		<form method="post" id="<?=strtotime($val['date'])?>-<?=$val['1Cid']?>" enctype="multipart/form-data" onsubmit="return false">
+		<input type="hidden" name="prodid" value="<?=$val["1Cid"]?>">
+		<input type="hidden" name="shoppingdate" value="<?=$val["date"]?>">		
+		<img src="/index_files/delete.png" width="17" align="left">&nbsp;
+		<a href="javascript:aDel('<?=$val['1Cid']?>-<?=strtotime($val['date'])?>',document.getElementById('<?=strtotime($val['date'])?>-<?=$val['1Cid']?>'))" style="">Удалить</a></td>
+	    </form>
+	    <?}?>
+	</tr>
+
+<?
+$totalprice=$totalprice+$val['allprice'];
+}}?>
+	<tr>
+		<td>&nbsp;</td>
+		<td><?if($param!='order'){?>Пересчитать<?}?></td>
+		<td>Общая стоимость: </td>
+		<td style="background-color: #D7DDFE"><b><span id="totalprice"><?=$totalprice?></span> гривен.</b></td>
+		<td>&nbsp;</td>
+	</tr>
+</table>
+<?if($param!='order'){?>
+<div style="padding:15px 15px 20px 60px;" id="result">
+<a href="<?=$catpage!=""?$catpage:"/"?>" class="button">
+Продолжить покупки</a>&nbsp;&nbsp;&nbsp;
+<?if($param!='login'){?><a<?if($shopcounttext!="Ваша корзина пуста"){?> href="<?=SITE_URL?>/shop/shopping/login.html"<?}?> class="button">
+Оформить заказ</a><?}?></div><?}?>
+</div>
+
+<?if(count($shopping_list)<3){?>
+<br><br><br><br><br><br><br><br><?}?>

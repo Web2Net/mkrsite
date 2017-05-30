@@ -1,0 +1,219 @@
+<script type="text/javascript">
+function flyDiv(menu){
+var smenu='sub-'+ menu.id;
+var amenu='a-'+ menu.id;
+document.getElementById(smenu).style.display='block';
+document.getElementById(menu.id).style.borderRight='1px solid #989AAF';
+document.getElementById(menu.id).style.backgroundColor='#D7DDFE';
+
+if(menu.id=='rem'){
+document.Remember.remail.focus();
+}else{
+document.forms.Register.regname.focus();
+}
+}
+
+function openTreeList (what) {
+var x=what.id;
+
+if (document.getElementById("list"+x).style.display != "block") {
+document.getElementById("list"+x).style.display = "block";
+}else {
+document.getElementById("list"+x).style.display = "none";
+}
+}
+
+function regValid() {
+
+var forma=document.Register;
+var reg_mail = /[0-9a-z_^.]+@[0-9a-z_^.]+.[a-z]{2,3}/i;
+var reg_phone = /[0-9]/i;
+
+if(forma.regname.value==""){
+alert("Не верно заполнено поле: Фамилия и имя (отчество)");
+forma.regname.focus();
+}
+else if(reg_phone.exec(forma.regphone.value)==null || forma.regphone.value.length<10){
+alert("Не верно заполнено поле: Контактный телефон");
+forma.regphone.focus();
+}
+
+else if(reg_mail.exec(forma.regemail.value) == null){
+alert("Не верно заполнено поле: Контактный e-mail");
+forma.regemail.focus();
+}
+
+else if(forma.regcity.value==""){
+alert("Не верно заполнено поле: Город");
+forma.regcity.focus();
+}
+
+else{
+document.Register.action="<?=SITE_URL?>/shop/shopping/order.html";
+document.Register.submit();
+}
+}
+
+function aValid(email) {
+$("#logonbutton").text("Проверяем...");
+JsHttpRequest.query(
+'<?=SITE_URL?>/?ext=ajax',
+{ 
+'mod':'shop',
+'com':'shopping',
+'param':'logonvalid',
+'logonemail': email,
+},
+function(result, errors) {
+if(result['valid']!=1){
+alert(result['valid']);
+document.getElementById("logonemail").value="";
+document.getElementById("regname").focus();
+$("#logonbutton").text("Оформить заказ");
+}else{
+document.Logon.action="<?=SITE_URL?>/shop/shopping/order.html";
+document.Logon.submit();
+//document.getElementById("l_mess").innerHTML = result['valid']; 
+}
+},
+false
+);
+} 
+
+function logonValid() {
+
+var forma=document.Logon;
+var reg_mail = /[0-9a-z_^.]+@[0-9a-z_^.]+.[a-z]{2,3}/i;
+var reg_phone = /[0-9]/i;
+
+if(reg_mail.exec(forma.logonemail.value) == null){
+alert("Не верно заполнено поле: Контактный e-mail");
+forma.logonemail.focus();
+}
+else{
+aValid(forma.logonemail.value);
+
+}
+}
+</script>
+<style>
+#signIn fieldset {
+border:2px solid #D7DDFE;
+float:left;
+height:350px;
+margin:0 10px;
+padding:8px 16px;
+text-align:left;
+width:440px;
+}
+</style>
+<div style="padding:3px 12px 3px 12px;font-family:verdana;font-size:11px;">
+<div><h1 style="font-size: 19px; font-weight: normal; margin: 3px 7px 7px 7px;">
+Оформление заказа</h1></div>
+
+<style>
+.shopping td{
+font-size: 11px; 
+font-family: verdana;
+border:solid 1px #D9D9D9;
+padding:4px;
+vertical-align:middle;
+}
+input,textarea{
+border:solid 1px #7F9DB9;
+padding:2px;
+background-color:#F9FBFF;
+}
+
+input:focus,textarea:focus{
+border:dashed 1px #7F9DB9;
+padding:2px;
+background-color:#ffffff;
+}
+</style>
+<div class="navilink" style="margin:3px 3px 14px 15px;"><a onclick="openTreeList(this)" id="_111" href="javascript:void(0)">
+Ваша корзина</a></div>
+<div class="treeList" id="list_111" style="display: none;">
+<?=$sh_list?>
+</div>
+
+<div id="signIn">
+	<fieldset>
+	<legend>&nbsp;<b>Зарегистрированным покупателям:</b>&nbsp;</legend>
+	<p>Уже регистрировались? Пожалуйста введите Ваши данные:</p>
+	<br>
+	<form id="Logon" name="Logon" method="post" onSubmit="return false">
+		<input type="hidden" value="logon" id="com_u" name="com_u">
+		<table>
+			<tr>
+				<td>
+				E-mail адрес: </td>
+				<td>
+				<input type="text" style="width: 200px;" value="" id="logonemail" name="logonemail"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td style="padding-top:7px;">
+				<div id="l_mess"></div>
+				<a id="logonbutton" href="javascript:logonValid()" class="button" style="display:inline;margin-top:4px;">
+				Оформить заказ</a></td>
+			</tr>
+		</table>
+	</form><br>
+
+	</fieldset> <fieldset>
+	<legend>&nbsp;<b>Новым покупателям:</b>&nbsp;</legend>
+	<p style="padding-bottom:7px;">Для того чтобы оформить заказ и получать дополнительные преимущества нашего сервиса,
+	 Вам необходимо пройти процедуру несложной регистрации.</p>
+	<p><span id="reg" style="padding:7px;">
+	<b>Регистрация</b></span></p>
+<div style="position:relative;display:none;z-index:50;margin-left:0px;text-align: left;margin-top:-7px;" name="sub-reg" id="sub-reg"><div class="submenu" style="padding:12px;">
+
+	<form id="Register" name="Register" method="post" onSubmit="return false">
+		<input type="hidden" value="register" id="com_u" name="com_u">
+		<table>
+				<tr>
+				<td>
+				Фамилия и имя (отчество): </td>
+				<td>
+				<input type="text" style="width: 230px;" value="" id="regname" name="regname"></td>
+			</tr>
+			<tr>
+				<td>
+				Контактный телефон: </td>
+				<td>
+				<input type="text" style="width: 230px;" value="" id="regphone" name="regphone"></td>
+			</tr>
+			<tr>
+				<td>
+				Контактный e-mail: </td>
+				<td>
+				<input type="text" style="width: 230px;" value="" id="regemail" name="regemail"></td>
+			</tr>
+			<tr>
+				<td>
+				Город: </td>
+				<td>
+				<input type="text" style="width: 230px;" value="" id="regcity" name="regcity"></td>
+			</tr>					
+			<tr>
+				<td>
+				Комментарий <br>(не обязательно): </td>
+				<td>
+            <textarea name="regcomment" cols="20" rows="3" style="width: 230px;"></textarea>
+			</tr>						
+			<tr>
+				<td></td>
+				<td style="padding-top:7px;">
+				<a id="" href="javascript:regValid()" class="button" style="display:inline;margin-top:4px;padding-left:15px;">Оформить заказ</a></td>
+			</tr>
+		</table>
+	</form>
+<script type="text/javascript">
+flyDiv(document.getElementById('reg'));
+</script>
+</div></div>
+	<br>
+	</fieldset> 
+	<div style="clear:both;"></div>
+	</div></div>

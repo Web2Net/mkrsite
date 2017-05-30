@@ -1,0 +1,49 @@
+<?$val=$mdata?>
+<div>
+     <div class="left">
+         <a href="?mod=feedback&com=view">
+             <img src="design/ico_back.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Назад" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''">
+         </a>
+     </div>
+</div>
+<div class="both br_5"></div>
+<?if ($upd=='ok'){?><div class="ok"><b>Данные обновлены</b></div><?}?>
+<table style="width: 100%;margin-top:2px" cellpadding="0" cellspacing="1">
+    <tr class="head">
+        <td>Редактирование</td>
+    </tr>
+    <tr>
+        <td>
+            <table style="width: 100%" cellpadding="2" cellspacing="0" class="uniform">    
+                <tr>
+                    <td style="width: 150px" align="right"><span class="error"></span>IP :</td>
+                    <td align="left"><strong><?=$val['ip']?></strong></td>
+                </tr>
+                <tr>
+                    <td style="width: 150px" align="right"><span class="error"></span>Имя :</td>
+                    <td align="left"><?=$val['name']?></td>
+                </tr>
+                <tr>
+                    <td style="width: 150px" align="right"><span class="error"></span>Адрес :</td>
+                    <td align="left"><?=$val['address']?></td>
+                </tr>
+                <tr>
+                    <td style="width: 150px" align="right"><span class="error"></span>e-mail :</td>
+                    <td align="left"><a href="mailto:<?=$val['email']?>"><?=$val['email']?></a></td>
+                </tr>
+                <tr>
+                    <td style="width: 150px" align="right"><span class="error"></span>Сообщение :</td>
+                    <td align="left"><?=$val['message']?></td>
+                </tr>
+            </table>
+        </td>
+     </tr>
+     <tr>
+        <td style="width: 350px" align="left">
+            <form action="?mod=feedback&com=update&id=<?=$val['id']?>" method="post">
+                Проработано :<input name="form__showing" type="checkbox"<?if ($val['showing']=='Y'){?> checked="checked"<?}?> value="1" />
+                <input type="submit" name="see" value="Обработано">
+            </form>
+        </td>
+    </tr>    
+</table>

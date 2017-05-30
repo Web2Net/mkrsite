@@ -1,0 +1,24 @@
+<?php $val = $list;?>
+<div class="block_main_header_left"></div>
+<div class="block_main_header_right"></div>
+<div class="block_main_header_center"><?=ucfirst($val['caption'])?></div>
+
+<div id="wrap_page">
+<!-- Кнопка назад после поиска -->
+<?if($_SERVER['HTTP_REFERER'] == SITE_URL."/search/"){?>
+<form method="post" action="/search/" style="display:inline;">
+       <input value="<?=$_SESSION['search_input']?>" type="hidden" name="search_input" />
+       <input type="image" src="<?=PATH_IMG?>/butt_search_back.png" alt="Назад к списку" title="Назад к списку" />
+</form>
+<div class="br_10"></div>
+<?}?>
+<!-- /Кнопка назад после поиска -->
+    <div style="padding:10px;">
+       <div>
+           <div style="text-align: justify;">
+               <img src="<?=$val['image']?>" title="<?=$val['image_title']?>" alt="<?=$val['image_title']?>" align="left" style="padding: 0px 10px 10px 0px; width:250px" />
+               <?=$val['content']?>
+           </div>
+       </div>
+   </div>
+</div>

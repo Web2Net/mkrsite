@@ -1,0 +1,19 @@
+<?//SYS::varDump($_SESSION['navigate']['main'])?>
+<?$count_nav_main = count($_SESSION['navigate']['main']);?>
+<?if($_SESSION['navigate']['main'] > "0"){foreach($_SESSION['navigate']['main'] as $k=>$v){?>
+<?if($v['name']=="main"){$link="/";}else{$link=SITE_URL."/".$v['seolink']."/";}?>
+<nobr>
+<div class="left nav_main" onmouseout="this.style.backgroundColor='#D6D9B2';"  onmouseover="this.style.backgroundImage='<?=PATH_IMG?>/bg_nav_main.jpg';">
+    <a href="<?=$link?>" class="decoration_none"><span style="color:#d91219;font-weight:900">.</span><b><?=Text::strtolower_utf8($v['caption'])?></b></a></div>
+<div class="left"><img border="0" src="<?=PATH_IMG?>/l.gif" height="25" width="1" alt="" /></div>
+<?}}?>
+
+<div class="left nav_main" onmouseout="this.style.backgroundColor='#D6D9B2';"  onmouseover="this.style.backgroundImage='<?=PATH_IMG?>/bg_nav_main.jpg';">
+    <div class="left" style="padding-left:15px"><a href="http://mkr.kiev.ua/" class="decoration_none" style="color:#d91219">
+        <span style="color:#000;font-weight:900">.</span>
+        <b>Магазин</b></a>
+    </div>
+<!--    <div class="left"><img src="<?=PATH_IMG?>/butt_shop.png" style="height:25px;padding-left:10px;" alt="Магазин" /></div>  -->
+
+</div>
+</nobr>

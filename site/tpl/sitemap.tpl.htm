@@ -1,0 +1,30 @@
+<div class="red_string_1">Карта сайта</div>
+
+<div id="wrap_page">
+<?//Sys::varDump($health_item_list)?> 
+<?if($page_list!=="")
+{
+    $page_i = "0"; 
+    $page_count = count($page_list);?>
+    <div style="text-align:center;"><h1>Страницы сайта</h1></div>
+    <div style="float:left;">
+    <?foreach($page_list as $page_k=>$page_v)
+    {
+        $page_i++;
+        if($page_v['seolink'] == "Главная")
+        {?>
+         <div style="text-align: left;"><a href="/"><?=$page_v['caption']?></a></div>
+      <?}
+        else
+        {?>
+         <div style="text-align: left;"><a href="/<?=$page_v['seolink']?>/"><?=$page_v['caption']?></a></div>
+      <?}?>
+     
+  <?}?>
+    </div>
+    <div class="both br_10"></div>
+<?}?> 
+
+
+
+</div>

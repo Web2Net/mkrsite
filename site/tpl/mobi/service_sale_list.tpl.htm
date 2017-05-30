@@ -1,0 +1,39 @@
+<br />
+<center>
+<?if($mod == "Продажа"){?>
+... сопутствующие товары для Вашей работы ...
+<?}
+elseif($mod == "Услуги"){?>
+... перечень услуг ...
+<?}?>
+</center>
+<br />
+<div id="wrap_page">
+<?if($list!=NULL){foreach($list as $key=>$val){?>
+    <div class="hr_dash_blue" onmouseover="this.style.background='#fafaeb';" onmouseout="this.style.background='#fff';">
+       <div style="padding:10px 15px 12px 15px;">
+            <div class="red_string">
+                <a title="Далее" href="/<?=$val['article_cat']?>/<?=$val['id']?>-<?=$val['web_link']?>/">
+                    <?=$val["caption"]?>
+                </a>
+            </div>
+            <div class="both br_10"></div>
+<?if($val["image"]!=""){?> 
+               <a title="Далее" href="/<?=$val['article_cat']?>/<?=$val['id']?>-<?=$val['web_link']?>/">
+               <img class="img_100 left" src="<?=$val['image']?>" alt="" /></a>
+<?}?>
+           <div class="br_5"></div>
+           <div class="article_short"><?=$val["short_text"]?></div>
+           <div class="both br_10"></div>
+
+           <div class="right butt_more">
+               <a href="/<?=$val['article_cat']?>/<?=$val['id']?>-<?=$val['web_link']?>/">
+                   <strong>Подробнее</strong>&nbsp;<b style="color:#444;">»</b>&nbsp;
+               </a> 
+           </div>
+        </div>
+        <div class="both br_5"></div>
+    </div>
+<?}}?>
+    <div class="br_10"></div>
+</div>

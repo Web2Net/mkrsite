@@ -1,0 +1,47 @@
+<table style="width: 100%;margin-bottom:3px;" cellpadding="0" cellspacing="0">
+<tr>
+<td align="left">
+<a href="?mod=article&type=category&com=add"><img src="design/ico_add_fold.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Добавить категорию" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+<a href="<?=SITE_URL."/"?>" title="Посмотреть на сайте" target="_blank"><img src="design/internet.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;width:48px;" title="Посмотреть на сайте" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''"></a>
+
+</td>
+<td class="heading1" align="right" valign="bottom">
+<span style="color:#e7e7e7;font-size:24px;"><?=$mod_name?></span><br>
+Список категорий</td>
+</tr>
+</table>
+
+
+<table class="list-table collapse" width="100%" border="0" cellpadding="5" cellspacing="1">
+<tr class="head">
+<td width="85%">Категория</td>
+<td nowrap="nowrap" width="15%">SEO Title</td>
+<td colspan="2" align="center">Опции</td>
+</tr>
+<?if($listing!=NULL){?>
+<?foreach($listing as $key=>$val){?>
+<tr id="tr-<?=$val['id']?>" class="row1 <?if ($id==$val['id']){?>sel<?}?>" valign="center" onmouseover="this.style.background='<?if ($id!=$val['id']){?>#FFFFCC<?}?>';" onmouseout="this.style.background=''">
+<td class="title"><img src="design/ico_folder.gif" alt="Показать все статьи секции" width="19" height="19" vspace="0" border="0" hspace="5" align="left">
+<a href="?mod=article&type=article&com=view&category_id=<?=$val['id']?>" title="Открыть папку">
+<b style="font-size:12px;line-height: 15px;"<?if ($val['enabled']!=1){?> class="orangered"<?}?>><?=$val['caption']?></b>
+</a>
+</td>
+<td style="background: #f8f9fd;"><nobr<?if ($val['enabled']!=1){?> class="orangered"<?}?>><?=$val['seo']?></nobr></td>
+<td class="options">
+<nobr>
+<a href="?mod=article&type=<?=$type?>&com=view&id=<?=$val['id']?>&event=moveDown" title="Вниз">
+<img src="design/backward.gif" alt="Вниз" border="0" height="17" width="17"></a>
+<a href="?mod=article&type=<?=$type?>&com=view&id=<?=$val['id']?>&event=moveUp" title="Вверх">
+<img src="design/forward.gif" alt="Вверх" border="0" height="17" width="17"></a>
+</nobr>
+</td>
+<td class="options" align="center">
+<nobr>
+<a href="?mod=article&type=<?=$type?>&com=edit&id=<?=$val['id']?>" title="Редактировать">
+<img src="design/ico_edit_sm.gif" alt="Редактировать" vspace="1" border="0" hspace="1"></a>
+<a title="Удалить" href="?mod=article&type=<?=$type?>&com=delete&id=<?=$val['id']?>" onclick="if (confirm('Вы уверены что хотите удалить всю секцию ?')) location=this.href; return false;">
+<img src="design/ico_delete_sm.gif" alt="Удалить" vspace="1" border="0" hspace="1"></a></nobr>
+</td>
+</tr>
+<?}}?>
+</table>

@@ -1,0 +1,29 @@
+<div class="both br_10"></div>
+<div  class="red_string_1">Товары</div>
+                
+<?php
+$query = "SELECT * FROM `items_category` WHERE `showing`='Y'";
+$res = mysql_query($query);
+
+while($row = mysql_fetch_array($res)) 
+{         
+   if($row['parent'] == "0" )
+   {
+       if($row['heritage'] == '1')
+       {?>
+       <div class='title'>
+           <a href="/каталог/<?=$row['seolink']?>/"><?=$row['caption']?></a>
+       </div>   
+       <?}
+       else
+       {?>
+       <div class='title'>
+           <a href="#"><?=$row['caption']?></a>
+       </div>
+       <?}
+?>   
+       
+
+
+<?}?>
+<?}?>

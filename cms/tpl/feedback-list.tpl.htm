@@ -1,0 +1,63 @@
+<?
+if($type == "feedback")$mod_name = "Запись в клинику";
+if($type == "feed")$mod_name = "Письма с сайта";
+?>
+<table style="width: 100%;margin-bottom:3px;" cellpadding="0" cellspacing="0">
+    <tr>
+        
+        <td class="heading1" align="right" valign="bottom">
+            <span style="color:#e7e7e7;font-size:24px;"><?=$mod_name?></span><br>
+            <span style="color:#444;"><?=$cat_name?></span><br>
+        </td>
+    </tr>
+</table>
+
+<table class="list-table collapse" width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr class="head">
+<?if($_SESSION['level'] == "9"){?> 
+        <td>ID</td>
+<?}?>
+        <td width="15%"><span class="navigation">Имя</span></td>
+        <td width="15%"><span class="navigation">Дата</span></td>
+        <td align="center" width="35%"><span class="navigation">Причина</span></td>
+        <td width="100"><span class="navigation">Контакт</span></td>
+        <td width="15"><span class="navigation">Состояние</span></td>
+        <td align="center" width="20" colspan="2"><span class="navigation">Опции</span></td>
+    </tr>
+<?if($list!=NULL){?>
+<?foreach($list as $key=>$val){?>
+    <tr onmouseover="this.style.background='#FFFFCC';" onmouseout="this.style.background='#F7F7F7'">
+<?if($_SESSION['level'] == "9"){?> 
+        <td><?=$val['id']?></td>
+<?}?>
+        <td class="title" style="padding:4px 10px 4px 10px;">
+            <span<?if($val['date'] == 'N'){?> class="orangered"<?}?>>
+                <a href="?mod=feedback&type=<?=$type?>&com=edit&id=<?=$val['id']?>">
+                    <?=$val['name']?>
+                </a>
+            </span>
+        </td>
+        <td class="title" style="padding:4px 10px 4px 10px;">
+            <span<?if($val['showing'] == 'N'){?> class="orangered"<?}?>>
+                <?=$val['date']?>
+            </span>
+        </td>
+        <td align="left">
+            <span><?=$val['why']?></span>
+        </td>
+        <td style="padding:4px;"><?=$val['tel']?></td>
+        <td align="center">
+            <?if ($val['showing'] == 'Y'){?>
+            <span style="font-size:15px;font-weight: bold;color:lightgreen">&#9679;</span>
+            <?}else{?>
+            <span style="font-size:15px;font-weight: bold;color:orangered">&#9679;</span>
+            <?}?>
+        </td>
+        <td class="options" align="center">
+            <nobr>
+            <a title="Удалить" href="?mod=feedback&com=delete&id=<?=$val['id']?>" onclick="if (confirm('Вы уверены что хотите удалить эту запись?')) location=this.href; return false;">
+               <img src="design/ico_delete_sm.gif" alt="Удалить" vspace="1" border="0" hspace="1"></a></nobr>    
+        </td>
+    </tr>
+<?}}?>
+</table>

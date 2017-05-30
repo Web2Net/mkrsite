@@ -1,0 +1,26 @@
+<?php $val = $list;?>
+<?php $count_row = count($val);?>
+<?php $cat_name=str_replace("_", " ", $val['0']['category_name']);?>
+
+
+<div class="block_main_header_left"></div>
+<div class="block_main_header_right"></div>
+<div class="block_main_header_center"><?=ucfirst($cat_name)?></div>
+
+
+<div id="wrap_page" style="text-align:center;">
+    <div class="both" style="padding-top:10%"></div>
+    <div style="float:left;width:48%;">       
+<?php $i = 0; if($val !== 0 && $val !== NULL){foreach($val as $row){?>
+        <div><a href="/health/<?=$row['category_name']?>/<?=$row['seolink']?>/" style="font-size:16px;"><?=$row['caption']?></a></div>
+        <div class="br_10"></div>
+        <? $i++; if($i==round($count_row/2)){?>
+        </div><div style="float:left;width:48%;">       
+      <?}
+    }
+}?>
+    </div>
+    <div class="both" style="padding-top:10%"></div>
+</div>
+
+

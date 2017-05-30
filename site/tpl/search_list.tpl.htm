@@ -1,0 +1,62 @@
+<div class="red_string_1">Вы искали "<?=$_POST['search_input']?>"</div>
+<div id="wrap_page">
+
+
+<?php $val_article = $list_article;?> 
+<?php $count_row_article = count($val_article);?>
+<?if($val_article !== 0 && $val_article !== NULL){?>
+    <h2>Новости/Статьи</h2>
+    <div style="float:left; width:49%;">    
+<?php $i = 0; {foreach($val_article as $row_article){?>
+       <p style=" border:1px solid #d91219; padding:5px;-moz-border-radius-topleft: 5px;-webkit-border-top-left-radius: 5px;">
+           <a href="/Новости/<?=$row_article['id']?>-<?=$row_article['web_link']?>/"><?=$row_article['caption']?></a>
+       </p>
+       <div class="br_5"></div>
+<? $i++; if($i==floor($count_row_article/2+1)){?>
+    </div>
+    <div style="float:right; width: 49%;">
+<?}}}?>
+    </div>
+    <div class="both br_10"></div>
+<?}?>
+
+    
+<?php $val_page = $list_page;?> 
+<?php $count_row_page = count($val_page);?>
+<?if($val_page !== 0 && $val_page !== NULL){?>
+    <h2>Страницы сайта</h2>
+    <div style="float:left; width:49%;">   
+<?php $i = 0; {foreach($val_page as $row_page){?>
+<?if($row_page['seolink'] == "Главная"){$link = "/";}else{$link = "/{$row_page['seolink']}/";}?>
+         <p style=" border:1px solid #d91219; padding:5px;-moz-border-radius-topleft: 5px;-webkit-border-top-left-radius: 5px;">
+            <a href="<?=$link?>"><?=Text::cutStr($row_page['caption'], 10)?></a>
+        </p>
+        <div class="br_5"></div>
+<? $i++; if($i==floor($count_row_page/2)){?>
+    </div>
+    <div style="float:right; width: 49%;">
+<?}}}?>
+    </div>
+    <div class="both br_10"></div>
+<?}?>
+
+<?php $val_items = $list_items;?> 
+<?php $count_row_items = count($val_items);?>
+<?if($val_items !== 0 && $val_items !== NULL){?>
+    <h2>Товары</h2>
+    <div style="float:left; width:49%;">   
+<?php $i = 0; {foreach($val_items as $row_items){?>
+<?$link = "/shop/catalog/{$row_items['category']}/{$row_items['seolink']}-15-1/{$row_items['caption']}.html";?>
+         <p style=" border:1px solid #d91219; padding:5px;-moz-border-radius-topleft: 5px;-webkit-border-top-left-radius: 5px;">
+            <a href="<?=$link?>"><?=$row_items['1Cid']?>&nbsp;&nbsp;<?=Text::cutStr($row_items['name'], 10)?></a>
+        </p>
+        <div class="br_5"></div>
+<? $i++; if($i==floor($count_row_items/2)){?>
+    </div>
+    <div style="float:right; width: 49%;">
+<?}}}?>
+    </div>
+    <div class="both br_10"></div>
+<?}?>
+    
+</div>

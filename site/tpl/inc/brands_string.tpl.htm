@@ -1,0 +1,18 @@
+<marquee onmouseover="this.stop()" style="height: 25px;" onmouseout="this.start()" scrollAmount="2" scrollDelay="10" direction="left" >
+<?php
+//$query = "SELECT * FROM `art_article` WHERE `category_id` = '46' AND `show_on_main` = '1' ORDER BY `caption`"; 
+$query = "SELECT * FROM `art_article` WHERE `category_id` = '46'  ORDER BY `caption`"; 
+$res = mysql_query($query);
+while($row = mysql_fetch_array($res)) 
+{   
+if(@$row['enabled'] == '1')
+{
+?>
+<a title="<?=Text::cutStr($row['caption'],10)?>" href="/Производители/<?=$row['id']?>-<?=$row['web_link']?>/">
+<img src="<?=$row['image_small']?>" alt="<?=Text::cutStr($row['caption'],10)?>" title="<?=Text::cutStr($row['caption'],10)?>" style="height:25px"></a>
+&nbsp;&nbsp;&nbsp;
+<?
+}
+}
+?> 
+</marquee>

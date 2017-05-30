@@ -1,0 +1,47 @@
+<center>
+<?if($rub == "Продажа"){?>
+<div style="text-align:justify">
+    <div style="border:1px solid #d91219;font-weight:700;padding:5px;-moz-border-radius-topleft: 5px;-webkit-border-top-left-radius: 5px;">
+        Мы строим свою работу основываясь на интересах и потребностях клиентов выбирая наиболее подходящие комплексные решения для Вас, при минимальных тратах Вашего времени и финансов.
+    </div>
+    <br /> 
+<p>Наша команда подберет для Вас, исходя из Ваших потребностей (задач), а также последующего обслуживания в гарантийный и после гарантийные периоды  гарантируя эффективную и надежную работу: компьютерную, периферийную, офисную, копировально-множительную, бытовую технику, аксессуары, канцтовары, кофемашины, презентационное, послепечатное, банковское оборудование, сейфы  и мебель ведущих мировых производителей, а также изготовленную на заказ.</p>
+</div>
+
+<?}
+elseif($rub == "Услуги"){?>
+<div style="border:1px solid #d91219;font-weight:700;padding:5px;-moz-border-radius-topleft: 5px;-webkit-border-top-left-radius: 5px;">
+    Мы строим свою работу основываясь на интересах и потребностях клиентов выбирая наиболее подходящие комплексные решения для Вас, при минимальных тратах Вашего времени и финансов.
+</div>
+<?}?>
+</center>
+<br />
+<div id="wrap_page">
+<?if($list!=NULL){foreach($list as $key=>$val){?>
+    <div class="hr_dash_blue" onmouseover="this.style.background='#fafaeb';" onmouseout="this.style.background='#fff';">
+       <div style="padding:10px 15px 12px 15px;">
+            <div class="red_string_2">
+                <a title="Далее" class="decoration_none" href="/<?=$val['article_cat']?>/<?=$val['id']?>-<?=$val['web_link']?>/">
+                    <?=$val["caption"]?>
+                </a>
+            </div>
+            <div class="both br_10"></div>
+<?if($val["image"]!=""){?> 
+               <a title="Далее" href="/<?=$val['article_cat']?>/<?=$val['id']?>-<?=$val['web_link']?>/">
+               <img class="img_150 left" src="<?=$val['image']?>" alt="" /></a>
+<?}?>
+           <div class="br_5"></div>
+           <div class="article_short"><?=$val["short_text"]?></div>
+           <div class="both br_10"></div>
+
+           <div class="right butt_more">
+               <a href="/<?=$val['article_cat']?>/<?=$val['id']?>-<?=$val['web_link']?>/">
+                   <strong>Подробнее</strong>&nbsp;<b style="color:#444;">»</b>&nbsp;
+               </a> 
+           </div>
+        </div>
+        <div class="both br_5"></div>
+    </div>
+<?}}?>
+    <div class="br_10"></div>
+</div>

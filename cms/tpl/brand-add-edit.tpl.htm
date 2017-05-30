@@ -1,0 +1,139 @@
+<script type="text/javascript" language="JavaScript">
+function SetUrl( url, width, height, alt )
+{
+document.getElementById('image_name').value = url;
+document.getElementById('seeImage').src = url;
+//alert(url);
+//alert(width);
+//alert(height);
+//alert(alt);
+}
+
+function BrowseServer(typefolder)
+{
+var url='<?=SITE_URL?>/lib/fckeditor/editor/filemanager/browser/default/browser.html?Type='+typefolder+'&Connector=<?=urlencode(SITE_URL)?>/lib%2Ffckeditor%2Feditor%2Ffilemanager%2Fconnectors%2Fphp%2Fconnector.php';
+
+var width = 650;
+var height = 400;
+
+var iLeft = ( window.screenWidth  - width ) / 2 ;
+var iTop  = ( window.screenHeight - height ) / 2 ;
+
+	var sOptions = "toolbar=no,status=no,resizable=yes,dependent=yes,scrollbars=yes" ;
+	sOptions += ",width=" + width ;
+	sOptions += ",height=" + height ;
+	sOptions += ",left=" + iLeft ;
+	sOptions += ",top=" + iTop ;
+
+	window.open( url, 'FCKBrowseWindow', sOptions ) ;
+}
+
+  function aUploadImage(value) {
+  //alert(param);
+   document.getElementById("seeImage").src = '<?=SITE_URL?><?=ADM_SITE_URL?>/design/loadfoto.gif';
+   JsHttpRequest.query(
+      '<?=PAGE_URL?>&ext=ajax&param=uploadimage',
+      { 
+        'file': value,
+      },
+      function(result, errors) {
+    //document.getElementById("image").innerHTML = result['q']; 
+    document.getElementById("seeImage").src = result['image'];
+    document.getElementById("image").value =  result['image'];  
+    document.getElementById("image_small").value =  result['image_small'];        
+    document.getElementById("message").innerHTML =  errors;     
+      },
+ false
+    );    
+  
+  } 
+</script>
+<?//SYS::varDump($brand_data)?>
+<div>
+     <div class="left">
+         <a href="?mod=article&type=<?=$type?>&com=view&category_id=<?=$category_id?>">
+             <img src="design/ico_back.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Назад" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''">
+         </a>
+     </div>
+     <div class="left">
+          <a href="javascript:void(0)" onclick="articleForm.submit();">
+              <img src="design/ico_save.gif" style="border: 1px solid rgb(90, 126, 220); cursor: pointer;" title="Сохранить" onmouseover="this.style.background='#D8D8D8';" onmouseout="this.style.background=''">
+          </a>
+     </div>
+     <div class="right heading1">
+         <span class="right" style="color:#e7e7e7;font-size:24px; align:right;"><?=$seo?></span><br />
+         <span>Бренд: "<?=$brand_data['DESCR']?>"</span>
+     </div>
+</div>
+<div class="both br_5"></div>
+<?if ($upd=='ok'){?><div class="ok"><b>Данные обновлены</b></div><?}?>
+
+
+
+<table style="width: 100%;margin-top:2px" cellpadding="0" cellspacing="1">
+	<tr class="head">
+		<td>Редактирование :: <?=$brand_data['DESCR']?></td>
+	</tr>
+	<tr>
+        <td>
+            <table style="width: 100%" cellpadding="2" cellspacing="0" class="uniform">	
+		        <tr>
+		            <td align="right"><span class="error">*&nbsp;</span>Картинка :</td>
+		            <td align="left">
+		
+<table cellspacing="1" style="border: 1px solid #c7c7c7; background-color: #FFFFFF;margin-right:7px;width:100px;" align="left" cellpadding="0" cellspacing="0">
+	<tr>
+		<td style="background-color: #FFFFFF;padding: 1px;">	
+	        <img alt="" src="<?=$brand_data['image']!=""?$art_data["image"]:ADM_SITE_URL."/design/noimage.jpg"?>" id="seeImage" style="width:300px" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <div style="margin:3px 0px 7px 0px;">
+            <form method="post" enctype="multipart/form-data" onsubmit="return false">
+                <input type="file" name="upl"><br>
+                <input type="button" value="Загрузить" 
+                  onclick="aUploadImage(this.form.upl)">
+            </form>
+            </div>
+        </td>
+	</tr>
+</table>
+<div>
+		<?=$mess?>
+	<div id="message"></div>
+</div>
+<!--<div style="margin:3px 0px 7px 0px;"><input id="btnBrowse" onclick="BrowseServer('Preview');" type="button" value="Р’С‹Р±СЂР°С‚СЊ РЅР° СЃРµСЂРІРµСЂРµ" /></div>-->
+
+</td>
+	</tr>
+	
+<form action="?mod=filter&type=<?=$type?>&com=update<?=isset($id)?"&id=".$id:""?>" method="post" name="articleForm">
+<input type="hidden" style="width: 300px;" name="image_small" id="image" value="<?=$brand_data['image']?>" />
+<input name="rubrica" value="<?=$_REQUEST['seo']?>" type="hidden">
+
+<input name="type" value="<?=$type?>" type="hidden">	
+<input name="id" value="<?=$brand_data['id']?>" type="hidden">
+    <tr>
+        <td align="left" style="padding-left:25px">id: <?=$brand_data['id']?></td>
+                    </tr>
+                    <tr>
+<?if ($brand_data['enabled']=='1'){$bg = "#85fd7c";}else{$bg = "#fd7c7c";}?>
+                        <td align="right" style="background-color:<?=$bg?>">Опубликовать :</td>
+                        <td align="left" style="background-color:<?=$bg?>">
+                            <input name="enabled" type="checkbox" <?if ($brand_data['enabled']=='1'){?> checked=""<?}?>value="1" />
+                        </td>
+                        <td align="right" style="background-color:<?=$bg?>"><?=$brand_data['CATID']?></td>
+                    </tr>
+    <tr>
+	<td style="width: 120px" align="right"><span class="error">*&nbsp;</span>Заголовок :</td>
+	<td align="left">
+	<input name='caption' class='adminform' value='<?=$brand_data['DESCR']?>' type='text'></td>
+	</tr>
+    <tr>
+	<td align="left"></td>
+    </tr>	
+</table>
+</form>	
+</td></tr>
+</table>

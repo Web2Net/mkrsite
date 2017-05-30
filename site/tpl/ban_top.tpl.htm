@@ -1,0 +1,26 @@
+<?php defined('WEB2NET') or die();?>
+<?if($banner!=NULL)
+{
+    foreach($banner as $k=>$row)
+    {
+        if($row['type'] == "swf")
+        {
+            $ban = "<object width='468' height='60' type='application/x-shockwave-flash' classid='clsid:d27cdb6e-ae6d-11cf-96b8-444553540000' codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,32,18'>
+                        <param value='{$row['file']}' name='src'>
+                        <param value='transparent' name='wmode'>
+                        <param value='' name='base'>
+                        <param value='{$row['file']}' name='name'>
+                        <embed  width='468' height='60' type='application/x-shockwave-flash' src='{$row['file']}' wmode='transparent' base='/' name='{$row['file']}' />
+                    </object>";
+        }
+        else
+        {
+            $ban = "<a href='{$row['link']}'><img src='{$row['file']}' width='468' height='60' alt='' title='' /></a>";
+        }?>
+<div>
+     <?=$ban?>
+</div>
+<div class="br_1"></div>
+  <?}
+}?>
+<div class="both br_5"></div>

@@ -1,0 +1,30 @@
+<?php defined('WEB2NET') or die();?>
+<div class="both br_10"></div>
+<div class="red_string_1"><a href="/Бренды/">Производители</a></div>
+
+<div class="block_content">   
+<?php
+$query = "SELECT * FROM `art_article` WHERE `category_id` = '46' AND `show_on_main` = '1' ORDER BY `caption`"; 
+$res = mysql_query($query);
+while($row = mysql_fetch_array($res)) 
+{   
+if(@$row['enabled'] == '1')
+{?>
+    <div style="padding:5px;">
+        <!--<div class="date_1"><?=Time::formatMonth($row['date_create'])?><br />Просмотров (<?=$row['see']?>)</div>-->
+<?if($row['image_small'] !== ""){?>
+        <a href="/Бренды/<?=$row['id']?>-<?=$row['web_link']?>/">
+            <img src="<?=$row['image']?>" alt="<?=Text::cutStr($row['caption'],10)?>" title="<?=Text::cutStr($row['caption'],10)?>" class="left img_100" />
+        </a>
+<?}else{?>
+        <div><a href="/Бренды/<?=$row['id']?>-<?=$row['web_link']?>/"  style="font-size:10px;font-weight:100"><?=Text::cutStr($row['caption'],10)?></a></div>
+<?}?>
+        
+    </div>
+ 
+    <div class="both br_5 hr_dash"></div>
+<?}
+}
+?>
+</div>
+<div class="both br_20"></div>

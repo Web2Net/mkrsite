@@ -1,0 +1,12 @@
+<div style="max-height: 97px;"> 
+    <div class="both" ></div>
+    <div style="padding-left:10px">
+<?$count_nav_second = count($_SESSION['navigate']['second']);?>
+<?if($_SESSION['navigate']['second'] > "0"){foreach($_SESSION['navigate']['second'] as $k=>$v){?>
+<?if($v['name']=="main"){$link="/";}else{$link=$v['seolink'];}?>
+
+    <a href="/<?=$link?>/" style="font-size:10px;font-style:normal;color:#65636e;"><?=$v['caption']?></a>&nbsp;|
+    
+<?}}?>                
+    </div>                    
+</div>

@@ -1,0 +1,403 @@
+<?//var_dump($nowfillist)?>
+<script type="text/javascript" language="JavaScript">
+	function setDisplayStyle(cssClass) {
+		var id = "productView";
+		document.getElementById(id).className = cssClass;
+	}
+	function sortBy(sortby) {
+       //alert(sortby);
+       window.location.href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-<?=$prm[2]?>-" + sortby + "-<?=$prm[4]?>/<?=$param[2]?>.html";
+	}
+  function aSend(param,value) {
+
+   JsHttpRequest.query(
+      '<?=SITE_URL?>/?mod=ajax&param='+param,
+      { 
+        'data': value,
+      },
+      function(result, errors) {
+ 
+      },
+ false
+    );
+      document.getElementById("return").innerHTML = '<a href="<?=PAGE_REF?>"> «« Вернуться </a>';       
+  
+  } 
+</script>
+<style>
+.grid .list-product {
+	width: 158px;
+	padding: 4px;
+	height: 253px;
+	float: left;
+	overflow: hidden;
+	border: 1px solid #D9D9D9;
+	margin:-1px 0px 0px -1px;
+}
+.list .list-product {
+width: 100%;
+border-top: 1px solid #D9D9D9;
+border-bottom: 1px solid #D9D9D9;
+margin-bottom:-1px;
+}
+.list, .grid {
+width: 100%;
+margin:4px 0px;
+}
+.grid .list-product .hide-desc {
+	display: none;
+}
+
+table.grid, table.list {
+	padding: 0px;
+	border-spacing: 0px;
+}
+.grid div, .grid td{
+  text-align:center;
+}
+.list .list-product img.catalog-list-image {
+float:left;
+}
+.toolbar-list {
+	background: url('/index_files/icon_view_list.gif') no-repeat left 7px;
+	margin-left: 12px;
+	padding: 4px 0px 0px 14px;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.toolbar-grid {
+	background: url('/index_files/icon_view_grid.gif') no-repeat left 7px;
+	margin-left: 12px;
+	padding: 4px 0px 0px 14px;
+	text-decoration: underline;
+	cursor: pointer;
+}
+.catalog-list-price{
+color:#198F00;
+font-weight:bold;
+}
+.catalog-list-oldprice{
+color:#D9001F;
+font-weight:bold;
+text-decoration: line-through;
+}
+.filterlist{
+margin:0px 0px 7px 0px;
+}
+.filterlist div b{
+display:block;
+padding:7px 0px 0px 0px;
+font-family:Verdana;
+font-size:11px;
+margin:0px 0px 3px 0px;
+}
+</style>
+<table cellspacing="0" cellpadding="0" style="width: 1000px; border-collapse: collapse; margin-right: 7px; margin-left: 7px; margin-top: 3px;">
+	<tr>
+		<td width="200">
+		<div style="margin:3px 3px 7px 1px;" class="filterlist">
+<?if(isset($nowfilter)){?><div style="font-family:Verdana;border-bottom:dashed 1px #D7DDFE;">
+		<b>Выбраны фильтры:</b></div><?}?>		
+<?if($nowfilter['other']!=NULL){?>
+<div><b>Подкатегория</b></div>
+<?foreach($nowfilter['other'] as $key=>$val){?>
+<div><a href="<?=str_replace($val["CATID"]."_","",PAGE_URL)?>" title="Убрать фильтр"><img src="/index_files/delete.png" width="17" align="left">&nbsp;<?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>		
+		
+<?if($nowfilter['man']!=NULL){?>
+<div><b>Для мужчин</b></div>
+<?foreach($nowfilter['man'] as $key=>$val){?>
+<div><a href="<?=str_replace($val["CATID"]."_","",PAGE_URL)?>" title="Убрать фильтр"><img src="/index_files/delete.png" width="17" align="left">&nbsp;<?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($nowfilter['woman']!=NULL){?>
+<div><b>Для женщин</b></div>
+<?foreach($nowfilter['woman'] as $key=>$val){?>
+<div><a href="<?=str_replace($val["CATID"]."_","",PAGE_URL)?>" title="Убрать фильтр"><img src="/index_files/delete.png" width="17" align="left">&nbsp;<?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($nowfilter['sn_bivak']!=NULL){?>
+<div><b>Снаряжение (бивак)</b></div>
+<?foreach($nowfilter['sn_bivak'] as $key=>$val){?>
+<div><a href="<?=str_replace($val["CATID"]."_","",PAGE_URL)?>" title="Убрать фильтр"><img src="/index_files/delete.png" width="17" align="left">&nbsp;<?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($nowfilter['sn_jelezo']!=NULL){?>
+<div><b>Снаряжение (железо)</b></div>
+<?foreach($nowfilter['sn_jelezo'] as $key=>$val){?>
+<div><a href="<?=str_replace($val["CATID"]."_","",PAGE_URL)?>" title="Убрать фильтр"><img src="/index_files/delete.png" width="17" align="left">&nbsp;<?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($nowfilter['sn_podvod']!=NULL){?>
+<div><b>Снаряжение (подводное)</b></div>
+<?foreach($nowfilter['sn_podvod'] as $key=>$val){?>
+<div><a href="<?=str_replace($val["CATID"]."_","",PAGE_URL)?>" title="Убрать фильтр"><img src="/index_files/delete.png" width="17" align="left">&nbsp;<?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($nowfilter['sn_zima']!=NULL){?>
+<div><b>Снаряжение (зимнее)</b></div>
+<?foreach($nowfilter['sn_zima'] as $key=>$val){?>
+<div><a href="<?=str_replace($val["CATID"]."_","",PAGE_URL)?>" title="Убрать фильтр"><img src="/index_files/delete.png" width="17" align="left">&nbsp;<?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($nowfilter['sn_velo']!=NULL){?>
+<div><b>Снаряжение (вело)</b></div>
+<?foreach($nowfilter['sn_velo'] as $key=>$val){?>
+<div><a href="<?=str_replace($val["CATID"]."_","",PAGE_URL)?>" title="Убрать фильтр"><img src="/index_files/delete.png" width="17" align="left">&nbsp;<?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($nowfilter['sport']!=NULL){?>
+<div><b>Мой спорт</b></div>
+<?foreach($nowfilter['sport'] as $key=>$val){?>
+<div><a href="<?=str_replace($val["CATID"]."_","",PAGE_URL)?>" title="Убрать фильтр"><img src="/index_files/delete.png" width="17" align="left">&nbsp;<?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($nowfilter['brand']!=NULL){?>
+<div><b>Бренд</b></div>
+<?foreach($nowfilter['brand'] as $key=>$val){?>
+<div><a href="<?=str_replace($val["CATID"]."_","",PAGE_URL)?>" title="Убрать фильтр"><img src="/index_files/delete.png" width="17" align="left">&nbsp;<?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($nowfilter['cena']!=NULL){?>
+<div><b>Цена</b></div>
+<?foreach($nowfilter['cena'] as $key=>$val){?>
+<div><a href="<?=str_replace($val["CATID"]."_","",PAGE_URL)?>" title="Убрать фильтр"><img src="/index_files/delete.png" width="17" align="left">&nbsp;<?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+	</div>			
+<div style="margin:3px 3px 7px 3px;" class="filterlist">
+<div style="font-family:Verdana;border-bottom:dashed 1px #D7DDFE;">
+<b style="">Доступные фильтры:</b></div>				
+<?//var_dump($filterlist)?>	
+<?if($filterlist['other']!=NULL){?>
+<div><b>Подкатегория</b></div>
+<?foreach($filterlist['other'] as $key=>$val){?>
+<div><a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-1-<?=$prm[3]?>-<?=$prm[4]?><?=$val["CATID"]?>_/<?=$param[2]?>.html"><?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+<?if($filterlist['man']!=NULL){?>
+<div><b>Для мужчин</b></div>
+<?foreach($filterlist['man'] as $key=>$val){?>
+<div><a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-1-<?=$prm[3]?>-<?=$prm[4]?><?=$val["CATID"]?>_/<?=$param[2]?>.html"><?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($filterlist['woman']!=NULL){?>
+<div><b>Для женщин</b></div>
+<?foreach($filterlist['woman'] as $key=>$val){?>
+<div><a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-1-<?=$prm[3]?>-<?=$prm[4]?><?=$val["CATID"]?>_/<?=$param[2]?>.html"><?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($filterlist['sn_bivak']!=NULL){?>
+<div><b>Снаряжение (бивак)</b></div>
+<?foreach($filterlist['sn_bivak'] as $key=>$val){?>
+<div><a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-1-<?=$prm[3]?>-<?=$prm[4]?><?=$val["CATID"]?>_/<?=$param[2]?>.html"><?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($filterlist['sn_jelezo']!=NULL){?>
+<div><b>Снаряжение (железо)</b></div>
+<?foreach($filterlist['sn_jelezo'] as $key=>$val){?>
+<div><a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-1-<?=$prm[3]?>-<?=$prm[4]?><?=$val["CATID"]?>_/<?=$param[2]?>.html"><?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($filterlist['sn_podvod']!=NULL){?>
+<div><b>Снаряжение (подводное)</b></div>
+<?foreach($filterlist['sn_podvod'] as $key=>$val){?>
+<div><a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-1-<?=$prm[3]?>-<?=$prm[4]?><?=$val["CATID"]?>_/<?=$param[2]?>.html"><?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($filterlist['sn_zima']!=NULL){?>
+<div><b>Снаряжение (зимнее)</b></div>
+<?foreach($filterlist['sn_zima'] as $key=>$val){?>
+<div><a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-1-<?=$prm[3]?>-<?=$prm[4]?><?=$val["CATID"]?>_/<?=$param[2]?>.html"><?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($filterlist['sn_velo']!=NULL){?>
+<div><b>Снаряжение (вело)</b></div>
+<?foreach($filterlist['sn_velo'] as $key=>$val){?>
+<div><a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-1-<?=$prm[3]?>-<?=$prm[4]?><?=$val["CATID"]?>_/<?=$param[2]?>.html"><?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($filterlist['sport']!=NULL){?>
+<div><b>Мой спорт</b></div>
+<?foreach($filterlist['sport'] as $key=>$val){?>
+<div><a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-1-<?=$prm[3]?>-<?=$prm[4]?><?=$val["CATID"]?>_/<?=$param[2]?>.html"><?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($filterlist['brand']!=NULL){?>
+<div><b>Бренд</b></div>
+<?foreach($filterlist['brand'] as $key=>$val){?>
+<div><a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-1-<?=$prm[3]?>-<?=$prm[4]?><?=$val["CATID"]?>_/<?=$param[2]?>.html"><?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+<?if($filterlist['cena']!=NULL){?>
+<div><b>Цена</b></div>
+<?foreach($filterlist['cena'] as $key=>$val){?>
+<div><a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-1-<?=$prm[3]?>-<?=$prm[4]?><?=$val["CATID"]?>_/<?=$param[2]?>.html"><?=$val["DESCR"]?> <?//=$val["ISFOLDER"]?></a></div>
+<?}}?>
+
+
+
+	</div>
+		
+		</td>
+		<td style="padding:0px 4px 0px 3px;">
+
+<?=$mess?>		
+<div class="navilink" align="left">
+	<a href="<?=SITE_URL?>/">Главная</a> &gt; <?=$menu_name?> &gt;
+	 <a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-1-<?=$prm[3]?>/<?=$param[2]?>.html">
+     <?=$category?></a>
+     <br>
+</div>
+
+<table border="0" cellpadding="3" cellspacing="0" style="width: 100%;">
+		<tr>
+		<td>
+		Показано: 
+		<?if($prm[1]!="all" && $limit_start>0){?>
+		<a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-<?=$prm[2]-1?>-<?=$prm[3]?>-<?=$prm[4]?>/<?=$param[2]?>.html">
+		&lt;&lt;&lt;</a>
+		<?}?>		
+		<?$limit_end=$prm[1]!="all"?$limit_end:$countall?>
+		<?=$countall!=0?$limit_start+1:0?> - <?=$limit_end<=$countall?$limit_end:$countall?> из <?=$countall?>
+		<?if($prm[1]!="all" && $limit_end<$countall){?>
+		<a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-<?=$prm[2]+1?>-<?=$prm[3]?>-<?=$prm[4]?>/<?=$param[2]?>.html">
+		&gt;&gt;&gt;</a>
+		<?}?>
+		</td>
+		<td align="right">Показать 
+<?$skarr=array(15,30,45);
+foreach($skarr as $skoko){
+if($skoko==$prm[1]){?>
+<?=$skoko?> |
+<?}else{?>
+<a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$skoko?>-1-<?=$prm[3]?>-<?=$prm[4]?>/<?=$param[2]?>.html">
+<?=$skoko?></a> |
+<?}}?>
+			 результатов или
+			<a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-all-1-<?=$prm[3]?>-<?=$prm[4]?>/<?=$param[2]?>.html">Показать всё
+			</a>&nbsp;
+		</td>
+	</tr>
+</table>
+
+<table style="width: 100%;" class="bg-color-light">
+	<tr>
+		<td>&nbsp;Сортировать по&nbsp;
+		<select id="sortByOptions" onchange="javascript:sortBy(this.options[selectedIndex].value)">
+		<option value="brendaz"<?=$prm[3]=="brendaz"?" selected=\"selected\"":""?>>
+		Имени бренда A-Z</option>
+		<option value="brendza"<?=$prm[3]=="brendza"?" selected=\"selected\"":""?>>
+		Имени бренда Z-A</option>
+		<option value="priceup"<?=$prm[3]=="priceup"?" selected=\"selected\"":""?>>
+		По цене: Дороже</option>
+		<option value="pricedown"<?=$prm[3]=="pricedown"?" selected=\"selected\"":""?>>
+		По цене: Дешевле</option>
+		</select>
+		</td>
+		<td>
+		<a onclick="javascript:setDisplayStyle('list');" href="javascript:aSend('list-style','list')" class="toolbar-list" >
+		Список</a>
+		<a onclick="javascript:setDisplayStyle('grid');" href="javascript:aSend('grid-style','grid')"  class="toolbar-grid">
+		Таблица</a>
+		</td>
+		<td>
+		<div align="right">
+			Страницы&nbsp; 
+<?$i=1;
+while($i<=$pages){
+if($i==$prm[2]){?>
+<?=$i?> <?
+}else{?>
+<a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-<?=$i?>-<?=$prm[3]?>-<?=$prm[4]?>/<?=$param[2]?>.html"><?=$i?></a> 
+<?}$i++;}?>
+&nbsp;
+<?if($prm[1]!="all" && $limit_end<$countall){?>
+<a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-<?=$prm[2]+1?>-<?=$prm[3]?>-<?=$prm[4]?>/<?=$param[2]?>.html">
+следующая</a>
+<?}?>
+&nbsp;</div>
+		</td>
+	</tr>
+</table>
+<table id="productView" class="<?=$liststyle=="list"?"list":"grid"?>">
+<tr>
+<td style="padding-left: 7px;">
+<?//var_dump($cat_list)?>
+<?if($cat_list!=NULL){
+foreach($cat_list as $key=>$val){?>
+<table class="list-product"><tr><td>
+<div align="right" style="text-align:right;" class="parent"><?=$val['parent']?></div>
+<a href="<?=SITE_URL?>/shop/catalog/product/<?=$val['1Cid']?>/<?=Text::cirilToLatin($val['brand'])?>-<?=Text::cirilToLatin($val['name'])?>.html">
+<img src="<?=$val['thumbnail']!=""?$val['thumbnail']:"/index_files/noimage.jpg"?>" alt="" border="0" class="catalog-list-image">
+</a>
+<div class="catalog-list-brand"><?=$val['brand']?></div>
+<div>
+<a href="<?=SITE_URL?>/shop/catalog/product/<?=$val['1Cid']?>/<?=Text::cirilToLatin($val['brand'])?>-<?=Text::cirilToLatin($val['name'])?>.html" style="line-height:15px;">
+<?=$val['name']?> <?=$val['serial']?></a></div>
+<div class="hide-desc">
+<?=$val['description']?></div>
+<?if($val['newprice']!=0){?><div class="catalog-list-oldprice">Цена: <?=$val['price']?> грн.</div>
+<div class="catalog-list-price">Новая цена: <?=$val['newprice']?> грн.</div>
+<?}else{?>
+<div class="catalog-list-price">Цена: <?=$val['price']?> грн.</div>
+<?}?>
+<?if($val['price']>300 || $product['newprice']>300){?><div class="free-dostavka">Бесплатная доставка</div><?}?>
+</td></tr></table>
+
+<?}}?>
+
+
+<div style="clear: both;"></div>
+		</td>
+	</tr>
+</table>
+<div align="right" class="bg-color-light" style="padding:3px 0px;">
+Страницы&nbsp; 
+<?$i=1;
+while($i<=$pages){
+if($i==$prm[2]){?>
+<?=$i?> <?
+}else{?>
+<a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-<?=$i?>-<?=$prm[3]?>-<?=$prm[4]?>/<?=$param[2]?>.html"><?=$i?></a> 
+<?}$i++;}?>
+&nbsp;
+<?if($prm[1]!="all" && $limit_end<$countall){?>
+<a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-<?=$prm[2]+1?>-<?=$prm[3]?>-<?=$prm[4]?>/<?=$param[2]?>.html">
+следующая</a>
+<?}?>
+&nbsp;</div>
+
+<table border="0" cellpadding="3" cellspacing="0" style="width: 100%;">
+		<tr>
+		<td>
+		Показано: 
+		<?if($prm[1]!="all" && $limit_start>0){?>
+		<a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-<?=$prm[2]-1?>-<?=$prm[3]?>-<?=$prm[4]?>/<?=$param[2]?>.html">
+		&lt;&lt;&lt;</a>
+		<?}?>		
+		<?$limit_end=$prm[1]!="all"?$limit_end:$countall?>
+		<?=$countall!=0?$limit_start+1:0?> - <?=$limit_end<=$countall?$limit_end:$countall?> из <?=$countall?>
+		<?if($prm[1]!="all" && $limit_end<$countall){?>
+		<a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$prm[1]?>-<?=$prm[2]+1?>-<?=$prm[3]?>-<?=$prm[4]?>/<?=$param[2]?>.html">
+		&gt;&gt;&gt;</a>
+		<?}?>
+		</td>
+		<td align="right">Показать 
+<?$skarr=array(15,30,45);
+foreach($skarr as $skoko){
+if($skoko==$prm[1]){?>
+<?=$skoko?> |
+<?}else{?>
+<a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-<?=$skoko?>-1-<?=$prm[3]?>-<?=$prm[4]?>/<?=$param[2]?>.html">
+<?=$skoko?></a> |
+<?}}?>
+			 результатов или
+			<a href="<?=SITE_URL?>/shop/catalog/<?=$param[0]?>/<?=$prm[0]?>-all-1-<?=$prm[3]?>-<?=$prm[4]?>/<?=$param[2]?>.html">Показать всё
+			</a>&nbsp;
+		</td>
+	</tr>
+</table>
+		
+		</td>
+	</tr>
+</table>

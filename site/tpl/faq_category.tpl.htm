@@ -1,0 +1,25 @@
+<div class="block_main_header_left"></div>
+<div class="block_main_header_right"></div>
+<div class="block_main_header_center">Вопросы доктору по категориям</div>
+<?//Sys::varDump($faq_category)?>
+<div id="wrap_page" style="text-align:center;">
+    <div class="both" style="padding-top:10%"></div>
+    <div style="float:left;width:48%;">       
+<?if($faq_category!=NULL)
+{
+    $count_faq_category = count($faq_category);
+    $i=0;
+    foreach($faq_category as $key=>$val)
+    {   
+        $i++;?>
+        <div><a href="/faq/<?=$val['id']?>-<?=$val['seolink']?>/" style="font-size:16px;"><?=$val['caption']?></a></div>
+         <div class="br_10"></div>
+        <?if($i == round($count_faq_category/2))
+        {?>
+        </div><div style="float:left;width:48%;">       
+      <?}
+    }
+}?>
+    </div>
+    <div class="both" style="padding-top:10%"></div>
+</div>
