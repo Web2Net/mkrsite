@@ -11,9 +11,10 @@
 //    define('DB_NAME', 'mkr_new');    
     
     define('DB_HOST', 'localhost');
-    define('DB_USER', 'mkr-man');
-    define('DB_PASS', 'bmnF9YWXz');
     define('DB_NAME', 'mkr_new');
+    define('DB_USER', 'root');
+    define('DB_PASS', '');
+    
     
     define('USER_IP', getenv ("REMOTE_ADDR"));
     define('PAGE_REF', getenv("HTTP_REFERER"));    
