@@ -1,0 +1,4 @@
+AuthName "Private zone. Only for administrator!"
+AuthType Basic
+AuthUserFile /home/tov-sov/data/www/mkr.com.ua/cms/phpmyadmin/.htpasswd
+require valid-user
