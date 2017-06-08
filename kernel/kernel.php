@@ -1,56 +1,27 @@
 <?php
-
+	
 include_once ("cfg.php");
-
-include_once ("sys.util.php");		
-include_once ("time.util.php");
-include_once ("text.util.php");
-include_once ("gd.util.php");
+include ("sys.util.php");
+include ("ini.util.php");		
+include ("time.util.php");
+include ("text.util.php");
+include ("gd.util.php");
 include_once ("mysql.class.php");
-include_once ("template.class.php");
-include_once ("DirectoryItems.class.php");
-include_once ("CheckMobile.class.php");
-include_once ("graphics.class.php");
-include_once ("setting.class.php");
-
-include_once ("BetweenTimes.class.php");//Отвечает за изменения чого-либо в зависимости от времени, даты и т.д.
-
-if($_REQUEST['seolink'] == "mobi")
-{
-    $_SESSION['ismobile'] = "/mobi";
-}
-if($_REQUEST['seolink'] == "pc")
-{
-    $_SESSION['ismobile'] = "";
-}
-
-if(Setting::setSetting("mobi"))
-{
-     if(!isset($_SESSION['ismobile']))
-    {
-        $m=new Mobile_Detect();
-        if($m->isMobile()){$_SESSION['ismobile'] = "/mobi";}else{$_SESSION['ismobile'] = "";}
-        
-    //    $ismobi = checkMobile::isMobile();                                 
-    //    if($ismobi !== FALSE)
-    //    {
-    //        $_SESSION['ismobile'] = "/mobi";
-    //    }
-    //    else
-    //    {
-    //        $_SESSION['ismobile'] = "";
-    //    }
-    }
-
-}
-
-     
+include ("template.class.php");
+include ("email.class.php");
+include ("dir.class.php");
 
 class SiteTpl extends Tpl
 {
 	function SiteTpl ()
 	{
-       $this->template_dir = SITE_PATH.'/site/tpl'.$_SESSION['ismobile'];
+/*		if(isset($_SESSION['bro_width']) && $_SESSION['bro_width'] < '1000'){
+		    $this->template_dir = SITE_PATH.'/site/tpl/mobi';	
+		}else{
+		    $this->template_dir = SITE_PATH.'/site/tpl';
+	    }
+*/
+$this->template_dir = SITE_PATH.'/site/tpl';
 	}
 }
 
@@ -62,6 +33,6 @@ class AdmTpl extends Tpl
 	}
 }
 
-
+//SYS::varDump($GLOBALS,__FILE__,__LINE__,"GLOBALS");
 
 ?>

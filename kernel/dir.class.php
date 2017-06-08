@@ -1,11 +1,11 @@
-<?php
-  class DirectoryItems
+<?php  
+  class Dir
   {
       var $filearray = array();
       var $file_line;
            
       function dirItems($directory)
-      {   //echo $directory;
+      {
           $dir = "";
           if(is_dir($directory))
           {
@@ -25,7 +25,6 @@
           }
           return  $filearray;
       }
-      
       function checkAllTxt($filearray)
       {
           //$bln = true;
@@ -44,7 +43,6 @@
           $filearray = $files;
           return $filearray;
       }
-      
       function indexOrder()
       {
          sort($this->filearray); 
@@ -75,7 +73,7 @@
           }
       }     
       function getOnlyType($filearray, $type)
-      {
+      {   
           $extension = "";
           foreach($filearray as $value)
           {
@@ -89,7 +87,6 @@
           $filearray = $files;
           return $filearray; 
       }
-      
       function countFileLine($filename)
       {
           if(!file_exists($filename))
@@ -99,17 +96,16 @@
           $file_line = count(file($filename));
           return $file_line;
       }
-      function deleteFile($path)
+      
+      function deleteFile($file) 
       {
-         if(isset($_GET['delete']))
-         {
-            $item = "{$path}/{$_GET['delete']}"; 
-            if(is_file($item))
-            {
-               unlink($item);
-               echo "<meta http-equiv=refresh content=0; url='{$_SERVER['PHP_SELF']}'>";
+         if(isset($file)){
+            if(is_file($file)){
+               unlink($file);
+//               echo "<meta http-equiv=refresh content=0; url='{$_SERVER['PHP_SELF']}'>";
             }
          }
-       }
-  }
+      }
+
+}
 ?>
